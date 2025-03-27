@@ -1,26 +1,49 @@
 
 'use client'
-import {motion} from 'framer-motion'
 import Image from 'next/image'
-const Card = (property) => {
+import { useEffect, useState } from 'react';
+
+const Card = ({property}) => {
+  const [ds, setDs] = useState('')
+  const [image, setImage] = useState();
+  useEffect(() => {
+    function firstFiveSentences(description) {
+      if(window?.innerWidth > 600) {
+        return description
+      }
+      const sentencesArray = description.split('.');
+    
+      const firstFive = sentencesArray.slice(0, 4);
+    
+      const result = firstFive.join('.') + (firstFive.length > 0 && description.endsWith('.') ? '.' : '');
+    
+      return result;
+    }
+    setDs(firstFiveSentences(property?.description));
+  }, [])
+  const handleImageSelect = (image) => {
+    setImage(image);
+  }
+  const images = property?.images;
   return (
     <div 
-      className="h-auto min-h-[400px] rounded-xl max-w-5xl w-full md:px-20 relative flex flex-col justify-center items-center mt-10 bg-gray-100 pt-8" 
-      style={{
-        gridColumn: 1,
-        gridRow: 1,
-      }}>
-
-      <div className='text-center w-full h-full'>
-        <h4 className='text-xl font-semibold'>Kalniečių g. 219</h4>
-        <p className='px-18 text-left mt-5 text-gray-600 font-light'>
-        Atsipalaiduokite su visa šeima šioje ramioje vietoje. Jaukūs, naujai įrengti 2iejų kambarių apartamentai. Atskiras įėjimas! Pirmas aukštas! Langai iš kiemo pusės. Nesigirdi miesto triukšmo! Kauno Klinikos pasiekiamos pėstute! Šalia namo maisto prekių parduotuvė “Express Market”, šiek tiek tolėliau prekybos centras “Maxima XXL”. Iki miesto centro 7 min automobiliu. Bute yra visa reikalinga buitinė technika: skalbimo mašina, Šaldytuvas, kaitlentė, gartraukis, virdulys, lygintuvas, Smart TV + Wifi. Rankšluosčiai, patalynė ir visi indai maisto ruošimui, kava bei arbata, prieskoniai. Mašinai nemokama parkingo vieta prie pat Jūsų buto durų. Talpiname iki 4 asmenų.
+      className="h-auto rounded-xl max-w-5xl w-full md:px-20 relative flex flex-col justify-center items-center mt-10 bg-gray-100 pt-8">
+      <div className='flex flex-col items-center w-full h-full'>
+        <h4 className='text-xl font-semibold'>{property?.title}</h4>
+        <p className='px-12 text-left mt-5 text-gray-600 font-light max-w-xl'>
+          {ds}
         </p>
       </div>
-      <div>
-        Galerija
+      <div className='grid grid-cols-6 gap-x-2 gap-y-2 px-12 mt-4'>
+        {property?.images?.length > 0 && (
+          images.map((image, i) => (
+            <div className='cursor-pointer' key={i} onClick={() => handleImageSelect(image)}> 
+              <Image src={`${image}`}  width={50} height={50} alt='gapartments'></Image>
+            </div>
+          ))
+        )}
       </div>
-      <div className='pb-10 md:absolute top-[270px] flex md:justify-between justify-center gap-x-40 w-full'>
+      <div className='pb-10 md:absolute flex md:justify-between justify-center gap-x-40 w-full'>
       {/*arrow left*/}
       <div className='md:absolute flex items-center justify-center bg-white rounded-full opacity-80 left-6 h-14 w-14 hover:bg-gray-200 mx-2 cursor-pointer'>
         <Image src='/left.svg' width={30} height={30} alt='left'/>
@@ -37,7 +60,65 @@ const Card = (property) => {
               
             </div>
           ))}
+      </div>
+      {image && (
+        <div className='fixed inset-0 z-60 flex items-center justify-center bg-black/40 backdrop-blur-sm'> 
+          <div className='flex flex-col items-center justify-center'>
+          <div className='absolute right-[5px] top-[5px] p-2 z-90 hover:bg-gray-100/20 rounded-md cursor-pointer'>
+            <Image src={'/close.svg'} width={50} height={50} alt='close'></Image>
+          </div>
+
+          
+            <Image src={image} width={300} height={300} alt='gapartments'></Image>
+            <div className='absolute w-full flex mt-[500px] md:mt-0 justify-center'>
+            <div className='md:absolute flex items-center justify-center rounded-full opacity-80 md:left-6 h-14 w-14 hover:bg-gray-100/20 mx-2 cursor-pointer'>
+              <svg width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <style>
+                  {`.c{fill:none;stroke:#ffffff;stroke-linecap:round;stroke-linejoin:round;}`}
+                </style>
+              </defs>
+              <g id="a" />
+              <g id="b">
+                <g>
+                  <line className="c" x1="8.62" x2="15.38" y1="12" y2="5.5" />
+                  <line className="c" x1="8.62" x2="15.38" y1="12" y2="18.5" />
+                </g>
+              </g>
+            </svg>
+            </div>
+
+            <div className='md:absolute flex items-center justify-center rounded-full opacity-80 md:right-6 h-14 w-14 hover:bg-gray-100/20 mx-2 cursor-pointer'>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width='50'
+                height='50'
+                style={{
+                  rotate: '180deg'
+                }}
+              >
+                <defs>
+                  <style>
+                    {`.c{fill:none;stroke:#ffffff;stroke-linecap:round;stroke-linejoin:round;}`}
+                  </style>
+                </defs>
+                <g id="a" />
+                <g id="b">
+                  <g>
+                    <line className="c" x1="8.62" x2="15.38" y1="12" y2="5.5" />
+                    <line className="c" x1="8.62" x2="15.38" y1="12" y2="18.5" />
+                  </g>
+                </g>
+              </svg>
+            </div>
+            </div>
+
+          </div>
+
+          
         </div>
+      )}
     </div>
   )
 }
@@ -47,7 +128,20 @@ export default function Home() {
       title: 'Kalniečių g. 219',
       description: "Atsipalaiduokite su visa šeima šioje ramioje vietoje. Jaukūs, naujai įrengti 2iejų kambarių apartamentai. Atskiras įėjimas! Pirmas aukštas! Langai iš kiemo pusės. Nesigirdi miesto triukšmo! Kauno Klinikos pasiekiamos pėstute! Šalia namo maisto prekių parduotuvė “Express Market”, šiek tiek tolėliau prekybos centras “Maxima XXL”. Iki miesto centro 7 min automobiliu. Bute yra visa reikalinga buitinė technika: skalbimo mašina, Šaldytuvas, kaitlentė, gartraukis, virdulys, lygintuvas, Smart TV + Wifi. Rankšluosčiai, patalynė ir visi indai maisto ruošimui, kava bei arbata, prieskoniai. Mašinai nemokama parkingo vieta prie pat Jūsų buto durų. Talpiname iki 4 asmenų.",
       images: [
-        
+        "https://gapartments.s3.eu-north-1.amazonaws.com/kalnieciu219/20240815_132619.jpg",
+        "https://gapartments.s3.eu-north-1.amazonaws.com/kalnieciu219/20240815_132708.jpg",
+        "https://gapartments.s3.eu-north-1.amazonaws.com/kalnieciu219/20240815_132715.jpg",
+        "https://gapartments.s3.eu-north-1.amazonaws.com/kalnieciu219/20240815_133029.jpg",
+        "https://gapartments.s3.eu-north-1.amazonaws.com/kalnieciu219/20240815_133053.jpg",
+        "https://gapartments.s3.eu-north-1.amazonaws.com/kalnieciu219/20240815_133503.jpg",
+        "https://gapartments.s3.eu-north-1.amazonaws.com/kalnieciu219/20240815_133513.jpg",
+        "https://gapartments.s3.eu-north-1.amazonaws.com/kalnieciu219/20240815_133724.jpg",
+         "https://gapartments.s3.eu-north-1.amazonaws.com/kalnieciu219/20240914_121311+(1).jpg",
+         "https://gapartments.s3.eu-north-1.amazonaws.com/kalnieciu219/20240914_122009.jpg",
+         "https://gapartments.s3.eu-north-1.amazonaws.com/kalnieciu219/20240914_122026.jpg",
+        "https://gapartments.s3.eu-north-1.amazonaws.com/kalnieciu219/20240914_122112+(1).jpg",
+         "https://gapartments.s3.eu-north-1.amazonaws.com/kalnieciu219/20240914_122335.jpg",
+         "https://gapartments.s3.eu-north-1.amazonaws.com/kalnieciu219/20240914_122348.jpg"
       ]
     },
     {
