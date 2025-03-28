@@ -93,9 +93,9 @@ const Nav = () => {
                       isOpen ? 'opacity-0' : ''
                     }`}
                   ></div>
-                  <div 
-                    className={`h-0.5 w-full bg-current transition-all duration-300 ease-in-out ${
+                  <div                     className={`h-0.5 w-full bg-current transition-all duration-300 ease-in-out ${
                       isOpen ? '-rotate-45 -translate-y-2.5' : ''
+
                     }`}
                   ></div>
                 </div>

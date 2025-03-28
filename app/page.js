@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 const Card = ({property}) => {
   const [ds, setDs] = useState('')
   const [image, setImage] = useState();
+  const [imageIndex, setImageIndex] = useState(0)
   useEffect(() => {
     function firstFiveSentences(description) {
       if(window?.innerWidth > 600) {
@@ -21,28 +22,49 @@ const Card = ({property}) => {
     }
     setDs(firstFiveSentences(property?.description));
   }, [])
-  const handleImageSelect = (image) => {
+  const handleImageSelect = (image, i) => {
     setImage(image);
+    setImageIndex(i);
+  }
+  const handleIndexChange = (d) => {
+    if(d === 'right') {
+      if (imageIndex < property?.images?.length - 1) {
+        setImageIndex(prev => prev + 1);
+      } else {
+        setImageIndex(0);
+      }
+    }
+    if(d === 'left') {
+      if(imageIndex != 0) {
+        setImageIndex(prev => prev - 1);
+      } else setImageIndex(images.length - 1)
+    }
+    setImage(property.images[imageIndex])
+
   }
   const images = property?.images;
   return (
     <div 
-      className="h-auto rounded-xl max-w-5xl w-full md:px-20 relative flex flex-col justify-center items-center mt-10 bg-gray-100 pt-8">
-      <div className='flex flex-col items-center w-full h-full'>
-        <h4 className='text-xl font-semibold'>{property?.title}</h4>
-        <p className='px-12 text-left mt-5 text-gray-600 font-light max-w-xl'>
+      className="h-auto pb-20 rounded-xl max-w-5xl w-full md:px-20 relative flex flex-col justify-center items-center mt-10 bg-gray-100 pt-8">
+      <div className='flex flex-col w-full h-full'>
+        <h4 className='text-xl font-semibold text-center'>{property?.title}</h4>
+        <div className='flex items-center flex-col md:flex-row gap-y-4 md:items-start'>
+        <p className='text-justify max-w-90  mt-5 text-gray-600 font-light'>
           {ds}
         </p>
-      </div>
-      <div className='grid grid-cols-6 gap-x-2 gap-y-2 px-12 mt-4'>
+        <div className='grid grid-cols-4 gap-x-1 gap-y-1 px-12 mt-6'>
         {property?.images?.length > 0 && (
-          images.map((image, i) => (
-            <div className='cursor-pointer' key={i} onClick={() => handleImageSelect(image)}> 
-              <Image src={`${image}`}  width={50} height={50} alt='gapartments'></Image>
+          images.slice(0, 8).map((image, i) => (
+            <div className='cursor-pointer' key={i} onClick={() => handleImageSelect(image, i)}> 
+              <Image src={`${image}`}  width={100} height={100} alt='gapartments'></Image>
             </div>
           ))
         )}
       </div>
+        </div>
+
+      </div>
+
       <div className='pb-10 md:absolute flex md:justify-between justify-center gap-x-40 w-full'>
       {/*arrow left*/}
       <div className='md:absolute flex items-center justify-center bg-white rounded-full opacity-80 left-6 h-14 w-14 hover:bg-gray-200 mx-2 cursor-pointer'>
@@ -64,14 +86,16 @@ const Card = ({property}) => {
       {image && (
         <div className='fixed inset-0 z-60 flex items-center justify-center bg-black/40 backdrop-blur-sm'> 
           <div className='flex flex-col items-center justify-center'>
-          <div className='absolute right-[5px] top-[5px] p-2 z-90 hover:bg-gray-100/20 rounded-md cursor-pointer'>
-            <Image src={'/close.svg'} width={50} height={50} alt='close'></Image>
+          <div onClick={() => setImage(false)} className='absolute right-[5px] top-[5px] p-2 z-90 hover:bg-gray-100/20 rounded-md cursor-pointer'>
+            <Image style={{ userSelect: 'none' }} src={'/close.svg'} width={50} height={50} alt='close'></Image>
           </div>
 
           
-            <Image src={image} width={300} height={300} alt='gapartments'></Image>
+            <Image  style={{ userSelect: 'none' }}
+            src={image} width={300} height={300} alt='gapartments'></Image>
             <div className='absolute w-full flex mt-[500px] md:mt-0 justify-center'>
-            <div className='md:absolute flex items-center justify-center rounded-full opacity-80 md:left-6 h-14 w-14 hover:bg-gray-100/20 mx-2 cursor-pointer'>
+            <div onClick={() => handleIndexChange('left')} 
+            className='md:absolute flex items-center justify-center rounded-full opacity-80 md:left-6 h-14 w-14 hover:bg-gray-100/20 mx-2 cursor-pointer'>
               <svg width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <style>
@@ -88,7 +112,8 @@ const Card = ({property}) => {
             </svg>
             </div>
 
-            <div className='md:absolute flex items-center justify-center rounded-full opacity-80 md:right-6 h-14 w-14 hover:bg-gray-100/20 mx-2 cursor-pointer'>
+            <div onClick={() => handleIndexChange('right')} 
+            className='md:absolute flex items-center justify-center rounded-full opacity-80 md:right-6 h-14 w-14 hover:bg-gray-100/20 mx-2 cursor-pointer'>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
