@@ -2,7 +2,7 @@
 'use client'
 import Image from 'next/image'
 import { useEffect, useState } from 'react';
-
+import { getS3ImageUrls } from './actions/getS3Images';
 const Card = ({property}) => {
   const [ds, setDs] = useState('')
   const [image, setImage] = useState();
@@ -21,6 +21,14 @@ const Card = ({property}) => {
       return result;
     }
     setDs(firstFiveSentences(property?.description));
+    getS3ImageUrls().then((urls) => {
+      if (urls.length > 0) {
+        console.log("Image URLs from S3:");
+        urls.forEach((url) => console.log(url));
+      } else {
+        console.log("No images found in the specified S3 bucket and prefix.");
+      }
+    });
   }, [])
   const handleImageSelect = (image, i) => {
     setImage(image);
