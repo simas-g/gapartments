@@ -12,7 +12,8 @@ const Dropdown = () => {
       'TAIKOS PR. 33',
       'VARNIŲ G. 24',
       'NEMUNO G. 22',
-      'PUODŽIŲ G. 27'
+      'PUODŽIŲ G. 27',
+      'LINKUVOS G. 55'
     ];
   
     return (
@@ -22,13 +23,13 @@ const Dropdown = () => {
           className="flex justify-end pr-12 items-center gap-x-4 w-full px-4 py-3 text-white tracking-wider font-light"
         >
           <span className="uppercase hover:underline underline-offset-8">Apartamentai</span>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 7" fill="white" className={`w-3 h-2 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 7" fill="white" className={`w-3 h-3 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
             <polygon points="5,0 10,7 0,7" />
           </svg>
         </button>
   
         {isOpen && (
-          <div className=" md:absolute top-full left-0 w-full md:w-fit md:px-4 md:rounded-md bg-black text-white shadow-lg z-50 pb-2">
+          <div className=" md:absolute top-full left-0 w-full md:w-fit md:px-4 md:rounded-md bg-black text-white shadow-lg z-10 pb-2">
             <ul>
               {locations.slice(1).map((location, index) => (
                 <li 
@@ -61,7 +62,7 @@ const Nav = () => {
     };
   
     return (
-      <nav className="fixed top-0 left-0 w-full z-50 bg-black/30">
+      <nav className="fixed top-0 left-0 w-full z-20 bg-black/30">
         <div className="mx-auto px-4 sm:px-6 lg:px-20 p-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}

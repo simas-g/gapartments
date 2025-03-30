@@ -1,7 +1,6 @@
 'use server';
 import { S3Client, ListObjectsV2Command } from "@aws-sdk/client-s3";
 
-const IMAGE_PREFIX = "kalnieciu196/";
 
 // Initialize the S3 client
 const s3Client = new S3Client({
@@ -11,11 +10,11 @@ const s3Client = new S3Client({
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   },
 });
-export async function getS3ImageUrls() {
+export async function getS3ImageUrls(imagePrefix) {
   try {
     const command = new ListObjectsV2Command({
       Bucket: process.env.AWS_BUCKET_NAME,
-      Prefix: IMAGE_PREFIX,
+      Prefix: imagePrefix,
     });
 
     const response = await s3Client.send(command);
