@@ -29,7 +29,7 @@ const Dropdown = () => {
         </button>
   
         {isOpen && (
-          <div className=" md:absolute top-full left-0 w-full md:w-fit md:px-4 md:rounded-md bg-black text-white shadow-lg z-10 pb-2">
+          <div className="absolute top-full left-0 w-full md:w-fit md:px-4 md:rounded-md bg-black text-white shadow-lg z-10 pb-2">
             <ul>
               {locations.slice(1).map((location, index) => (
                 <li 
@@ -62,7 +62,7 @@ const Nav = () => {
     };
   
     return (
-      <nav className="fixed top-0 left-0 w-full z-20 bg-black/30">
+      <nav className=" top-0 left-0 w-full z-20">
         <div className="mx-auto px-4 sm:px-6 lg:px-20 p-8">
           <div className="flex items-center justify-between h-12">
             {/* Logo */}
@@ -105,7 +105,7 @@ const Nav = () => {
   
             {/* Mobile Menu Overlay */}
             {isOpen && (
-              <div className="md:hidden fixed inset-0 bg-black/90 top-0 right-10 w-full h-fit z-40 ">
+              <div className="md:hidden absolute inset-0 bg-black/90 top-0 right-10 w-full h-fit z-1 ">
                 <div className="container mx-auto space-y-6">
                   <Dropdown />
                   <div className="space-y-4">

@@ -44,14 +44,16 @@ const Card = ({property, count, setCount, isVisible}) => {
   return (
     <div 
     style={{
-      animation: animate ? 'fade-in 0.5s ease-in-out forwards' : '',
       display: isVisible ? '': 'none',
     }}
-    className="xl:h-[550px] grid-rows-1 h-fit pb-20 rounded-xl max-w-5xl w-full md:px-20 relative flex flex-col justify-center items-center mt-10 bg-gray-100 pt-8"
+    className=" xl:h-[550px] grid-rows-1 h-fit pb-20 rounded-xl max-w-5xl w-full md:px-20 relative flex flex-col justify-center items-center mt-10 bg-gray-100 pt-8"
   >
       
       
-      <div className='flex flex-col w-full h-full'>
+      <div className='flex flex-col w-full h-full' 
+      style={{
+      animation: animate ? 'fade-in 0.5s ease-in-out forwards' : '',
+      }}>
         <h4 className='text-xl font-semibold text-center'>{property?.title}</h4>
         <div className='flex items-center flex-col xl:flex-row gap-y-4 xl:items-start'>
         <p className='md:text-justify max-w-90  mt-5 text-gray-600 font-light px-8 sm:px-0'>
@@ -288,7 +290,7 @@ export default function Home() {
       {/* Properties Preview Section */}
       <section className="py-16 bg-white">
           <h3 className='text-center text-3xl font-bold'>Mūsų apartamentai</h3>
-          <div className="grid place-items-center md:px-20 px-6 grid-rows-1 grid-cols-1">
+          <div className="grid z-90 place-items-center md:px-20 px-6 grid-rows-1 grid-cols-1">
             {properties.map((prop, i) => (
               <Card 
                 property={prop} 
