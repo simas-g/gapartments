@@ -3,9 +3,10 @@
 import Image from 'next/image'
 import { useEffect, useState, useRef } from 'react';
 import { getS3ImageUrls } from './actions/getS3Images';
-const Card = ({property, count, setCount}) => {
+const Card = ({property, count, setCount, isVisible}) => {
   const [image, setImage] = useState();
   const [imageIndex, setImageIndex] = useState(0)
+  const [animate, setAnimate] = useState(false);
   const handleImageSelect = (image, i) => {
     setImage(image);
     setImageIndex(i + 1);
@@ -23,7 +24,9 @@ const Card = ({property, count, setCount}) => {
       return newIndex; 
     });
   };
-  
+  useEffect(() => {
+    setAnimate(true);
+  }, [count])
   const images = property?.images;
   const moveLeft = () => {
     console.log(count);
@@ -40,14 +43,21 @@ const Card = ({property, count, setCount}) => {
   }
   return (
     <div 
-      className="md:h-[500px] fade-in-container pb-20 rounded-xl max-w-5xl w-full md:px-20 relative flex flex-col justify-center items-center mt-10 bg-gray-100 pt-8">
+    style={{
+      animation: animate ? 'fade-in 0.5s ease-in-out forwards' : '',
+      display: isVisible ? '': 'none',
+    }}
+    className="xl:h-[550px] grid-rows-1 h-fit pb-20 rounded-xl max-w-5xl w-full md:px-20 relative flex flex-col justify-center items-center mt-10 bg-gray-100 pt-8"
+  >
+      
+      
       <div className='flex flex-col w-full h-full'>
         <h4 className='text-xl font-semibold text-center'>{property?.title}</h4>
-        <div className='flex items-center flex-col md:flex-row gap-y-4 md:items-start'>
-        <p className='text-justify max-w-90  mt-5 text-gray-600 font-light'>
+        <div className='flex items-center flex-col xl:flex-row gap-y-4 xl:items-start'>
+        <p className='md:text-justify max-w-90  mt-5 text-gray-600 font-light px-8 sm:px-0'>
           {property?.description}
         </p>
-        <div className='grid grid-cols-4 gap-x-1 gap-y-1 px-12 mt-6'>
+        <div className='grid grid-cols-4 pb-18 lg:px-12 mt-6 z-10 xl:grid-cols-4 px-8'>
         {property?.images?.length > 0 && (
           images.slice(1, 9).map((image, i) => (
             <div
@@ -69,7 +79,7 @@ const Card = ({property, count, setCount}) => {
         </div>
 
       </div>
-      <div className='pb-10 md:absolute flex md:justify-between justify-center gap-x-40 w-full'>
+      <div className='md:pb-10 relative md:absolute md:mt-20 flex md:justify-between justify-between px-10 w-full'>
       {/*arrow left*/}
       <div onClick={moveLeft} className='md:absolute flex items-center justify-center bg-white rounded-full opacity-80 left-6 h-14 w-14 hover:bg-gray-200 mx-2 cursor-pointer'>
         <Image src='/left.svg' width={30} height={30} alt='left'/>
@@ -80,21 +90,26 @@ const Card = ({property, count, setCount}) => {
           <Image src='/right.svg' width={30} height={30} alt='left'/>
         </div>
       </div>
-      <div className='flex gap-2 absolute bottom-8 z-90'>
-          {[...Array(7)].map((_, index) => (
+      <div className='flex flex-col items-center gap-y-2 absolute bottom-12 z-10'>
+        <button className='border rounded-lg px-4 py-3 hover:bg-gray-400 cursor-pointer'>
+          Daugiau informacijos
+        </button>
+        <div className='flex gap-2'>
+        {[...Array(7)].map((_, index) => (
             <div onClick={() => setCount(index)} key={index} className={`${count === index ? 'bg-black w-4 h-2': 'bg-gray-300 w-2 h-2'} rounded-full cursor-pointer`}> 
               
             </div>
           ))}
+        </div>
+
       </div>
       {image && (
         <div className='fixed inset-0 z-90 flex items-center justify-center bg-black/40 backdrop-blur-sm'> 
-          <div className='flex flex-col items-center justify-center'>
-          <div onClick={() => setImage(false)} className='absolute right-[5px] top-[5px] p-2 z-200 hover:bg-gray-100/20 rounded-md cursor-pointer'>
+          <div className='flex flex-col items-center justify-center z-90'>
+          <div onClick={() => setImage(false)} className='absolute right-[5px] top-[5px] p-2 z-90 hover:bg-gray-100/20 rounded-md cursor-pointer'>
             <Image 
             style={{ 
               userSelect: 'none',
-
             }} src={'/close.svg'} width={50} height={50} alt='close'></Image>
           </div>
 
@@ -185,7 +200,7 @@ export default function Home() {
       ]
     },
     {
-      title: 'Taikos pr. 33',
+      title: 'Taikos pr. 33B',
       id: 'taikospr33b/',
       description: "Šviesūs ir erdvūs 2iejų kambarių apartamentai. Langai į kiemo pusę, nesigirdi miesto triukšmo. 8ame aukšte, yra liftas. Šalia maisto prekių parduotuvė “Šilas”, 7 min automobiliu iki miestelio „Urmas“ bei miesto centro, 5 min automobiliu iki Zoologijos sodo bei Dariaus ir Girėno stadiono. Bute yra visa reikalinga buitinė technika: skalbimo mašina, Šaldytuvas, kaitlentė, gartraukis, virdulys, lygintuvas, Smart TV + Wifi, dveji balkonai. Rankšluosčiai, patalynė ir visi indai maisto ruošimui, kava bei arbata, prieskoniai. Nemokamas parkingas atviroje namo aikštelėje. Talpiname iki 4 asmenų.",
       images: [
@@ -273,8 +288,17 @@ export default function Home() {
       {/* Properties Preview Section */}
       <section className="py-16 bg-white">
           <h3 className='text-center text-3xl font-bold'>Mūsų apartamentai</h3>
-          <div className="grid place-items-center md:px-20 px-6">
-            <Card property={properties[propertyCount]} count={propertyCount} setCount={setPropertyCount}></Card>
+          <div className="grid place-items-center md:px-20 px-6 grid-rows-1 grid-cols-1">
+            {properties.map((prop, i) => (
+              <Card 
+                property={prop} 
+                count={propertyCount} 
+                currentIndex={i}
+                key={i} 
+                setCount={setPropertyCount}
+                isVisible={propertyCount === i}
+              />
+            ))}
           </div>
       </section>
 

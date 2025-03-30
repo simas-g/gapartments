@@ -9,7 +9,7 @@ const Dropdown = () => {
       'APARTAMENTAI',
       'KALNIEČIŲ G. 219',
       'KALNIEČIŲ G. 196',
-      'TAIKOS PR. 33',
+      'TAIKOS PR. 33B',
       'VARNIŲ G. 24',
       'NEMUNO G. 22',
       'PUODŽIŲ G. 27',
@@ -17,7 +17,7 @@ const Dropdown = () => {
     ];
   
     return (
-      <div className=" tracking-widest relative w-full md:pt-0 pt-32 h-auto font-[--font-poppins] md:flex items-center ">
+      <div className=" tracking-widest relative w-full md:pt-0 pt-32 h-fit font-[--font-poppins] md:flex items-center ">
         <button 
           onClick={() => setIsOpen(!isOpen)}
           className="flex justify-end pr-12 items-center gap-x-4 w-full px-4 py-3 text-white tracking-wider font-light"
@@ -64,7 +64,7 @@ const Nav = () => {
     return (
       <nav className="fixed top-0 left-0 w-full z-20 bg-black/30">
         <div className="mx-auto px-4 sm:px-6 lg:px-20 p-8">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-12">
             {/* Logo */}
             <div className="flex-shrink-0 z-50">
               <Image 

@@ -34,3 +34,12 @@ body {
 .hover-scale:hover {
   transform: scale(1.2); /* Increase the scale by 20% on hover */
 }
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
