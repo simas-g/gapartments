@@ -44,9 +44,7 @@ const Card = ({property, count, setCount, isVisible}) => {
     <div 
     className="border bg-white border-gray-300 shadow rounded-lg overflow-hidden h-fit max-w-[400px]"
   >
-      <div className='h-72'>
-        <img src={property.images[2]} className='w-full h-full object-cover'></img>
-      </div>
+      
       <div className='p-4 gap-y-4 flex flex-col'>
         <div className='bg-white flex items-center gap-x-4'>
           <Image src={`/pin.svg`} width={30} height={30} alt='map'></Image>
@@ -83,7 +81,9 @@ const Card = ({property, count, setCount, isVisible}) => {
         </div>
 
       </div>
-      
+      <div className='h-48'>
+        <img src={property.images[2]} className='w-full h-full object-cover'></img>
+      </div>
     </div>
   )
 }
