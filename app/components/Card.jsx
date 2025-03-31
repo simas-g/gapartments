@@ -1,5 +1,6 @@
 'use client'
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
 const Card = ({property, count, setCount, isVisible}) => {
   const [image, setImage] = useState();
@@ -41,7 +42,7 @@ const Card = ({property, count, setCount, isVisible}) => {
   }
   return (
     <div 
-    className="border bg-white border-gray-300 shadow rounded-lg overflow-hidden h-[630px] max-w-[400px]"
+    className="border bg-white border-gray-300 shadow rounded-lg overflow-hidden h-fit max-w-[400px]"
   >
       <div className='h-72'>
         <img src={property.images[2]} className='w-full h-full object-cover'></img>
@@ -70,15 +71,15 @@ const Card = ({property, count, setCount, isVisible}) => {
         <div className='text-gray-600 line-clamp-6'>
           {property.description}
         </div>
-        <div className='flex flex-wrap items-center justify-between'>
+        <div className='flex flex-wrap items-center justify-between gap-y-3'>
           <div className='flex items-center gap-x-2'>
             <p className='font-normal text-gray-500'>nuo</p>
             <p className='font-bold text-xl'>{property.price}€</p>
             <p className='text-gray-500 text-sm mt-2'>/ nakčiai</p>
           </div>
-          <div className='bg-[#7B5D3E] text-gray-100 w-fit cursor-pointer px-4 py-2 rounded-lg'>
+          <Link href={`/${property.id}`} className='bg-[#7B5D3E] text-gray-100 w-fit cursor-pointer px-4 py-2 rounded-lg'>
             Daugiau informacijos
-          </div>
+          </Link>
         </div>
 
       </div>

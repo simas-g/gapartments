@@ -18,6 +18,7 @@ export default function Home() {
       })
     }
   }, [])
+
   const [propertyCount, setPropertyCount] = useState(0)
   const [properties, setProperties] = useState([ 
     {

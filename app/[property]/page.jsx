@@ -1,9 +1,13 @@
-import React from 'react'
+const getProperty = async ({id}) => {
+    const property = await fetch(`${process.env.URL}/api/property?id=${id}`)
+}
 
-const Page = () => {
+const page = async ({params}) => {
+    const id = (await params).property
+    const prop= await getProperty({id})
   return (
-    <div>Page</div>
+    <div>{prop?.name}</div>
   )
 }
 
-export default Page
+export default page
