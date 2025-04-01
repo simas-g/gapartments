@@ -81,7 +81,6 @@ const Nav = () => {
               <button 
                 onClick={toggleMenu}
                 className="relative z-50 p-2 cursor-pointer text-white hover:text-gray-100 focus:outline-none"
-                aria-label={isOpen ? "Close menu" : "Open menu"}
               >
                 <div className="w-8 h-6 flex flex-col justify-between">
                   <div 
@@ -94,14 +93,15 @@ const Nav = () => {
                       isOpen ? 'opacity-0' : ''
                     }`}
                   ></div>
-                  <div                     className={`h-0.5 w-full bg-current transition-all duration-300 ease-in-out ${
+                  <div 
+                    className={`h-0.5 w-full bg-current transition-all duration-300 ease-in-out ${
                       isOpen ? '-rotate-45 -translate-y-2.5' : ''
-
                     }`}
                   ></div>
                 </div>
               </button>
             </div>
+
   
             {/* Mobile Menu Overlay */}
             {isOpen && (

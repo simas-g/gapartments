@@ -81,7 +81,7 @@ const Card = ({property, count, setCount, isVisible}) => {
         </div>
 
       </div>
-      <div className='h-48'>
+      <div className='h-48 border-[#7B5D3E] border overflow-hidden rounded-b-lg'>
         <img src={property.images[2]} className='w-full h-full object-cover'></img>
       </div>
     </div>
