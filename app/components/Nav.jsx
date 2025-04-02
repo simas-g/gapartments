@@ -1,7 +1,7 @@
 'use client'
 import { useState } from "react";
 import Image from "next/image";
-
+import Link from "next/link";
 const Dropdown = () => {
     const [isOpen, setIsOpen] = useState(false);
   
@@ -62,11 +62,13 @@ const Nav = () => {
     };
   
     return (
-      <nav className=" top-0 left-0 w-full z-20">
+      <nav className="top-0 left-0 w-full z-20 bg-">
         <div className="mx-auto px-4 sm:px-6 lg:px-20 p-8">
           <div className="flex items-center justify-between h-12">
             {/* Logo */}
-            <div className="flex-shrink-0 z-50">
+            <Link 
+            href={'/'}
+            className="flex-shrink-0 z-50 cursor-pointer">
               <Image 
                 src={'/logo.png'} 
                 height={80} 
@@ -74,7 +76,7 @@ const Nav = () => {
                 alt="gapartments" 
                 className="object-contain"
               />
-            </div>
+            </Link>
   
             {/* Mobile Menu Button */}
             <div className="md:hidden flex items-center">
