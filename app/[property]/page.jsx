@@ -14,16 +14,15 @@ const page = async ({params}) => {
     let newImages
     newImages = images.slice(1, images?.length);
 
-
   return (
-    <div className="">
+    <div className="w-full pb-20">
       {/* navigation overlay */}
       <div className="absolute top-0 overflow-x-hidden w-full z-[-2] h-32">
         <div className="w-full h-full bg-[#9D774F] absolute"></div>
       </div>
 
       {/* heading */}
-      <div className=' p-8 px-6 max-w-7xl m-auto flex flex-col gap-y-2'>
+      <div className=' p-8 px-8 m-auto flex flex-col gap-y-2'>
         <h1 className='text-3xl font-bold text-gray-800'>{prop?.title}</h1>
         <ul className='flex gap-x-4'>{prop?.add?.map((a, i) => (
           <li key={i} className='bg-[#9D774F] text-white text-sm rounded-3xl px-4'>
@@ -41,11 +40,14 @@ const page = async ({params}) => {
       </div>
 
       {/* gallery + descr */}
-      <div className='grid px-8'>
+      <div className='grid px-8 gap-y-6 justify-items-stretch lg:grid-cols-3 gap-x-8'>
         <ImageNav images={newImages}></ImageNav>
 
-        <div>
-
+        <div className='w-full h-auto md:max-h-[480px] bg-[#f4ddc5] px-8 p-4 rounded-lg flex flex-col gap-y-3'>
+          <h5 className='font-bold text-xl tracking-wide'>Apie apartamentus</h5>
+          <p>
+            {prop?.description}
+          </p>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@
 import { useState } from "react"
 
 const ImageNav = ({images}) => {
-    const [selected, setSelected] = useState(images[2])
+    const [selected, setSelected] = useState(0)
     const handleImageChange = (i) => {
         setSelected(i)
         console.log(i)
@@ -20,14 +20,14 @@ const ImageNav = ({images}) => {
         }
     }
   return (
-    <div>
+    <div className="col-span-2 max-w-4xl w-full">
           {/*main image */}
-          <div className='w-full pb-2 cursor-pointer relative'>
+          <div className='rounded-xl overflow-hidden w-full mb-2 cursor-pointer relative shadow border-1 border-gray-400'>
             <div onClick={() => handleNavigation('left')} className='absolute z-4 w-16 h-16 bg-white opacity-60 rounded-full top-[40%] left-4 border border-gray-300'>
               <img src="/left.svg" alt="" />
             </div>
 
-            <img className='w-full h-80 object-cover' src={images[selected]} alt="" />
+            <img className='w-full h-80 lg:h-[480px] object-cover' src={images[selected]} alt="" />
 
             <div 
             onClick={() => handleNavigation('right')}
@@ -43,9 +43,9 @@ const ImageNav = ({images}) => {
           <div
           className='w-full grid h-auto overflow-hidden grid-cols-[repeat(auto-fit,minmax(50px,1fr))] gap-x-2 gap-y-2'>
             {images.map((image, i) => (
-              <div key={i} className='h-[55px] w-[55px] overflow-hidden cursor-pointer'
+              <div key={i} className='h-[55px] w-[55px] overflow-hidden cursor-pointer rounded-sm'
               onClick={() => handleImageChange(i)} >
-                <img src={image} className={`object-cover w-full h-full ${i === selected ? 'border-3' : ''}`} alt="" />
+                <img src={image} className={`object-cover rounded-sm w-full h-full ${i === selected ? 'border-3' : ''}`} alt="" />
               </div>
             ))}
           </div>
