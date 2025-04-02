@@ -44,3 +44,6 @@ body {
     opacity: 1;
   }
 }
+@theme {
+  --breakpoint-xs: 28rem;
+}

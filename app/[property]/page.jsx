@@ -1,4 +1,5 @@
 import {getS3ImageUrls} from '../actions/getS3Images'
+import ImageNav from '../components/ImageNav';
 const getProperty = async ({id}) => {
     const data = await fetch(`${process.env.URL}/api/property?id=${id}`)
     const {property} = await data.json();
@@ -12,6 +13,8 @@ const page = async ({params}) => {
     const images = await getS3ImageUrls(`${idd}`)
     let newImages
     newImages = images.slice(1, images?.length);
+
+
   return (
     <div className="">
       {/* navigation overlay */}
@@ -39,21 +42,8 @@ const page = async ({params}) => {
 
       {/* gallery + descr */}
       <div className='grid px-8'>
-        <div>
-          {/*main image */}
-          <div className='w-full pb-2'>
-            <img className='w-full h-80 object-cover' src={images[2]} alt="" />
-          </div>
+        <ImageNav images={newImages}></ImageNav>
 
-          {/*image previews */}
-          <div className='w-full grid h-auto overflow-hidden grid-cols-7 gap-x-2 gap-y-2'>
-            {newImages.map((image, i) => (
-              <div key={i} className='h-[55px] w-[55px] overflow-hidden'>
-                <img src={image} className='object-cover w-full h-full' alt="" />
-              </div>
-            ))}
-          </div>
-        </div>
         <div>
 
         </div>
