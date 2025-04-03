@@ -123,7 +123,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col font-[family-name:var(--font-geist-sans)]">
       {/* Hero Section */}
-      <header className="relative h-screen w-full overflow-hidden">
+      <header className="relative h-[650px] w-full md:h-screen">
         {/* Background Image */}
         <div 
           className="inset-0 bg-cover bg-center z-[-1] fixed"
@@ -136,7 +136,7 @@ export default function Home() {
         </div>
 
         {/* Hero Content */}
-        <div className="container mx-auto px-4 md:px-20 h-full flex items-center justify-start relative z-1">
+        <div className="container mx-auto px-4 md:px-20 h-full flex pt-40 justify-start relative z-1">
           <div className="text-white max-w-2xl">
             <h1 className="text-4xl md:text-5xl font-[--font-poppins-sans] mb-4">
               Apartamentai <br/> 

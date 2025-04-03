@@ -17,7 +17,7 @@ const Dropdown = () => {
     ];
   
     return (
-      <div className=" tracking-widest relative w-full md:pt-0 pt-32 h-fit font-[--font-poppins] md:flex items-center ">
+      <div className="  tracking-widest relative w-full md:pt-0 pt-32 h-fit font-[--font-poppins] md:flex items-center ">
         <button 
           onClick={() => setIsOpen(!isOpen)}
           className="flex justify-end pr-12 items-center gap-x-4 w-full px-4 py-3 text-white tracking-wider font-light"
@@ -62,7 +62,7 @@ const Nav = () => {
     };
   
     return (
-      <nav className="top-0 left-0 w-full z-20 bg-">
+      <nav className="bg-gradient-to-r from-amber-600 via-amber-700 to-amber-800 top-0 left-0 w-full z-20 bg-">
         <div className="mx-auto px-4 sm:px-6 lg:px-20 p-8">
           <div className="flex items-center justify-between h-12">
             {/* Logo */}

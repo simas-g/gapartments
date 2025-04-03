@@ -23,7 +23,7 @@ const ImageNav = ({images}) => {
     <div className="col-span-2 max-w-4xl w-full">
           {/*main image */}
           <div className='rounded-xl overflow-hidden w-full mb-2 cursor-pointer relative shadow border-1 border-gray-400'>
-            <div onClick={() => handleNavigation('left')} className='absolute z-4 w-16 h-16 bg-white opacity-60 rounded-full top-[40%] left-4 border border-gray-300'>
+            <div onClick={() => handleNavigation('left')} className='shadow-3xl absolute z-4 w-12 h-12 bg-white rounded-full top-[40%] left-4 border border-gray-300'>
               <img src="/left.svg" alt="" />
             </div>
 
@@ -34,7 +34,7 @@ const ImageNav = ({images}) => {
             style={{
               rotate: '180deg'
             }}
-            className='absolute z-4 w-16 h-16 bg-white opacity-60 rounded-full top-[40%] right-4 border border-gray-300'>
+            className='shadow-3xl absolute z-4 w-12 h-12 bg-white rounded-full top-[40%] right-4 border border-gray-300'>
               <img src="/left.svg" alt="" />
             </div>
           </div>
