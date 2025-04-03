@@ -45,7 +45,7 @@ const ImageNav = ({images}) => {
             {images.map((image, i) => (
               <div key={i} className='h-[55px] w-[55px] overflow-hidden cursor-pointer rounded-sm'
               onClick={() => handleImageChange(i)} >
-                <img src={image} className={`object-cover rounded-sm w-full h-full ${i === selected ? 'border-3' : ''}`} alt="" />
+                <img src={image} className={`object-cover rounded-sm w-full h-full ${i === selected ? 'border-3 border-amber-700' : ''}`} alt="" />
               </div>
             ))}
           </div>
