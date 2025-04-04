@@ -49,7 +49,7 @@ const Page = async ({ params }) => {
 
       {/* gallery + description */}
       <div className="grid px-8 gap-y-6 gap-x-8 items-start lg:grid-cols-2 lg-grid-flow-col">
-        <div className="h-fit flex items-start max-w-4xl justify-start border-gray-300 border rounded-lg">
+        <div className="h-fit flex items-start max-w-4xl justify-start">
           <ImageNav images={prop.images} />
         </div>
 
