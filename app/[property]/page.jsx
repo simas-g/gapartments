@@ -54,7 +54,7 @@ const Page = async ({ params }) => {
           <ImageNav images={prop.images} />
         </div>
 
-        <div className="w-full lg:sticky lg:top-20 lg:right-8 max-w-lg h-auto bg-gray-100 border-gray-300 border px-8 p-4 rounded-lg flex flex-col gap-y-3">
+        <div className="w-full lg:sticky lg:top-20 lg:right-8 h-auto bg-gray-100 border-gray-300 border px-8 p-4 rounded-lg flex flex-col gap-y-3">
           <h5 className="font-extrabold text-xl">Apie apartamentus</h5>
           <div className="text-gray-700">
             {prop.description
@@ -85,8 +85,11 @@ const Page = async ({ params }) => {
             </button>
           </div>
         </div>
-        <div className='cols-span-2'>
-          <h3>Žemėlapis</h3>
+        <div className=''>
+          <div className='w-full h-12 bg-gray-200 flex items-center justify-around rounded-lg'>
+              <h4 className='cursor-pointer w-full justify-center h-full flex items-center'>Žemėlapis</h4>
+              <h4 className='cursor-pointer w-full justify-center h-full flex items-center'>Atsiliepimai</h4>
+          </div>
         </div>
       </div>
       

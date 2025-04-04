@@ -23,11 +23,11 @@ const ImageNav = ({images}) => {
     <div className="col-span-2 max-w-4xl w-full rounded-lg overflow-hidden">
           {/*main image */}
           <div className=' overflow-hidden w-full mb-2 cursor-pointer relative shadow border-1 border-gray-400'>
-            <div onClick={() => handleNavigation('left')} className='shadow-3xl absolute z-4 w-12 h-12 bg-white rounded-full top-[40%] left-4 border border-gray-300'>
+            <div onClick={() => handleNavigation('left')} className='shadow-3xl absolute z-4 w-12 h-12 bg-white rounded-full top-[50%] left-4 border border-gray-300'>
               <img src="/left.svg" alt="" />
             </div>
 
-            <img className='w-full h-80 lg:h-[480px] object-cover' src={images[selected]} alt="" />
+            <img className='w-full h-80 lg:h-[400px] object-cover' src={images[selected]} alt="" />
 
             <div 
             onClick={() => handleNavigation('right')}
