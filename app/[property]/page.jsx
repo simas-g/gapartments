@@ -22,7 +22,6 @@ const fetchPropertyData = async (id) => {
 
 const Page = async ({ params }) => {
   const prop = await fetchPropertyData(params.property);
-  if (!prop) return <p>Failed to load property data.</p>;
 
   return (
     <div className="w-full pb-20 bg-gray-100 md:px-20">
