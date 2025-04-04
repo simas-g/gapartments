@@ -25,14 +25,9 @@ const Page = async ({ params }) => {
   if (!prop) return <p>Failed to load property data.</p>;
 
   return (
-    <div className="w-full pb-20 bg-gray-100 md:px-14">
-      {/* navigation overlay */}
-      <div className="absolute top-0 group overflow-x-hidden w-full z-[-2] h-32">
-        <div className="w-full h-full absolute"></div>
-      </div>
-
+    <div className="w-full pb-20 bg-gray-100 md:px-20">
       {/* heading */}
-      <div className="p-8 px-8 m-auto flex flex-col gap-y-2 relative">
+      <div className="p-8 px-8 m-auto flex flex-col gap-y-2">
         <h1 className="text-3xl font-bold">{prop.title}</h1>
         <ul className="flex gap-x-4">
           {prop.add?.map((a, i) => (
@@ -54,15 +49,12 @@ const Page = async ({ params }) => {
       </div>
 
       {/* gallery + description */}
-      <div className="grid px-8 gap-y-6 gap-x-8 items-start lg:grid-cols-2 h-screen">
-        <div className="h-full flex items-start justify-start w-full">
+      <div className="grid px-8 gap-y-6 gap-x-8 items-start lg:grid-cols-2 lg-grid-flow-col">
+        <div className="h-fit flex items-start max-w-4xl justify-start border-gray-300 border rounded-lg">
           <ImageNav images={prop.images} />
-          <div>
-            <div className="w-full h-[400px] bg-gray-300 rounded-lg mt-6"></div>
-          </div>
         </div>
 
-        <div className="w-full lg:sticky lg:top-20 max-w-lg h-auto bg-gray-100 border-gray-300 border px-8 p-4 rounded-lg flex flex-col gap-y-3">
+        <div className="w-full lg:sticky lg:top-20 lg:right-8 max-w-lg h-auto bg-gray-100 border-gray-300 border px-8 p-4 rounded-lg flex flex-col gap-y-3">
           <h5 className="font-extrabold text-xl">Apie apartamentus</h5>
           <div className="text-gray-700">
             {prop.description
@@ -92,6 +84,9 @@ const Page = async ({ params }) => {
               Susisiekti
             </button>
           </div>
+        </div>
+        <div className='cols-span-2'>
+          <h3>Žemėlapis</h3>
         </div>
       </div>
       
