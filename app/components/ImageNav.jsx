@@ -41,9 +41,9 @@ const ImageNav = ({images}) => {
 
           {/*image previews */}
           <div
-          className='w-full grid h-auto overflow-hidden grid-cols-[repeat(auto-fit,minmax(50px,1fr))] gap-x-2 gap-y-2'>
+          className='w-full grid h-auto overflow-hidden grid-cols-[repeat(auto-fit,minmax(55px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(80px,1fr))] gap-x-2 gap-y-2'>
             {images.map((image, i) => (
-              <div key={i} className='h-[55px] w-[55px] overflow-hidden cursor-pointer rounded-sm'
+              <div key={i} className='md:h-[80px] md:w-[80px] h-[55px] w-[55px] overflow-hidden cursor-pointer rounded-sm'
               onClick={() => handleImageChange(i)} >
                 <img src={image} className={`object-cover rounded-sm w-full h-full ${i === selected ? 'border-3 border-amber-700' : ''}`} alt="" />
               </div>

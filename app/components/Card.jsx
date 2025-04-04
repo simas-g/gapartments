@@ -53,7 +53,7 @@ const Card = ({property, count, setCount, isVisible}) => {
 
         <div className='flex gap-x-4'>
           {(property?.add)?.map((a, i) => (
-            <div key={i} className='py-1 bg-amber-800 text-white text-sm rounded-3xl px-4'>
+            <div key={i} className='py-1 bg-amber-600 text-white text-sm rounded-3xl px-4'>
               {a.length === 1 ? (
                 <div className='flex items-center gap-x-1'>
                   <img width={15} height={15} src='/user.svg'></img>
@@ -73,7 +73,7 @@ const Card = ({property, count, setCount, isVisible}) => {
           <div className='flex items-center gap-x-2'>
             <p className='font-normal text-gray-500'>nuo</p>
             <p className='font-bold text-xl'>{property.price}€</p>
-            <p className='text-gray-500 text-sm mt-2'>/ nakčiai</p>
+            <p className='text-gray-500 text-sm mt-2 mr-3'>/ nakčiai</p>
           </div>
           <Link href={`/${property.id}`} className='bg-amber-600 text-gray-100 w-fit cursor-pointer px-4 py-2 rounded-lg'>
             Daugiau informacijos

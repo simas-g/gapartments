@@ -28,7 +28,7 @@ export const metadata = {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} antialiased overflow-x-hidden`}
       suppressHydrationWarning={true}
       >
         <Nav></Nav>
