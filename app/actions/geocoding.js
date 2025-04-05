@@ -1,15 +1,24 @@
 export async function geocoding(address) {
-    const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.MAPS_API_KEY}`)
-    const data = await res.json();
-    if (data.status === 'OK') {
-        const location = {
-            lat: data.results[0].geometry.location.lat,
-            lng: data.results[0].geometry.location.lng,
-        };
-        console.log('our location: ',location)
-        return location;
-    } else {
-        console.error('Geocoding error:', data.status);
-        return null;
-    }
-}
+    const res1 = await fetch(`https://addressvalidation.googleapis.com/v1:validateAddress?key=${process.env.MAPS_API_KEY}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        address: {
+        regionCode: "LT",
+          addressLines: [address],
+        },
+      }),
+    });
+  
+    const validationData = await res1.json();
+  
+    const validated = validationData.result?.address?.formattedAddress;
+    if (!validated) {
+      console.error("Address validation failed");
+      return null;
+    }    
+    return validationData.result.geocode.location
+  }
+  
