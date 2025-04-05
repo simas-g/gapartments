@@ -1,8 +1,8 @@
 import { getS3ImageUrls } from '../actions/getS3Images';
 import { geocoding } from '../actions/geocoding';
 import { User } from 'lucide-react';
-import ImageNav from '../components/ImageNav';
-import PropNavigation from '../components/PropNavigation';
+
+import GalleryDesc from '../components/GalleryDesc';
 const fetchPropertyData = async (id) => {
   try {
     const res = await fetch(`${process.env.URL}/api/property?id=${id}`);
@@ -48,19 +48,7 @@ const Page = async ({ params }) => {
       </div>
 
       {/* gallery + description */}
-      <div className="grid px-8 gap-y-6 gap-x-8 items-start lg:grid-cols-2 lg-grid-flow-col-dense">
-        <div className="h-fit flex flex-col max-w-4xl">
-          <ImageNav images={prop.images} />
-          <div className='order-3 w-full h-12 bg-gray-200 flex items-center justify-around rounded-lg mt-6'>
-            <h4 className='lg:hidden cursor-pointer w-full justify-center h-full flex items-center'>Informacija</h4>
-            <h4 className='cursor-pointer w-full justify-center h-full flex items-center'>Žemėlapis</h4>
-            <h4 className='cursor-pointer w-full justify-center h-full flex items-center'>Atsiliepimai</h4>
-          </div>
-        </div>
-        <PropNavigation prop={prop}/>
-        
-
-      </div>      
+      <GalleryDesc prop={prop} />
     </div>
   );
 };
