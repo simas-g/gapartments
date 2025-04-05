@@ -168,7 +168,7 @@ export default function Home() {
       {/* Properties Preview Section */}
       <section className="py-16 bg-gray-100 relative">
           <h3 className='text-center text-4xl text-gray-700 font-bold pb-3'>Mūsų apartamentai</h3>
-          <div className=' w-18 rounded-lg h-1 bg-[#7B5D3E] m-auto mb-9'></div>
+          <div className=' w-18 rounded-lg h-1 bg-amber-600 m-auto mb-9'></div>
           <div className="grid z-90 place-items-center md:px-20 px-6 gap-y-8 grid-cols-1 md:grid-cols-2 gap-x-8 lg:grid-cols-3 3xl:grid-cols-4">
             {properties.map((prop, i) => (
               <Card 

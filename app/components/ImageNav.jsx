@@ -29,7 +29,7 @@ const ImageNav = ({ images }) => {
   }
 
   return (
-    <div className="grid grid-cols-3 grid-rows-4 gap-2 max-w-4xl w-full rounded-lg overflow-hidden">
+    <div className="grid order-1 grid-cols-3 grid-rows-4 gap-2 max-w-4xl w-full h-auto rounded-lg overflow-hidden">
       {/* main image */}
       <div className="col-span-2 row-span-3">
         <img

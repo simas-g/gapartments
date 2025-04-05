@@ -62,8 +62,8 @@ const Nav = () => {
     };
   
     return (
-      <nav className="bg-gradient-to-r from-amber-600 via-amber-700 to-amber-800 top-0 left-0 w-full z-20 bg-">
-        <div className="mx-auto px-4 sm:px-6 lg:px-20 p-8">
+      <nav className="bg-gradient-to-r px-20 from-amber-600 via-amber-700 to-amber-800 top-0 left-0 w-full z-20 bg-">
+        <div className="mx-auto px-4 sm:px-6 p-8">
           <div className="flex items-center justify-between h-12">
             {/* Logo */}
             <Link 

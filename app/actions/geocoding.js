@@ -6,6 +6,7 @@ export async function geocoding(address) {
             lat: data.results[0].geometry.location.lat,
             lng: data.results[0].geometry.location.lng,
         };
+        console.log('our location: ',location)
         return location;
     } else {
         console.error('Geocoding error:', data.status);
