@@ -35,18 +35,32 @@ const ImageNav = ({ images }) => {
   const scrollToThumb = (index) => {
     if(thumbsRef.current[index]) {
       thumbsRef.current[index].scrollIntoView({
-        behavior: "smooth",
+        behavior: "instant",
         inline: "center",
         block: "nearest",
       });
     }
 
   };
-
-  // Scroll when selected changes
   useEffect(() => {
-    scrollToThumb(selected);
-  }, [selected]);
+    if (viewing) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = ""; 
+    }
+  
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [viewing]);
+  
+  // Scroll when selected changes
+    useEffect(() => {
+      scrollToThumb(selected);
+      setTimeout(() => {
+
+      }, 500);
+    }, [selected]);
 
 
   return (
@@ -78,9 +92,13 @@ const ImageNav = ({ images }) => {
 
             <div ref={scrollBar} 
             className="flex gap-x-4 overflow-x-auto max-w-[400px] md:max-w-[600px] px-4 scroll-smooth"
+            style={{ scrollbarWidth: "none" }}
+
             >
+              
             {images.map((image, i) => (
                 <div
+
                   ref={(el) => (thumbsRef.current[i] = el)}
                   key={i}
                   className={`select-none w-20 h-20 flex-shrink-0 overflow-hidden cursor-pointer rounded-sm ${
@@ -98,7 +116,7 @@ const ImageNav = ({ images }) => {
           
       )}
       {/* main image */}
-      <div className="col-span-2 row-span-3 cursor-pointer" onClick={() => handleImagesView()}>
+      <div className="col-span-2 row-span-3 cursor-pointer select-none" onClick={() => handleImagesView()}>
 
         <img
           src={mainImage}
@@ -108,7 +126,7 @@ const ImageNav = ({ images }) => {
       </div>
 
       {/* mid images */}
-      <div className="flex flex-col gap-2 col-span-1 row-span-3">
+      <div className="flex flex-col gap-2 col-span-1 row-span-3 select-none">
         {midImages.map((image, i) => (
           <div
             key={i}
@@ -125,18 +143,19 @@ const ImageNav = ({ images }) => {
       </div>
 
       {/* Image Previews */}
-    <div className="grid grid-cols-5 gap-2 col-span-3 row-span-1">
+    <div className="grid grid-cols-5 gap-2 col-span-3 row-span-1 select-none">
       {imagePreviews.map((image, i) => (
         <div
           key={i}
           className="overflow-hidden cursor-pointer rounded-sm relative"
           onClick={() => handleImagesView()}
+          
         >
           {/* Overlay for the last image preview */}
           {i === imagePreviews.length - 1 && (
             <div style={{
               backdropFilter: 'blur(6px)',
-            }} className="absolute inset-0 z-10 flex items-center justify-center bg-black/50 text-white font-bold rounded-sm">
+            }} className="absolute inset-0 flex items-center justify-center bg-black/50 text-white font-bold rounded-sm sm:text-xs text-[10px] px-2">
               Peržiūrėti visas nuotraukas ({images.length})
             </div>
           )}

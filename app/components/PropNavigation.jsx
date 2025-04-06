@@ -9,16 +9,7 @@ const PropNavigation = ({prop, selected}) => {
         <div className="w-full order-2 lg:sticky lg:top-20 lg:right-8 h-fit bg-gray-100 border-gray-300 border px-8 p-4 rounded-lg flex flex-col gap-y-5">
             <h5 className="font-extrabold text-xl">Apie apartamentus</h5>
             <div className="text-gray-700 text-justify">
-                {prop.description
-                // ?.split('.')
-                // .filter(Boolean)
-                // .map((sentence, i) => (
-                //     <div key={i}>
-                //     {i % 3 === 0 && i !== 0 && <br />}
-                //     {sentence}.
-                //     </div>
-                // ))
-                }
+                {prop.description}
             </div>
     
             <div className="border-b border-gray-300 my-3"></div>

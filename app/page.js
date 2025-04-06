@@ -136,7 +136,7 @@ export default function Home() {
         </div>
 
         {/* Hero Content */}
-        <div className="container mx-auto px-4 md:px-20 h-full flex pt-40 justify-start relative z-1">
+        <div className="container mx-auto px-4 md:px-26 h-full flex pt-40 justify-start relative z-1">
           <div className="text-white max-w-2xl">
             <h1 className="text-4xl md:text-5xl font-[--font-poppins-sans] mb-4">
               Apartamentai <br/> 

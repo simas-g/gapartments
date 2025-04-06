@@ -31,13 +31,13 @@ const GalleryDesc = ({prop}) => {
           window.removeEventListener('resize', handleResize);
         };
       }, []);
-      
+
   return (
     <div className="grid px-8 gap-y-6 gap-x-8 items-start lg:grid-cols-2">
         <div className='flex flex-col gap-y-4'>
           <ImageNav images={prop.images} />
           <div className='order-2 w-full h-12 lg:order-3 bg-gray-200 flex items-center justify-around rounded-lg p-1'>
-            <h4 onClick={() => handleSelected(1)} className={`lg:hidden cursor-pointer w-full justify-center h-full flex items-center ${selected == 1 ? ' bg-gray-100 rounded-md' : ''}`}>Informacija {selected}</h4>
+            <h4 onClick={() => handleSelected(1)} className={`lg:hidden cursor-pointer w-full justify-center h-full flex items-center ${selected == 1 ? ' bg-gray-100 rounded-md' : ''}`}>Informacija</h4>
             <h4 onClick={() => handleSelected(2)} className={`cursor-pointer w-full justify-center h-full flex items-center ${selected == 2 ? ' bg-gray-100 rounded-md' : ''}`}>Žemėlapis</h4>
             <h4 onClick={() => handleSelected(3)} className={`cursor-pointer w-full justify-center h-full flex items-center ${selected == 3 ? ' bg-gray-100 rounded-md' : ''}`}>Atsiliepimai</h4>
           </div>
