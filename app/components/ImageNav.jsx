@@ -64,7 +64,7 @@ const ImageNav = ({ images }) => {
 
 
   return (
-    <div className="max-h-90 grid order-1 grid-cols-3 grid-rows-4 gap-2 max-w-4xl w-full h-auto rounded-lg overflow-hidden">
+    <div className="max-h-90 grid grid-cols-3 grid-rows-4 gap-2 max-w-4xl w-full h-auto rounded-lg overflow-hidden">
       {/* image viewer */}
       {viewing && (
         <div className="fixed inset-0 z-100 bg-black/50 backdrop-blur-md px-6 py-6">

@@ -1,5 +1,5 @@
 export async function geocoding(address) {
-    const res1 = await fetch(`https://addressvalidation.googleapis.com/v1:validateAddress?key=${process.env.MAPS_API_KEY}`, {
+    const res1 = await fetch(`https://addressvalidation.googleapis.com/v1:validateAddress?key=${process.env.REACT_APP_MAPS_API_KEY}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
