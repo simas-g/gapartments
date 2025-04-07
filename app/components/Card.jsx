@@ -1,45 +1,6 @@
-'use client'
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState, useRef } from 'react';
-const Card = ({property, count, setCount, isVisible}) => {
-  const [image, setImage] = useState();
-  const [imageIndex, setImageIndex] = useState(0)
-  const [animate, setAnimate] = useState(false);
-  const handleImageSelect = (image, i) => {
-    setImage(image);
-    setImageIndex(i + 1);
-  }
-  const handleIndexChange = (d) => {
-    setImageIndex(prevIndex => {
-      let newIndex;
-      if (d === 'right') {
-        newIndex = prevIndex < 8 ? prevIndex + 1 : 1;
-      } else {
-        newIndex = prevIndex > 1 ? prevIndex - 1 : property.images.length - 1;
-      }
-      
-      setImage(property.images[newIndex]); 
-      return newIndex; 
-    });
-  };
-  useEffect(() => {
-    setAnimate(true);
-  }, [count])
-  const images = property?.images;
-  const moveLeft = () => {
-    console.log(count);
-    if(count === 0) {
-      setCount(prev => 6)
-    } else setCount(prev => prev - 1);
-  }
-  const moveRight = () => {
-    if(count === 6) {
-      setCount(prev=>0)
-    } else setCount(prev => prev + 1);
-    console.log(count);
-
-  }
+const Card = ({property}) => {
   return (
     <div 
     className="border bg-white border-gray-300 shadow rounded-lg overflow-hidden h-fit max-w-[400px]"
@@ -82,7 +43,7 @@ const Card = ({property, count, setCount, isVisible}) => {
 
       </div>
       <div className='h-48 overflow-hidden rounded-b-lg'>
-        <img src={property.images[2]} className='w-full h-full object-cover'></img>
+        <img src={property.images[0]} className='w-full h-full object-cover'></img>
       </div>
     </div>
   )

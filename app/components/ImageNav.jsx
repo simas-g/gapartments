@@ -76,7 +76,7 @@ const ImageNav = ({ images }) => {
 
           <div className="flex flex-col justify-center items-center gap-y-4 mt-8">
             <div className="select-none w-80 h-80 max-[90%] sm:w-100 sm:h-[450px] overflow-hidden">
-              <img src={images[selected]} className="object-cover object-center w-full h-full" alt="" />
+              <img src={images[selected]} className="object-cover object-center w-full h-auto" alt="" />
             </div>
             <div className="text-white">
               {selected + 1} / {images.length}
@@ -106,7 +106,7 @@ const ImageNav = ({ images }) => {
                   }`}
                   onClick={() => handleImage(i)}
                 >
-                  <img src={image} className="object-cover rounded-sm w-full h-full" alt="" />
+                  <img src={image} className="object-cover rounded-sm w-full h-auto" alt="" />
                 </div>
               ))}
             </div>
@@ -116,11 +116,11 @@ const ImageNav = ({ images }) => {
           
       )}
       {/* main image */}
-      <div className="col-span-2 row-span-3 cursor-pointer select-none" onClick={() => handleImagesView()}>
+      <div className="col-span-2 rounded-lg overflow-hidden row-span-3 cursor-pointer select-none" onClick={() => handleImagesView()}>
 
         <img
           src={mainImage}
-          className="object-cover rounded-lg w-full h-full"
+          className="object-cover w-full h-auto"
           alt=""
         />
       </div>
@@ -135,7 +135,7 @@ const ImageNav = ({ images }) => {
           >
             <img
               src={image}
-              className={`object-cover rounded-sm w-full h-full`}
+              className={`object-cover rounded-sm w-full h-auto`}
               alt=""
             />
           </div>
@@ -161,7 +161,7 @@ const ImageNav = ({ images }) => {
           )}
           <img
             src={image}
-            className={`object-cover rounded-sm w-full h-full`}
+            className={`object-cover rounded-sm w-full h-auto`}
             alt=""
           />
         </div>

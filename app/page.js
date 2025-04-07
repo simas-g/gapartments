@@ -1,32 +1,15 @@
 
-'use client'
-import Image from 'next/image'
-import { useEffect, useState, useRef } from 'react';
-import { getS3ImageUrls } from './actions/getS3Images';
-import Link from 'next/link';
 import Card from './components/Card';
 
 
 export default function Home() {
-  const imagePrefixes = useRef(['kalnieciu219/', 'kalnieciu196/', 'taikospr33b/', 'varniu24/', 'nemuno22/', 'puodziu27/', 'linkuvos55/'])
-  useEffect(() => {
-    for(const prefix of imagePrefixes.current) {
-      getS3ImageUrls(prefix).then((urls) => {
-        setProperties(prev => prev.map(property => 
-          prefix.startsWith(property.id) ? {...property, images: urls} : property
-        ));        
-      })
-    }
-  }, [])
-
-  const [propertyCount, setPropertyCount] = useState(0)
-  const [properties, setProperties] = useState([ 
+  const properties = [ 
     {
       title: 'Kalniečių g. 219',
       id: 'kalnieciu219/',
       description: "Atsipalaiduokite su visa šeima šioje ramioje vietoje. Jaukūs, naujai įrengti 2iejų kambarių apartamentai. Atskiras įėjimas! Pirmas aukštas! Langai iš kiemo pusės. Nesigirdi miesto triukšmo! Kauno Klinikos pasiekiamos pėstute! Šalia namo maisto prekių parduotuvė “Express Market”, šiek tiek tolėliau prekybos centras “Maxima XXL”. Iki miesto centro 7 min automobiliu. Bute yra visa reikalinga buitinė technika: skalbimo mašina, Šaldytuvas, kaitlentė, gartraukis, virdulys, lygintuvas, Smart TV + Wifi. Rankšluosčiai, patalynė ir visi indai maisto ruošimui, kava bei arbata, prieskoniai. Mašinai nemokama parkingo vieta prie pat Jūsų buto durų. Talpiname iki 4 asmenų.",
       images: [
-        
+        'https://gapartments.s3.eu-north-1.amazonaws.com/kalnieciu219/20240815_132619.jpg'
       ],
       price: 35,
       add: [
@@ -36,11 +19,25 @@ export default function Home() {
       ]
     },
     {
-      title: 'Kalniečių g. 196',
-      id: 'kalnieciu196/',
+      title: 'Kalniečių g. 196 (1)',
+      id: 'kalnieciu196(1)/',
       description: "Pėstute iki Kauno Klinikų! Viršutiniame panoraminiame 9 ame aukšte dveji 2iejų kambarių apartamentai vienas šalia kito! Langai į kiemą – į privačių namų kvartalą, nesigirdi miesto triukšmo. Šalia maisto prekių parduotuvė “Express Market”, „Maxima“, šiek tiek tolėliau prekybos centras “Maxima XXL”. Iki miesto centro 7 min automobiliu. Bute yra visa reikalinga buitinė technika: skalbimo mašina, Šaldytuvas, kaitlentė, gartraukis, virdulys, lygintuvas, Smart TV + Wifi, įstiklintas balkonas. Rankšluosčiai, patalynė ir visi indai maisto ruošimui, kava bei arbata, prieskoniai.",
       images: [
-        
+        'https://gapartments.s3.eu-north-1.amazonaws.com/kalnieciu196(1)/20240420_113625.jpg'
+      ],
+      price: 35,
+      add: [
+        '2 kamb.',
+        '4',
+        'WiFi'
+      ]
+    },
+    {
+      title: 'Kalniečių g. 196 (2)',
+      id: 'kalnieciu196(2)/',
+      description: "Pėstute iki Kauno Klinikų! Viršutiniame panoraminiame 9 ame aukšte dveji 2iejų kambarių apartamentai vienas šalia kito! Langai į kiemą – į privačių namų kvartalą, nesigirdi miesto triukšmo. Šalia maisto prekių parduotuvė “Express Market”, „Maxima“, šiek tiek tolėliau prekybos centras “Maxima XXL”. Iki miesto centro 7 min automobiliu. Bute yra visa reikalinga buitinė technika: skalbimo mašina, Šaldytuvas, kaitlentė, gartraukis, virdulys, lygintuvas, Smart TV + Wifi, įstiklintas balkonas. Rankšluosčiai, patalynė ir visi indai maisto ruošimui, kava bei arbata, prieskoniai.",
+      images: [
+        'https://gapartments.s3.eu-north-1.amazonaws.com/kalnieciu196(2)/20240420_132045.jpg'
       ],
       price: 35,
       add: [
@@ -54,7 +51,7 @@ export default function Home() {
       id: 'taikospr33b/',
       description: "Šviesūs ir erdvūs 2iejų kambarių apartamentai. Langai į kiemo pusę, nesigirdi miesto triukšmo. 8ame aukšte, yra liftas. Šalia maisto prekių parduotuvė “Šilas”, 7 min automobiliu iki miestelio „Urmas“ bei miesto centro, 5 min automobiliu iki Zoologijos sodo bei Dariaus ir Girėno stadiono. Bute yra visa reikalinga buitinė technika: skalbimo mašina, Šaldytuvas, kaitlentė, gartraukis, virdulys, lygintuvas, Smart TV + Wifi, dveji balkonai. Rankšluosčiai, patalynė ir visi indai maisto ruošimui, kava bei arbata, prieskoniai. Nemokamas parkingas atviroje namo aikštelėje. Talpiname iki 4 asmenų.",
       images: [
-        
+        'https://gapartments.s3.eu-north-1.amazonaws.com/taikospr33b/20240404_174410.jpg'
       ],
       price: 35,
       add: [
@@ -68,7 +65,7 @@ export default function Home() {
       id: 'varniu24/',
       description: "Dideli ir erdvūs 2iejų kambarių apartamentai. Langai į kiemo pusę, nesigirdi miesto triukšmo. Pirmame namo aukšte konditerijos parduotuvė-kavinukė “Alkava”. Šalia maisto prekių parduotuvė “Iki”, „Rimi“, šiek tiek tolėliau Vilijampolės turgus”. Už poros minučių Neries krantinė su pasivaikščiojimo takais ir vaikų žaidimo aikštelėmis, senamiestis 7 min automobiliu. Bute yra visa reikalinga buitinė technika: skalbimo mašina, Šaldytuvas, kaitlentė, gartraukis, virdulys, lygintuvas, Smart TV + Wifi. Rankšluosčiai, patalynė ir visi indai maisto ruošimui, kava bei arbata, prieskoniai. Nemokamas parkingas atviroje namo aikštelėje. Talpiname iki 6 asmenų.",
       images: [
-        
+        'https://gapartments.s3.eu-north-1.amazonaws.com/varniu24/20240701_142359.jpg'
       ],
       price: 35,
       add: [
@@ -82,7 +79,7 @@ export default function Home() {
       id: 'nemuno22/',
       description: "Nuomojami 2-ju kambariu apartamentai pačioje senamieščio širdyje. Langai į kiemo pusę, nesigirdi miesto triukšmo. Šalia maisto prekių parduotuvė “Iki”, Žalgirio arena 15 min pėškute. Bute yra visa reikalinga buitinė technika: skalbimo mašina, Šaldytuvas, kaitlentė, gartraukis, virdulys, lygintuvas, Smart TV + Wifi. Rankšluosčiai, patalynė ir visi indai maisto ruošimui, kava bei arbata, prieskoniai. Nemokamas parkingas atviroje namo aikštelėje. Talpiname iki 6 asmenų.",
       images: [
-        
+        'https://gapartments.s3.eu-north-1.amazonaws.com/nemuno22/1.jpg'
       ],
       price: 35,
       add: [
@@ -96,7 +93,7 @@ export default function Home() {
       id: 'puodziu27/',
       description: "Nuomojama studija per 2 aukštus su kiemeliu rytinei kavai! Langai į kiemo pusę, nesigirdi miesto triukšmo. Žalgirio arena 15 min pėškute. Bute yra visa reikalinga buitinė technika: skalbimo mašina, Šaldytuvas, kaitlentė, gartraukis, virdulys, lygintuvas, Smart TV + Wifi. Rankšluosčiai, patalynė ir visi indai maisto ruošimui, kava bei arbata, prieskoniai. Mokamas parkingas prie namo gatvėje. Talpiname iki 4 asmenų.",
       images: [
-        
+        'https://gapartments.s3.eu-north-1.amazonaws.com/puodziu27/1.jpg'
       ],
       price: 35,
       add: [
@@ -110,6 +107,7 @@ export default function Home() {
       id: 'linkuvos55/',
       description: "Butukas su atskiru įėjimu pirmame aukšte! Iki senamieščio 20min pėškute, parduotuvė „Šilas“ 3 min pėškute, Veterinarijos akademija 3 min automobiliu, šalia skausmo klinika „Agatas“. Bute yra visa reikalinga buitinė technika: skalbimo mašina, Šaldytuvas, kaitlentė, gartraukis, virdulys, lygintuvas, Smart TV + Wifi. Rankšluosčiai, patalynė ir visi indai maisto ruošimui, kava bei arbata, prieskoniai. Nemokamas parkingas atviroje namo aikštelėje. Talpiname iki 4 asmenų.",
       images: [
+        'https://gapartments.s3.eu-north-1.amazonaws.com/linkuvos55/20240625_134736.jpg'
       ],
       price: 35,
       add: [
@@ -119,7 +117,7 @@ export default function Home() {
       ]
     },
 
-  ])
+  ]
   return (
     <div className="min-h-screen flex flex-col font-[family-name:var(--font-geist-sans)]">
       {/* Hero Section */}
@@ -173,11 +171,7 @@ export default function Home() {
             {properties.map((prop, i) => (
               <Card 
                 property={prop} 
-                count={propertyCount} 
-                currentIndex={i}
                 key={i} 
-                setCount={setPropertyCount}
-                isVisible={propertyCount === i}
               />
             ))}
           </div>

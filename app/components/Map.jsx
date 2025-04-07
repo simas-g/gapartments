@@ -11,16 +11,19 @@ function MapBlock({location}) {
     console.log(process.env.URL)
   return (
     <APIProvider apiKey={"AIzaSyCoN-eN4LE9tZDgKNCmLS4zPeqyVLt1y0M"} onLoad={() => console.log('Maps API has loaded.')}>
-         <Map
-            options={{
-                mapTypeControl: false,
-            }}
-            defaultZoom={13}
-            defaultCenter={center}
-            style={{ width: '100%', height: '400px' }}
-            >
-            <Marker position={center}></Marker>
-        </Map>
+         
+          <div className='border-2 border-gray-300 rounded-lg overflow-hidden'>          
+            <Map
+              options={{
+                  mapTypeControl: false,
+              }}
+              defaultZoom={13}
+              defaultCenter={center}
+              style={{ width: '100%', height: '400px' }}
+              >
+              <Marker position={center}></Marker>
+          </Map>
+        </div>
     </APIProvider>
   );
 }

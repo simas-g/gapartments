@@ -13,7 +13,6 @@ export async function geocoding(address) {
     });
   
     const validationData = await res1.json();
-  
     const validated = validationData.result?.address?.formattedAddress;
     if (!validated) {
       console.error("Address validation failed");

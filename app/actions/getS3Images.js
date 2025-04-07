@@ -27,7 +27,7 @@ export async function getS3ImageUrls(imagePrefix) {
 
     return imageUrls;
   } catch (error) {
-    console.error("Error retrieving image URLs from S3:", error);
+    console.log("Error retrieving image URLs from S3:", error);
     return [];
   }
 }
