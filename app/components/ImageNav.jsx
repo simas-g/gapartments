@@ -116,7 +116,9 @@ const ImageNav = ({ images }) => {
           
       )}
       {/* main image */}
-      <div className="col-span-2 flex items-center rounded-lg overflow-hidden row-span-3 cursor-pointer select-none" onClick={() => handleImagesView()}>
+      <div className="col-span-2 flex items-center overflow-hidden row-span-3 cursor-pointer select-none" style={{
+        borderRadius: '8px 0px 0px 0px'
+      }} onClick={() => handleImagesView()}>
 
         <img
           src={mainImage}
@@ -126,16 +128,19 @@ const ImageNav = ({ images }) => {
       </div>
 
       {/* mid images */}
-      <div className="flex flex-col gap-2 col-span-1 row-span-3 select-none">
+      <div className="flex flex-col gap-2 col-span-1 row-span-3 select-none"
+      style={{
+        borderRadius: '0px 8px 0px 0px'
+      }} >
         {midImages.map((image, i) => (
           <div
             key={i}
-            className="overflow-hidden cursor-pointer rounded-sm flex items-center"
+            className="overflow-hidden cursor-pointer flex items-center"
             onClick={() => handleImagesView()}
           >
             <img
               src={image}
-              className={`object-cover rounded-sm w-full h-auto object-center`}
+              className={`object-cover w-full h-auto object-center`}
               alt=""
             />
           </div>

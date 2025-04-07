@@ -29,8 +29,8 @@ const Dropdown = () => {
         </button>
   
         {isOpen && (
-          <div className="md:absolute top-full left-0 w-full md:w-fit md:px-4 md:rounded-md bg-black text-white shadow-lg z-10 pb-2">
-            <ul>
+          <div className="md:absolute top-full left-0 w-full md:w-fit md:px-4 md:rounded-md bg-black text-white shadow-lg z-10 pb-2 md:block flex flex-col items-end">
+            <ul className="w-full flex flex-col">
               {locations.slice(1).map((location, index) => (
                 <li 
                   key={index}
@@ -62,13 +62,13 @@ const Nav = () => {
     };
   
     return (
-      <nav className="bg-gradient-to-r md:px-20 from-amber-600 via-amber-700 to-amber-800 top-0 left-0 w-full z-70">
+      <nav className="bg-gradient-to-r z-60 md:px-20 from-amber-600 via-amber-700 to-amber-800 top-0 left-0 w-full">
         <div className="mx-auto px-4 sm:px-6 p-8">
           <div className="flex items-center justify-between h-12">
             {/* Logo */}
             <Link 
             href={'/'}
-            className="flex-shrink-0 z-50 cursor-pointer">
+            className="flex-shrink-0 z-90 cursor-pointer">
               <Image 
                 src={'/logo.png'} 
                 height={80} 
@@ -79,10 +79,10 @@ const Nav = () => {
             </Link>
   
             {/* Mobile Menu Button */}
-            <div className="md:hidden flex items-center">
+            <div className="md:hidden flex items-center z-80">
               <button 
                 onClick={toggleMenu}
-                className="relative z-50 p-2 cursor-pointer text-white hover:text-gray-100 focus:outline-none"
+                className="relative p-2 cursor-pointer text-white hover:text-gray-100 focus:outline-none"
               >
                 <div className="w-8 h-6 flex flex-col justify-between">
                   <div 
@@ -107,7 +107,7 @@ const Nav = () => {
   
             {/* Mobile Menu Overlay */}
             {isOpen && (
-              <div className="md:hidden absolute inset-0 bg-black/90 top-0 right-10 w-full h-fit z-1 ">
+              <div className="md:hidden absolute inset-0 bg-black/90 top-0 right-10 w-full h-fit z-60 ">
                 <div className="container mx-auto space-y-6">
                   <Dropdown />
                   <div className="space-y-4">
