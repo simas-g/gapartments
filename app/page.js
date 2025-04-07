@@ -119,14 +119,15 @@ export default function Home() {
 
   ]
   return (
-    <div className="min-h-screen flex flex-col font-[family-name:var(--font-geist-sans)]">
+    <div className="flex flex-col font-[family-name:var(--font-geist-sans)]">
       {/* Hero Section */}
-      <header className="relative h-[650px] w-full md:h-screen">
+      <header className="relative h-screen w-full">
         {/* Background Image */}
         <div 
           className="inset-0 bg-cover bg-center z-[-1] fixed"
           style={{
             backgroundImage: "url(/kaunas.jpg)",
+            height: '100vh'
           }}
         >
           {/* Overlay */}
@@ -164,7 +165,7 @@ export default function Home() {
       </header>
 
       {/* Properties Preview Section */}
-      <section className="py-16 bg-gray-100 relative">
+      <section className="py-16 bg-gray-100 z-2 relative">
           <h3 className='text-center text-4xl text-gray-700 font-bold pb-3'>Mūsų apartamentai</h3>
           <div className=' w-18 rounded-lg h-1 bg-amber-600 m-auto mb-9'></div>
           <div className="grid z-90 place-items-center md:px-20 px-6 gap-y-8 grid-cols-1 md:grid-cols-2 gap-x-8 lg:grid-cols-3 3xl:grid-cols-4">

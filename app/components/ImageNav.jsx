@@ -116,7 +116,7 @@ const ImageNav = ({ images }) => {
           
       )}
       {/* main image */}
-      <div className="col-span-2 rounded-lg overflow-hidden row-span-3 cursor-pointer select-none" onClick={() => handleImagesView()}>
+      <div className="col-span-2 flex items-center rounded-lg overflow-hidden row-span-3 cursor-pointer select-none" onClick={() => handleImagesView()}>
 
         <img
           src={mainImage}
@@ -130,12 +130,12 @@ const ImageNav = ({ images }) => {
         {midImages.map((image, i) => (
           <div
             key={i}
-            className="overflow-hidden cursor-pointer rounded-sm"
+            className="overflow-hidden cursor-pointer rounded-sm flex items-center"
             onClick={() => handleImagesView()}
           >
             <img
               src={image}
-              className={`object-cover rounded-sm w-full h-auto`}
+              className={`object-cover rounded-sm w-full h-auto object-center`}
               alt=""
             />
           </div>
@@ -143,7 +143,7 @@ const ImageNav = ({ images }) => {
       </div>
 
       {/* Image Previews */}
-    <div className="grid grid-cols-5 gap-2 col-span-3 row-span-1 select-none">
+    <div className="grid grid-cols-5 gap-2 col-span-3 row-span-1 overflow-hidden select-none place-items-center">
       {imagePreviews.map((image, i) => (
         <div
           key={i}
