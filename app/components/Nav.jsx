@@ -34,6 +34,7 @@ const Dropdown = () => {
               {locations.slice(1).map((location, index) => (
                 <li 
                   key={index}
+                  id='list'
                   className="px-4 hover:underline underline-offset-8 pr-11 py-3 cursor-pointer text-right uppercase md:text-center tracking-wider font-light w-full"
                   onClick={() => {
                     setIsOpen(false);
