@@ -181,3 +181,6 @@ input {
   border-radius: var(--radius-sm);
   color: var(--color-gray-700);
 }
+button:hover {
+  cursor: pointer;
+}

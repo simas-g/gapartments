@@ -1,10 +1,20 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Cal from "./Cal";
 import Contact from "./Contact";
 const PropNavigation = ({ prop, selected }) => {
   const [openCalendar, setOpenCalendar] = useState(false);
   const [openContact, setOpenContact] = useState(false);
+  useEffect(() => {
+    if(openContact===true || openCalendar === true) {
+      document.body.style.overflow = "hidden";
+    
+      return () => {
+        document.body.style.overflow = "";
+      };
+    } else return
+
+  }, [openContact, openCalendar]);
   return (
     <div className="w-full order-2 lg:sticky lg:top-20 lg:right-8 h-fit bg-gray-100 border-gray-300 border px-8 p-4 rounded-lg flex flex-col gap-y-5">
       {openCalendar && <Cal setOpenContact={setOpenCalendar} />}
