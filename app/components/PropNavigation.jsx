@@ -1,11 +1,14 @@
 "use client";
 import { useState } from "react";
+import Cal from "./Cal";
 import Contact from "./Contact";
 const PropNavigation = ({ prop, selected }) => {
+  const [openCalendar, setOpenCalendar] = useState(false);
   const [openContact, setOpenContact] = useState(false);
   return (
     <div className="w-full order-2 lg:sticky lg:top-20 lg:right-8 h-fit bg-gray-100 border-gray-300 border px-8 p-4 rounded-lg flex flex-col gap-y-5">
-      {openContact && <Contact setOpenContact={setOpenContact} />}
+      {openCalendar && <Cal setOpenContact={setOpenCalendar} />}
+      {openContact && <Contact prop={prop} setOpenContact={setOpenContact} />}
       <h5 className="font-extrabold text-xl">Apie apartamentus</h5>
       <div className="text-gray-700 text-justify">{prop.description}</div>
 
@@ -18,7 +21,7 @@ const PropNavigation = ({ prop, selected }) => {
             <span className="text-gray-700 font-medium text-sm">/ nakčiai</span>
           </p>
         </div>
-        <button className="w-full cursor-pointer text-white bg-amber-600 py-3 rounded-lg">
+        <button onClick={() => setOpenCalendar(true)} className="w-full cursor-pointer text-white bg-amber-600 py-3 rounded-lg">
           Kalendorius
         </button>
         <button
