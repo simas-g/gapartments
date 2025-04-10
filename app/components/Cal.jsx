@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { X } from "lucide-react"
+import { Calendar1 } from 'lucide-react';
 import { Calendar } from "@/components/ui/calendar"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -23,22 +23,23 @@ const Cal = ({ prop = "none", setOpenContact }) => {
   return (
     <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4 sm:p-6 md:p-10 backdrop-blur-sm">
       <Card className="bg-white max-w-3xl shadow-xl border-0 overflow-hidden">
-        <CardHeader className="bg-gradient-to-r from-amber-500 to-amber-700 text-white relative p-6">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute right-4 top-4 text-white hover:bg-white/20 rounded-full"
-            onClick={() => setOpenContact(false)}
-          >
-          </Button>
+        <CardHeader className="border justify-between rounded-t-xl flex w-full flex-between flex-wrap bg-gradient-to-r from-amber-500 to-amber-700 text-white relative p-6">
+          <div className="w-fit">
           <CardTitle className="text-2xl font-bold">{prop?.title}</CardTitle>
           <p className="text-gray-700 mt-2">Užimtumo kalendorius</p>
+          </div>
+          
+          <div className="flex gap-x-4 bg-gray-800 p-4 rounded-xl w-fit">
+            <img src="/bookingcom.svg" width={40} alt="" />
+            <img src="/airbnb.svg" width={80} alt="" />
+          </div>
         </CardHeader>
 
         <CardContent className="p-0">
           <form onSubmit={handleSubmit}>
             <div className="p-6">
               <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                
                 <div className="text-sm font-medium text-gray-500 mb-2">Atvykimas - išvykimas</div>
                 <div className="text-lg font-medium">
                   {date?.from ? (

@@ -17,7 +17,7 @@ const PropNavigation = ({ prop, selected }) => {
   }, [openContact, openCalendar]);
   return (
     <div className="w-full order-2 lg:sticky lg:top-20 lg:right-8 h-fit bg-gray-100 border-gray-300 border px-8 p-4 rounded-lg flex flex-col gap-y-5">
-      {openCalendar && <Cal setOpenContact={setOpenCalendar} />}
+      {openCalendar && <Cal prop={prop} setOpenContact={setOpenCalendar} />}
       {openContact && <Contact prop={prop} setOpenContact={setOpenContact} />}
       <h5 className="font-extrabold text-xl">Apie apartamentus</h5>
       <div className="text-gray-700 text-justify">{prop.description}</div>
