@@ -23,18 +23,16 @@ const Cal = ({ prop = "none", setOpenContact }) => {
   return (
     <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4 sm:p-6 md:p-10 backdrop-blur-sm">
       <Card className="bg-white max-w-3xl shadow-xl border-0 overflow-hidden">
-        <CardHeader className="bg-gradient-to-r from-teal-500 to-emerald-500 text-white relative pb-6">
+        <CardHeader className="bg-gradient-to-r from-amber-500 to-amber-700 text-white relative p-6">
           <Button
             variant="ghost"
             size="icon"
             className="absolute right-4 top-4 text-white hover:bg-white/20 rounded-full"
             onClick={() => setOpenContact(false)}
           >
-            <X className="h-5 w-5" />
-            <span className="sr-only">Close</span>
           </Button>
-          <CardTitle className="text-2xl font-bold">Select Your Dates</CardTitle>
-          <p className="text-teal-100 mt-2">Please choose your preferred date range</p>
+          <CardTitle className="text-2xl font-bold">{prop?.title}</CardTitle>
+          <p className="text-gray-700 mt-2">Užimtumo kalendorius</p>
         </CardHeader>
 
         <CardContent className="p-0">
@@ -46,7 +44,7 @@ const Cal = ({ prop = "none", setOpenContact }) => {
                   {date?.from ? (
                     date?.to ? (
                       <>
-                        {format(date.from, "PPP", { locale: lt })} - {format(date.to, "PPP", {locale: lt})}
+                        {format(date.from, "PPP", { locale: lt })} - {format(date.to, "PPP", { locale: lt })}
                       </>
                     ) : (
                       format(date.from, "PPP", { locale: lt })
@@ -66,16 +64,17 @@ const Cal = ({ prop = "none", setOpenContact }) => {
                   onSelect={setDate}
                   numberOfMonths={2}
                   className="p-3"
+                  disabled={new Date() > date ? true : false}
                 />
               </div>
             </div>
 
             <CardFooter className="flex justify-end gap-3 border-t p-6 bg-gray-50">
               <Button type="button" variant="outline" onClick={() => setOpenContact(false)}>
-                Cancel
+                Atšaukti
               </Button>
-              <Button type="submit" className="bg-teal-600 hover:bg-teal-700">
-                Confirm Selection
+              <Button type="submit" className="bg-amber-600 hover:bg-amber-700">
+                Patvirtinti datas
               </Button>
             </CardFooter>
           </form>
