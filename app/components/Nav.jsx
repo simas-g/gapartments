@@ -2,20 +2,23 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-const Dropdown = () => {
+import { useRouter } from "next/navigation";
+const Dropdown = ({setNavOpen}) => {
     const [isOpen, setIsOpen] = useState(false);
   
     const locations = [
-      'APARTAMENTAI',
-      'KALNIEČIŲ G. 219',
-      'KALNIEČIŲ G. 196',
-      'TAIKOS PR. 33B',
-      'VARNIŲ G. 24',
-      'NEMUNO G. 22',
-      'PUODŽIŲ G. 27',
-      'LINKUVOS G. 55'
+      { title: 'APARTAMENTAI', url: '/apartamentai' },
+      { title: 'KALNIEČIŲ G. 219', url: '/kalnieciu219' },
+      { title: 'KALNIEČIŲ G. 196 (1)', url: '/kalnieciu196(1)' },
+      { title: 'KALNIEČIŲ G. 196 (2)', url: '/kalnieciu196(2)' },
+      { title: 'TAIKOS PR. 33B', url: '/taikospr33b' },
+      { title: 'VARNIŲ G. 24', url: '/varniu24' },
+      { title: 'NEMUNO G. 22', url: '/nemuno22' },
+      { title: 'PUODŽIŲ G. 27', url: '/puodziu27' },
+      { title: 'LINKUVOS G. 55', url: '/linkuvos55' }
     ];
-  
+    
+    const router = useRouter()
     return (
       <div className="tracking-widest relative w-full md:pt-0 pt-32 h-fit font-[--font-poppins] md:flex items-center ">
         <button 
@@ -35,12 +38,17 @@ const Dropdown = () => {
                 <li 
                   key={index}
                   id='list'
-                  className="px-4 hover:underline underline-offset-8 pr-11 py-3 cursor-pointer text-right uppercase md:text-center tracking-wider font-light w-full"
+                  href={location}
+                  className="px-4 z-11 hover:underline underline-offset-8 pr-11 py-3 cursor-pointer text-right uppercase md:text-center tracking-wider font-light w-full"
                   onClick={() => {
+                    router.push(location.url)
                     setIsOpen(false);
+                    if(setNavOpen) {
+                      setNavOpen(false);
+                    }
                   }}
                 >
-                  {location}
+                  {location.title}
                 </li>
               ))}
             </ul>
@@ -110,7 +118,7 @@ const Nav = () => {
             {isOpen && (
               <div className="md:hidden absolute inset-0 bg-black/90 top-0 right-10 w-full h-fit z-60 ">
                 <div className="container mx-auto space-y-6">
-                  <Dropdown />
+                  <Dropdown setNavOpen={setIsOpen} />
                   <div className="space-y-4">
                   </div>
                 </div>
