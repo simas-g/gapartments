@@ -35,9 +35,10 @@ const Contact = ({ prop = "none", setOpenContact }) => {
     setIsSubmitting(true)
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      console.log("Form submitted:", { email, name, message, property: prop !== "none" ? prop.title : null })
-      setOpenContact(false)
+      const res = await fetch('api/property/emails', {
+        method: 'POST'
+      })
+      console.log(res)
     } catch (error) {
       console.error("Error submitting form:", error)
     } finally {

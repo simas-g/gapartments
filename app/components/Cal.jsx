@@ -21,12 +21,12 @@ const Cal = ({ prop = "none", setOpenContact }) => {
   }
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4 sm:p-6 md:p-10 backdrop-blur-sm">
-      <Card className="bg-white max-w-3xl shadow-xl border-0 overflow-hidden">
-        <CardHeader className="border justify-between rounded-t-xl flex w-full flex-between flex-wrap bg-gradient-to-r from-amber-500 to-amber-700 text-white relative p-6">
+    <div className="fixed inset-0 z-50 py-10 bg-black/50 flex items-center justify-center pt-12 sm:p-6 md:p-10 backdrop-blur-sm">
+      <Card className="max-h-[700px] overflow-auto bg-white max-w-3xl w-[90%] shadow-xl border-0">
+        <CardHeader className="border gap-x-4 gap-y-4 justify-between rounded-t-xl flex w-full flex-between flex-wrap bg-gradient-to-r from-amber-500 to-amber-700 text-white relative p-6">
           <div className="w-fit">
-          <CardTitle className="text-2xl font-bold">{prop?.title}</CardTitle>
-          <p className="text-gray-700 mt-2">Užimtumo kalendorius</p>
+            <CardTitle className="text-2xl font-bold">{prop?.title}</CardTitle>
+            <p className="text-gray-700 mt-2">Užimtumo kalendorius</p>
           </div>
           
           <div className="flex gap-x-4 bg-gray-800 p-4 rounded-xl w-fit">
@@ -56,14 +56,14 @@ const Cal = ({ prop = "none", setOpenContact }) => {
                 </div>
               </div>
 
-              <div className="overflow-hidden rounded-lg border shadow-sm">
+              <div className="overflow-hidden rounded-lg border shadow-sm w-fit m-auto">
                 <Calendar
                   initialFocus
                   mode="range"
                   defaultMonth={date?.from}
                   selected={date}
                   onSelect={setDate}
-                  numberOfMonths={2}
+                  numberOfMonths={1}
                   className="p-3"
                   disabled={new Date() > date ? true : false}
                 />

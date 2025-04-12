@@ -10,8 +10,6 @@ export const GET = async (req) => {
         return NextResponse.json({property}, {status: 200})
     } catch (error) {
         console.error('Error fetching property data:', error);
-        return NextResponse.json({error: 'Error fetching property data'}, {status: 500})
-        
+        return NextResponse.json({error: error}, {status: 500})
     }
-
 }
