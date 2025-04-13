@@ -30,16 +30,17 @@ const Contact = ({ prop = "none", setOpenContact }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const jsonData = {
-      email, 
       name, 
-      property: prop.title,
       message,
-      link: prop.id
+      link: prop.id,
+      property: prop.title,
+      email
     }
     if (!validate()) return
 
     setIsSubmitting(true)
-
+    
+    {/*Client*/}
     try {
       const res = await fetch('api/property/emails', {
         method: 'POST',
@@ -51,10 +52,25 @@ const Contact = ({ prop = "none", setOpenContact }) => {
     } finally {
       setIsSubmitting(false)
     }
+
+    {/*Owner*/}
+    try {
+      const res2 = await fetch('api/property/emails/owner', {
+        method: 'POST',
+        body: JSON.stringify(jsonData)
+      })
+      console.log(res2)
+    } catch (error) {
+      console.error("Error submitting form:", error)
+    } finally {
+      setIsSubmitting(false)
+      setOpenContact(false)
+    }
+
   }
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4 sm:p-6 md:p-10 backdrop-blur-sm">
+    <div className="fixed inset-0 z-90 bg-black/50 flex items-center justify-center p-4 sm:p-6 md:p-10 backdrop-blur-sm">
       <Card className="bg-white w-full max-w-md shadow-xl border-0 overflow-hidden">
         <CardHeader className="border rounded-t-xl bg-gradient-to-r from-amber-500 to-amber-700 text-white relative p-6 ">
           <div className="flex justify-between items-center">

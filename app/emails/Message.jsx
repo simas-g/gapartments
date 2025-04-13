@@ -8,10 +8,12 @@ import {
   Link,
 } from "@react-email/components";
 
-export default function Confirmation({
+export default function Message({
   name ="Simas",
   message = 'Gavome jūsų užklausą dėl apartamentų ir netrukus su jum susisieksime',
+  email,
   link,
+  property
 }) {
   // Color scheme
   const colors = {
@@ -63,27 +65,14 @@ export default function Confirmation({
             borderRight: `1px solid ${colors.border}`,
           }}
         >
-          <Heading
-            as="h2"
+          <Text
             style={{
-              fontSize: "20px",
+              fontSize: "18px",
               color: colors.text,
               marginBottom: "12px",
             }}
           >
-            Sveiki {name},
-          </Heading>
-
-          <Text
-            style={{
-              fontSize: "16px",
-              color: colors.text,
-              lineHeight: "24px",
-              margin: "16px 0",
-            }}
-          >
-            Gavome jūsų užklausą dėl apartamentų ir netrukus su jumis
-            susisieksime.
+            Gavote naują užklausą,
           </Text>
 
           <Section
@@ -104,7 +93,7 @@ export default function Confirmation({
                 margin: "0 0 12px 0",
               }}
             >
-              Jūsų informacija
+              Informacija
             </Heading>
 
             <Text
@@ -119,6 +108,33 @@ export default function Confirmation({
               <strong className="w-full">Vardas:</strong>
             </Text>
             {name}
+
+            <Text
+              style={{
+                fontSize: "14px",
+                color: colors.lightText,
+                margin: "8px 8px 0 0",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <strong className="w-full">El. paštas:</strong>
+            </Text>
+            {email}
+
+            <Text
+              style={{
+                fontSize: "14px",
+                color: colors.lightText,
+                margin: "8px 8px 0 0",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <strong className="w-full">Apartamentai:</strong>
+            </Text>
+            {property}
+
             <Text
               style={{
                 fontSize: "14px",
@@ -132,31 +148,12 @@ export default function Confirmation({
             </Text>
             {message}
           </Section>
-
-          <Link
-            href={`${process.env.URL}/${link}`}
-            style={{
-              backgroundColor: "#d97706",
-              borderRadius: "6px",
-              color: "white",
-              fontSize: "16px",
-              fontWeight: "bold",
-              textDecoration: "none",
-              textAlign: "center",
-              display: "block",
-              padding: "12px 16px",
-              margin: "26px 0",
-              cursor: "pointer",
-            }}
-          >
-            Peržiūrėti apartamentus
-          </Link>
         </Section>
 
         {/* Footer */}
         <Section
           style={{
-            backgroundColor: colors.background,
+            backgroundColor: "#d97706",
             padding: "20px",
             borderRadius: "0 0 8px 8px",
             borderLeft: `1px solid ${colors.border}`,
@@ -168,14 +165,14 @@ export default function Confirmation({
           <Text
             style={{
               fontSize: "14px",
-              color: colors.lightText,
+              color: 'white',
               margin: "0 0 8px 0",
             }}
           >
             © 2025{" "}
             <Link
               style={{
-                color: colors.lightText,
+                color: 'white',
                 textDecoration: "underline",
                 textUnderlineOffset: "2px",
               }}
