@@ -29,14 +29,21 @@ const Contact = ({ prop = "none", setOpenContact }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
+    const jsonData = {
+      email, 
+      name, 
+      property: prop.title,
+      message,
+      link: prop.id
+    }
     if (!validate()) return
 
     setIsSubmitting(true)
 
     try {
       const res = await fetch('api/property/emails', {
-        method: 'POST'
+        method: 'POST',
+        body: JSON.stringify(jsonData)
       })
       console.log(res)
     } catch (error) {
