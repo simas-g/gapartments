@@ -71,7 +71,7 @@ const Contact = ({ prop = "none", setOpenContact }) => {
 
   return (
     <div className="fixed inset-0 z-90 bg-black/50 flex items-center justify-center p-4 sm:p-6 md:p-10 backdrop-blur-sm">
-      <Card className="bg-white w-full max-w-md shadow-xl border-0 overflow-hidden">
+      <Card className="bg-white z-92 w-full max-w-md shadow-xl border-0 overflow-hidden">
         <CardHeader className="border rounded-t-xl bg-gradient-to-r from-amber-500 to-amber-700 text-white relative p-6 ">
           <div className="flex justify-between items-center">
             <CardTitle className="text-2xl font-medium">Parašykite mums laišką</CardTitle>
@@ -95,7 +95,7 @@ const Contact = ({ prop = "none", setOpenContact }) => {
                   type="text"
                   disabled
                   value={prop.title}
-                  className="bg-gray-100 text-gray-700 font-medium"
+                  className="bg-gray-100 text-gray-700"
                 />
               </div>
             )}

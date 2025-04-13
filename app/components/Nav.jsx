@@ -81,11 +81,11 @@ const Nav = () => {
   };
 
   return (
-    <nav className="bg-gradient-to-r z-60 md:px-20 from-amber-600 via-amber-700 to-amber-800 top-0 left-0 w-full">
+    <nav className="bg-gradient-to-r z-40 md:px-20 from-amber-600 via-amber-700 to-amber-800 top-0 left-0 w-full">
       <div className="mx-auto px-4 sm:px-6 p-8">
         <div className="flex items-center justify-between h-12">
           {/* Logo */}
-          <Link href={"/"} className="flex-shrink-0 z-60 cursor-pointer">
+          <Link href={"/"} className="flex-shrink-0 z-50 cursor-pointer">
             <Image
               src={"/logo.png"}
               height={80}
