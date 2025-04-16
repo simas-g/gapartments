@@ -15,6 +15,20 @@ const PropNavigation = ({ prop, selected }) => {
     } else return
 
   }, [openContact, openCalendar]);
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const res = await fetch(`/api/reviews?place=${encodeURIComponent(prop.name)}`, {
+          method: 'GET',
+
+        })
+        console.log(res)
+      } catch (error) {
+        console.log(error, 'error')
+      }
+    }
+    fetchReviews();
+  }, [])
   return (
     <div className="w-full order-2 lg:sticky lg:top-20 lg:right-8 h-fit bg-gray-100 border-gray-300 border px-8 p-4 rounded-lg flex flex-col gap-y-5">
       {openCalendar && <Cal prop={prop} setOpenContact={setOpenCalendar} />}
