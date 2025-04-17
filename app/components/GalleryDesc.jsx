@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import ImageNav from '../components/ImageNav';
 import PropNavigation from '../components/PropNavigation';
 import MapBlock from '../components/Map'
+
 const GalleryDesc = ({prop}) => {
     const [selected, setSelected] = useState(1)
     const [width, setWidth] = useState(0);
@@ -10,6 +11,7 @@ const GalleryDesc = ({prop}) => {
         setSelected(i)
 
     }
+
     useEffect(() => {
         const handleResize = () => {
           const windowSize = window.innerWidth;
@@ -46,6 +48,7 @@ const GalleryDesc = ({prop}) => {
         {(selected == 1 || width > 1024) && (
           <PropNavigation prop={prop} selected={selected} setSelected={setSelected}/>
         )}
+        
 
     </div>      
   )

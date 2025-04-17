@@ -2,9 +2,11 @@
 import { useState, useEffect } from "react";
 import Cal from "./Cal";
 import Contact from "./Contact";
+
 const PropNavigation = ({ prop, selected }) => {
   const [openCalendar, setOpenCalendar] = useState(false);
   const [openContact, setOpenContact] = useState(false);
+
   useEffect(() => {
     if(openContact===true || openCalendar === true) {
       document.body.style.overflow = "hidden";
@@ -17,18 +19,19 @@ const PropNavigation = ({ prop, selected }) => {
   }, [openContact, openCalendar]);
   useEffect(() => {
     const fetchReviews = async () => {
+      console.log(prop)
       try {
-        const res = await fetch(`/api/reviews?place=${encodeURIComponent(prop.name)}`, {
+        const res = await fetch(`/api/property/reviews?place=${encodeURIComponent(prop?.placeId)}`, {
           method: 'GET',
-
         })
-        console.log(res)
+        const data = await res.json();
+        console.log(data, 'our result')
       } catch (error) {
         console.log(error, 'error')
       }
     }
     fetchReviews();
-  }, [])
+  }, [prop])
   return (
     <div className="w-full order-2 lg:sticky lg:top-20 lg:right-8 h-fit bg-gray-100 border-gray-300 border px-8 p-4 rounded-lg flex flex-col gap-y-5">
       {openCalendar && <Cal prop={prop} setOpenContact={setOpenCalendar} />}
