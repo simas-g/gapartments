@@ -75,17 +75,17 @@ const ImageNav = ({ images }) => {
           </div>
 
           <div className="flex flex-col justify-center items-center gap-y-4 mt-8">
-            <div className="select-none w-80 h-80 max-[90%] sm:w-100 sm:h-[450px] overflow-hidden">
+            <div className="select-none w-80 h-80 max-[90%] sm:w-100 sm:h-[450px] overflow-hidden flex items-center">
               <img src={images[selected]} className="object-cover object-center w-full h-auto" alt="" />
             </div>
             <div className="text-white">
               {selected + 1} / {images.length}
             </div>
             <div className="flex gap-x-6">
-              <div onClick={()=> handleImageChange('left')} className="sm:absolute top-[30%] sm:top-[40%] left-4 cursor-pointer bg-black/50 rounded-full p-2">
+              <div onClick={()=> handleImageChange('left')} className="sm:absolute top-[30%] sm:top-[40%] left-4 cursor-pointer">
                 <ChevronLeft width={40} height={40} color="white"/>
               </div>
-              <div onClick={()=> handleImageChange('right')} className="sm:absolute top-[30%] sm:top-[40%] right-4 cursor-pointer bg-black/50 rounded-full p-2">
+              <div onClick={()=> handleImageChange('right')} className="sm:absolute top-[30%] sm:top-[40%] right-4 cursor-pointer">
                 <ChevronRight width={40} height={40} color="white"/>
               </div>
             </div>
@@ -106,7 +106,7 @@ const ImageNav = ({ images }) => {
                   }`}
                   onClick={() => handleImage(i)}
                 >
-                  <img src={image} className="object-cover rounded-sm w-full h-auto" alt="" />
+                  <img src={image} className="object-cover rounded-sm w-full h-full" alt="" />
                 </div>
               ))}
             </div>
@@ -116,13 +116,13 @@ const ImageNav = ({ images }) => {
           
       )}
       {/* main image */}
-      <div className="col-span-2 flex items-center overflow-hidden row-span-3 cursor-pointer select-none" style={{
+      <div className="col-span-2 h-full w-full flex items-center overflow-hidden row-span-3 cursor-pointer select-none" style={{
         borderRadius: '8px 0px 0px 0px'
       }} onClick={() => handleImagesView()}>
 
         <img
           src={mainImage}
-          className="object-cover w-full h-auto"
+          className="object-cover w-full md:h-auto h-full"
           alt=""
         />
       </div>
@@ -135,12 +135,12 @@ const ImageNav = ({ images }) => {
         {midImages.map((image, i) => (
           <div
             key={i}
-            className="overflow-hidden cursor-pointer flex items-center"
+            className="overflow-hidden cursor-pointer flex h-full w-full items-center"
             onClick={() => handleImagesView()}
           >
             <img
               src={image}
-              className={`object-cover w-full h-auto object-center`}
+              className={`object-cover w-full md:h-auto h-full object-center`}
               alt=""
             />
           </div>
@@ -152,7 +152,7 @@ const ImageNav = ({ images }) => {
       {imagePreviews.map((image, i) => (
         <div
           key={i}
-          className="overflow-hidden cursor-pointer rounded-sm relative"
+          className="overflow-hidden h-full w-full cursor-pointer rounded-sm relative"
           onClick={() => handleImagesView()}
           
         >
@@ -166,7 +166,7 @@ const ImageNav = ({ images }) => {
           )}
           <img
             src={image}
-            className={`object-cover rounded-sm w-full h-auto`}
+            className={`object-cover rounded-sm w-full md:h-auto h-full`}
             alt=""
           />
         </div>

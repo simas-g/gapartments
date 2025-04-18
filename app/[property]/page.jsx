@@ -23,7 +23,6 @@ const fetchPropertyData = async (id) => {
 const Page = async ({ params }) => {
   const property = (await params).property
   const prop = await fetchPropertyData(property);
-  
   return (
     <div className="w-full pb-20 bg-gray-100 md:px-20">
       {/* heading */}

@@ -3,15 +3,15 @@ import { useState, useEffect } from "react"
 import ImageNav from '../components/ImageNav';
 import PropNavigation from '../components/PropNavigation';
 import MapBlock from '../components/Map'
-
+import { properties } from "@/lib/properties";
 const GalleryDesc = ({prop}) => {
     const [selected, setSelected] = useState(1)
     const [width, setWidth] = useState(0);
     const handleSelected = (i) => {
         setSelected(i)
-
+    
     }
-
+    
     useEffect(() => {
         const handleResize = () => {
           const windowSize = window.innerWidth;
@@ -32,6 +32,20 @@ const GalleryDesc = ({prop}) => {
         setSelected(2);
       }
     }, [])
+    useEffect(() => {
+      const fetchReviews = async () => {
+        const targetProperty = properties.find((p) => p.title === prop?.title);
+        try {
+          const res = await fetch(`/api/property/reviews?place=${targetProperty?.placeId}`, {
+            method: 'GET',
+          })
+          const data = await res.json();
+        } catch (error) {
+          console.log(error, 'error')
+        }
+      }
+      fetchReviews();
+    }, [prop])
   return (
     <div className="grid px-8 gap-y-4 gap-x-8 items-start lg:grid-cols-2">
         <div className='flex flex-col'>
