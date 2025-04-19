@@ -1,4 +1,5 @@
 export async function geocoding(address) {
+  console.log(address, 'our address')
     const res1 = await fetch(`https://addressvalidation.googleapis.com/v1:validateAddress?key=${process.env.REACT_APP_MAPS_API_KEY}`, {
       method: "POST",
       headers: {
@@ -7,7 +8,7 @@ export async function geocoding(address) {
       body: JSON.stringify({
         address: {
         regionCode: "LT",
-          addressLines: [address],
+          addressLines: address + ', Kaunas',
         },
       }),
     });

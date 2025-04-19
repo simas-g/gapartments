@@ -42,8 +42,8 @@ const Card = ({property}) => {
         </div>
 
       </div>
-      <div className='h-48 overflow-hidden rounded-b-lg'>
-        <img src={property.images[0]} className='w-full h-full object-cover'></img>
+      <div className='h-48 overflow-hidden rounded-b-lg items-center flex'>
+        <img src={property.images[0]} className='w-auto h-auto object-cover object-center'></img>
       </div>
     </div>
   )

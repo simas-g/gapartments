@@ -27,7 +27,7 @@ const Page = async ({ params }) => {
     <div className="w-full pb-20 bg-gray-100 md:px-20">
       {/* heading */}
       <div className="p-8 px-8 m-auto flex flex-col gap-y-2">
-        <h1 className="text-3xl font-bold">{prop?.name}</h1>
+        <h1 className="text-3xl font-bold">{prop?.title}</h1>
         <ul className="flex gap-x-4">
           {prop?.add?.map((a, i) => (
             <li

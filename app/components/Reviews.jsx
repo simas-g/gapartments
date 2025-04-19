@@ -16,11 +16,7 @@ const Review = ({
       <div className="flex items-start gap-4 mb-3">
         <img
           className="w-12 h-12 rounded-full border border-gray-200 object-cover"
-          src={profile_photo_url || "/placeholder.svg"}
-          alt={`${author_name}'s profile`}
-          onError={(e) => {
-            e.currentTarget.src = "/placeholder.svg?height=48&width=48";
-          }}
+          src={profile_photo_url}
         />
         <div className="flex-1">
           <div className="flex justify-between items-start">

@@ -123,7 +123,7 @@ const Nav = () => {
 
           {/* Mobile Menu Overlay */}
           {isOpen && (
-            <div className="md:hidden absolute inset-0 bg-black/90 top-0 right-10 w-full h-fit z-40 ">
+            <div className="md:hidden absolute inset-0 bg-black top-0 right-10 w-full h-fit z-40 ">
               <div className="container mx-auto space-y-6">
                 <Dropdown setNavOpen={setIsOpen} />
                 <div className="space-y-4"></div>

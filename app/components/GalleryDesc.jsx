@@ -35,7 +35,7 @@ const GalleryDesc = ({ prop }) => {
     }
   }, []);
   useEffect(() => {
-    const fetchReviews = async () => {
+    const fetchData= async () => {
       setLoading(true);
       const targetProperty = properties.find((p) => p.title === prop?.title);
       try {
@@ -48,13 +48,15 @@ const GalleryDesc = ({ prop }) => {
         const initialData = await res.json();
         const data = initialData.data.result;
         setData(data);
+
+        
       } catch (error) {
         console.log(error, "error");
       } finally {
         setLoading(false);
       }
     };
-    fetchReviews();
+    fetchData();
   }, []);
   return (
     <div className="grid px-8 gap-y-4 gap-x-8 items-start lg:grid-cols-2">
