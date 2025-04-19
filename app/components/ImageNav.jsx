@@ -67,31 +67,32 @@ const ImageNav = ({ images }) => {
     <div className="max-h-90 grid grid-cols-3 grid-rows-4 gap-2 max-w-4xl w-full h-auto rounded-lg overflow-hidden">
       {/* image viewer */}
       {viewing && (
-        <div className="fixed inset-0 z-100 bg-black/50 backdrop-blur-md px-6 py-6">
+        <div className="fixed inset-0 z-100 bg-white px-6 py-6">
           <div className="w-full flex justify-end">
-            <div className="cursor-pointer hover:bg-black/10" onClick={() => setViewing(false)}>
-              <X width={40} height={40} color="white"/>
+            <div className="cursor-pointer flex items-center gap-x-1 hover:underline" onClick={() => setViewing(false)}>
+              <p >Uždaryti</p>
+              <X width={40} height={40} color="black"/>
             </div>
           </div>
 
           <div className="flex flex-col justify-center items-center gap-y-4 mt-8">
-            <div className="select-none w-80 h-80 max-[90%] sm:w-100 sm:h-[450px] overflow-hidden flex items-center">
+            <div className="select-none border border-gray-300 w-80 h-80 max-[90%] sm:w-100 sm:h-[450px] overflow-hidden flex items-center">
               <img src={images[selected]} className="object-cover object-center w-full h-auto" alt="" />
             </div>
-            <div className="text-white">
+            <div className="text-black">
               {selected + 1} / {images.length}
             </div>
             <div className="flex gap-x-6">
-              <div onClick={()=> handleImageChange('left')} className="sm:absolute top-[30%] sm:top-[40%] left-4 cursor-pointer">
-                <ChevronLeft width={40} height={40} color="white"/>
+              <div onClick={()=> handleImageChange('left')} className="sm:absolute top-[30%] sm:top-[40%] left-5 cursor-pointer">
+                <ChevronLeft width={50} height={50} color="black"/>
               </div>
-              <div onClick={()=> handleImageChange('right')} className="sm:absolute top-[30%] sm:top-[40%] right-4 cursor-pointer">
-                <ChevronRight width={40} height={40} color="white"/>
+              <div onClick={()=> handleImageChange('right')} className="sm:absolute top-[30%] sm:top-[40%] right-5 cursor-pointer">
+                <ChevronRight width={50} height={50} color="black"/>
               </div>
             </div>
 
             <div ref={scrollBar} 
-            className="flex gap-x-4 overflow-x-auto max-w-[400px] md:max-w-[600px] px-4 scroll-smooth"
+            className="flex gap-x-4 overflow-x-auto max-w-[390px] md:max-w-[680px] px-4 scroll-smooth"
             style={{ scrollbarWidth: "none" }}
 
             >
@@ -102,7 +103,7 @@ const ImageNav = ({ images }) => {
                   ref={(el) => (thumbsRef.current[i] = el)}
                   key={i}
                   className={`select-none w-20 h-20 flex-shrink-0 overflow-hidden cursor-pointer rounded-sm ${
-                    i === selected ? 'border-2 border-white' : 'opacity-40'
+                    i === selected ? 'border-2 border-black' : 'opacity-40'
                   }`}
                   onClick={() => handleImage(i)}
                 >

@@ -65,19 +65,21 @@ const Reviews = ({ reviews, user_ratings_total, url }) => {
   return (
     <section className="py-4">
       {/* Header with Google Maps attribution */}
-      <div className="flex items-center justify-between mb-6 border-b pb-4">
-        <div className="flex items-center gap-2">
+      <div className="flex sm:items-center sm:justify-between justify-around mb-6 border-b pb-4 gap-x-3 flex-col sm:flex-row ">
+        <div className="flex items-center gap-2 flex-wrap w-fit">
           <h3 className="font-semibold text-lg">Svečių atsiliepimai</h3>
-          <div className="bg-amber-400 text-white font-bold rounded px-2 py-0.5 text-sm ml-2">
-            {averageRating}
+          <div className="flex gap-x-3 items-center">
+            <div className="bg-amber-400 text-white font-bold rounded px-2 py-0.5 text-sm sm:ml-2">
+              {averageRating}
+            </div>
+            <span className="text-sm text-gray-600">
+              {user_ratings_total} atsiliepimų
+            </span>
           </div>
-          <span className="text-sm text-gray-600">
-            {user_ratings_total} atsiliepimų
-          </span>
         </div>
 
-        <div className="flex items-center gap-2">
-          <p className="text-sm text-gray-600">Informacija iš</p>
+        <div className="flex items-center gap-2 sm:px-2">
+          <p className="text-sm text-gray-600 whitespace-nowrap">Informacija iš</p>
           <img className="w-8 h-8" src="/google-maps.svg" alt="Google Maps" />
         </div>
       </div>
