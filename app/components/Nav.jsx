@@ -104,7 +104,7 @@ const Nav = () => {
               <div className="w-8 h-6 flex flex-col justify-between">
                 <div
                   className={`h-0.5 w-full bg-current transition-all duration-300 ease-in-out ${
-                    isOpen ? "rotate-45 translate-y-2.5" : ""
+                    isOpen ? "rotate-45 translate-y-[11px]" : ""
                   }`}
                 ></div>
                 <div
@@ -114,7 +114,7 @@ const Nav = () => {
                 ></div>
                 <div
                   className={`h-0.5 w-full bg-current transition-all duration-300 ease-in-out ${
-                    isOpen ? "-rotate-45 -translate-y-2.5" : ""
+                    isOpen ? "-rotate-45 -translate-y-[11px]" : ""
                   }`}
                 ></div>
               </div>

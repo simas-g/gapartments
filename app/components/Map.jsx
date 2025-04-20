@@ -14,7 +14,7 @@ function MapBlock({ location }) {
       onLoad={() => console.log("Maps API has loaded.")}
     >
                
-      <div className="border-2 border-gray-300 rounded-lg overflow-hidden">
+      <div className="border-1 border-gray-300 rounded-lg overflow-hidden">
         <Map
           options={{
             mapTypeControl: false,

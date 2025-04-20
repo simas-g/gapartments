@@ -1,5 +1,5 @@
 "use client";
-
+import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
 import {
   Card,
@@ -79,7 +79,7 @@ const Contact = ({ prop = "none", setOpenContact }) => {
     }
   };
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-90 bg-black/50 flex items-center justify-center p-4 sm:p-6 md:p-10 backdrop-blur-sm">
       <Card className="bg-white z-92 w-full max-w-md shadow-xl border-0 overflow-hidden">
         <CardHeader className="border rounded-t-xl bg-gradient-to-r from-amber-500 to-amber-700 text-white relative p-6 ">
@@ -184,7 +184,7 @@ const Contact = ({ prop = "none", setOpenContact }) => {
           </Button>
         </CardFooter>
       </Card>
-    </div>
+    </div>, document.getElementById('top-page')
   );
 };
 

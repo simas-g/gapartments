@@ -24,7 +24,7 @@ const Page = async ({ params }) => {
   const property = (await params).property
   const prop = await fetchPropertyData(property);
   return (
-    <div className="w-full pb-20 bg-gray-100 md:px-20">
+    <div className="w-full pb-20 bg-gray-100 md:px-20" id='top-page'>
       {/* heading */}
       <div className="p-8 px-8 m-auto flex flex-col gap-y-2">
         <h1 className="text-3xl font-bold">{prop?.title}</h1>
