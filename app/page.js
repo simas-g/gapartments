@@ -33,12 +33,7 @@ export default function Home() {
             </p>
 
             <div className="mt-8 flex space-x-4">
-              <a 
-                href="#properties" 
-                className="bg-white text-black px-6 py-3 rounded-full hover:bg-gray-100 transition-colors"
-              >
-                Žemėlapis
-              </a>
+
               <a 
                 href="#contact" 
                 className="border border-white text-white px-6 py-3 rounded-full hover:bg-white/20 transition-colors"

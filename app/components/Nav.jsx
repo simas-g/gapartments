@@ -63,7 +63,7 @@ const Dropdown = ({ setNavOpen }) => {
       )}
       <div className="text-right px-4 pr-19">
         <a
-          href=""
+          href="/susisiekti"
           className="text-white uppercase hover:underline underline-offset-8"
         >
           Susisiekti
