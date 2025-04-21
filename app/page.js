@@ -58,15 +58,6 @@ export default function Home() {
             ))}
           </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-100 py-12">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-gray-600">
-            © 2025 gapartments.lt Visos teisės saugomos.
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }

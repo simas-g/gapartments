@@ -1,5 +1,7 @@
 "use client";
 import { giedreApartments } from "@/lib/properties";
+import { Mail, Phone, MapPin } from "lucide-react";
+
 import {
   Card,
   CardTitle,
@@ -17,14 +19,34 @@ import {
   Map,
   AdvancedMarker,
   Pin,
+  InfoWindow,
 } from "@vis.gl/react-google-maps";
 
 const PoiMarkers = () => {
+  const [openInfo, setOpenInfo] = useState(null);
+
   return (
     <>
       {giedreApartments?.map((poi) => (
-        <AdvancedMarker key={poi.title} position={poi.loc}>
-          <Pin background="#FBBC04" glyphColor="#000" borderColor="#000" />
+        <AdvancedMarker 
+          key={poi.title} 
+          position={poi.loc}
+          onClick={() => setOpenInfo(poi.title)}
+        >
+          <Pin 
+            background="#FF9800" 
+            glyphColor="#FFF" 
+            borderColor="#E65100" 
+            scale={1.2} 
+          />
+          {openInfo === poi.title && (
+            <InfoWindow onCloseClick={() => setOpenInfo(null)}>
+              <div className="p-2">
+                <h3 className="font-semibold">{poi.title}</h3>
+                {poi.address && <p className="text-sm">{poi.address}</p>}
+              </div>
+            </InfoWindow>
+          )}
         </AdvancedMarker>
       ))}
     </>
@@ -34,10 +56,22 @@ const PoiMarkers = () => {
 function FullMap() {
   return (
     <APIProvider apiKey={"AIzaSyCoN-eN4LE9tZDgKNCmLS4zPeqyVLt1y0M"}>
-      <div className="md:h-[350px] h-[400px] rounded-lg overflow-hidden shadow-md border border-gray-300">
+      <div className="h-full w-full rounded-xl overflow-hidden shadow-xl">
         <Map
-          options={{ mapTypeControl: false }}
-          defaultZoom={11.5}
+          options={{ 
+            mapTypeControl: false,
+            streetViewControl: false,
+            fullscreenControl: false,
+            zoomControl: true,
+            styles: [
+              {
+                featureType: "poi",
+                elementType: "labels",
+                stylers: [{ visibility: "off" }]
+              }
+            ]
+          }}
+          defaultZoom={13}
           mapId="Apartamentai"
           defaultCenter={giedreApartments[0].loc}
         >
@@ -54,12 +88,15 @@ const Form = () => {
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const newErrors = {};
 
     if (!email) newErrors.email = "Būtinas el. pašto adresas";
+    else if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = "Neteisingas el. pašto formatas";
+    
     if (!name) newErrors.name = "Būtinas vardas";
     if (!message) newErrors.message = "Būtina žinutė";
 
@@ -70,96 +107,188 @@ const Form = () => {
       setTimeout(() => {
         console.log({ email, name, message });
         setIsSubmitting(false);
-        alert("Žinutė išsižsta!");
+        setSubmitted(true);
+        setEmail("");
+        setName("");
+        setMessage("");
       }, 1500);
     }
   };
 
   return (
-    <Card className="mt-30 bg-white w-full max-w-lg mx-auto shadow-2xl border-0 rounded-xl overflow-hidden">
-      <CardHeader className="bg-gradient-to-tr from-amber-500 to-amber-700 text-white p-6">
-        <CardTitle className="text-2xl">Susisiekite su mumis</CardTitle>
+    <Card className="bg-white border w-full max-w-md rounded-xl overflow-hidden backdrop-blur-sm bg-opacity-95">
+      <CardHeader className=" p-6 border-b">
+        <CardTitle className="text-2xl font-bold flex items-center gap-2">
+          <Mail className="h-5 w-5 text-amber-600" />
+          Parašykite žinutę
+        </CardTitle>
       </CardHeader>
-      <CardContent className="p-6">
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <Label
-              htmlFor="email"
-              className={errors.email ? "text-red-500" : ""}
+      <CardContent className='pb-6'>
+        {submitted ? (
+          <div className="text-center py-8">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 mb-4">
+              <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold text-gray-800 mb-2">Žinutė išsiųsta!</h3>
+            <p className="text-gray-600 mb-6">Dėkojame už jūsų žinutę. Susisieksime su jumis kuo greičiau.</p>
+            <Button 
+              onClick={() => setSubmitted(false)}
+              className="bg-amber-600 hover:bg-amber-700 text-white"
             >
-              El. paštas{" "}
-              {errors.email && (
-                <span className="text-sm">({errors.email})</span>
-              )}
-            </Label>
-            <Input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className={errors.email ? "border-red-500 ring-red-500" : ""}
-            />
+              Siųsti kitą žinutę
+            </Button>
           </div>
-          <div>
-            <Label htmlFor="name" className={errors.name ? "text-red-500" : ""}>
-              Vardas{" "}
-              {errors.name && <span className="text-sm">({errors.name})</span>}
-            </Label>
-            <Input
-              id="name"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className={errors.name ? "border-red-500 ring-red-500" : ""}
-            />
-          </div>
-          <div>
-            <Label
-              htmlFor="message"
-              className={errors.message ? "text-red-500" : ""}
-            >
-              Žinutė{" "}
-              {errors.message && (
-                <span className="text-sm">({errors.message})</span>
-              )}
-            </Label>
-            <Textarea
-              id="message"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              placeholder="Jūsų žinutė..."
-              className={`resize-none min-h-[100px] ${errors.message ? "border-red-500 ring-red-500" : ""}`}
-            />
-          </div>
-        </form>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <Label
+                htmlFor="email"
+                className={`text-sm font-medium ${errors.email ? "text-red-500" : "text-gray-700"}`}
+              >
+                El. paštas{" "}
+                {errors.email && (
+                  <span className="text-sm font-normal">({errors.email})</span>
+                )}
+              </Label>
+              <Input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className={`mt-1 ${errors.email ? "border-red-500 ring-red-500" : "border-gray-300"}`}
+              />
+            </div>
+            <div>
+              <Label 
+                htmlFor="name" 
+                className={`text-sm font-medium ${errors.name ? "text-red-500" : "text-gray-700"}`}
+              >
+                Vardas{" "}
+                {errors.name && <span className="text-sm font-normal">({errors.name})</span>}
+              </Label>
+              <Input
+                id="name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className={`mt-1 ${errors.name ? "border-red-500 ring-red-500" : "border-gray-300"}`}
+              />
+            </div>
+            <div>
+              <Label
+                htmlFor="message"
+                className={`text-sm font-medium ${errors.message ? "text-red-500" : "text-gray-700"}`}
+              >
+                Žinutė{" "}
+                {errors.message && (
+                  <span className="text-sm font-normal">({errors.message})</span>
+                )}
+              </Label>
+              <Textarea
+                id="message"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder="Jūsų žinutė..."
+                className={`resize-none min-h-[120px] mt-1 ${errors.message ? "border-red-500 ring-red-500" : "border-gray-300"}`}
+              />
+            </div>
+            <div className="pt-2">
+              <Button
+                type="submit"
+                className="w-full bg-amber-600 hover:bg-amber-700 text-white font-medium py-2"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Siunčiama...
+                  </span>
+                ) : (
+                  "Išsiųsti pranešimą"
+                )}
+              </Button>
+            </div>
+          </form>
+        )}
       </CardContent>
-      <CardFooter className="flex justify-end gap-3 bg-gray-100 px-6 py-4 border-t">
-        <Button
-          variant="outline"
-          type="button"
-          onClick={() => alert("Formos siuntimas atšauktas")}
-        >
-          Atšaukti
-        </Button>
-        <Button
-          onClick={handleSubmit}
-          className="bg-amber-600 hover:bg-amber-700 text-white"
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? "Siunčiama..." : "Išsiųsti pranešimą"}
-        </Button>
-      </CardFooter>
+    </Card>
+  );
+};
+
+const Info = () => {
+  return (
+    <Card className="bg-white border w-full max-w-md rounded-xl overflow-hidden backdrop-blur-sm bg-opacity-95">
+      <CardHeader className="border-b p-6">
+        <CardTitle className="text-2xl font-bold flex items-center gap-2">
+          <MapPin className="h-5 w-5 text-amber-600" />
+          Kontaktai
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="p-6 pt-0">
+        <div className="space-y-6">
+          <div className="flex items-start gap-4">
+            <div className="bg-amber-100 p-3 rounded-full">
+              <Mail className="text-amber-600" size={24} />
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-800 mb-1">El. paštas</h3>
+              <a href="mailto:giedre@example.com" className="text-amber-600 hover:text-amber-700 transition-colors">
+                giedregg99@gmail.com
+              </a>
+            </div>
+          </div>
+          
+          <div className="flex items-start gap-4">
+            <div className="bg-amber-100 p-3 rounded-full">
+              <Phone className="text-amber-600" size={24} />
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-800 mb-1">Telefono numeris</h3>
+              <a href="tel:+37060000000" className="text-amber-600 hover:text-amber-700 transition-colors">
+                +370 610 95591
+              </a>
+            </div>
+          </div>
+        </div>
+      </CardContent>
     </Card>
   );
 };
 
 const Page = () => {
   return (
-    <div className="flex flex-col w-full h-screen">
-      <div className="w-full absolute z-[-1]">
+    <div className="relative w-full min-h-screen py-20">
+      {/* Full screen background map */}
+      <div className="absolute inset-0 z-0">
         <FullMap />
       </div>
-      <Form />
+
+      {/* Semi-transparent overlay */}
+      <div className="absolute inset-0 bg-black/10 z-10"></div>
+
+      {/* Content container */}
+      <div className="relative z-20 md:w-3xl lg:w-4xl border shadow-2xl container mx-auto px-10 py-12 w-fit bg-white rounded-lg p-4">
+        {/* Page heading */}
+        <div className="text-center mb-12 bg-white/20 rounded-md p-2 w-fit m-auto backdrop-blur-md">
+          <h1 className="text-4xl font-bold drop-shadow-md">
+            Susisiekite su mumis
+          </h1>
+          <p className="mt-2 max-w-2xl mx-auto drop-shadow">
+            Turite klausimų apie mūsų apartamentus? Susisiekite su mumis ir mes mielai padėsime.
+          </p>
+        </div>
+
+        {/* Cards container */}
+        <div className="grid md:grid-cols-2 md:place-items-start place-items-center gap-12 max-w-4xl mx-auto">
+          <Form />
+          <Info />
+        </div>
+      </div>
     </div>
   );
 };
