@@ -1,4 +1,5 @@
 "use client";
+import {giedreApartments } from "@/lib/properties";
 import {
   Card,
   CardTitle,
@@ -9,17 +10,51 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Textarea } from "@/components/ui/textarea";
-const Map = () => {
+import {
+  APIProvider,
+  Map,
+  AdvancedMarker,
+  Pin,
+} from "@vis.gl/react-google-maps";
+const PoiMarkers = () => {
+
   return (
-    <iframe
-      src="https://www.google.com/maps/d/u/0/embed?mid=1vmWFThTj3sjMBhJznbe15TjExsaLdTE&ehbc=2E312F&noprof=1"
-      width="640"
-      height="480"
-    ></iframe>
+    <>
+      {giedreApartments?.map((poi)=> (
+        <AdvancedMarker
+          key={poi.title}
+          position={poi.loc}>
+        <Pin background={'#FBBC04'} glyphColor={'#000'} borderColor={'#000'} />
+        </AdvancedMarker>
+      ))}
+    </>
   );
-};
+}
+function FullMap() {
+  return (
+    <APIProvider
+      apiKey={"AIzaSyCoN-eN4LE9tZDgKNCmLS4zPeqyVLt1y0M"}
+      onLoad={() => console.log("Maps API has loaded.")}
+    >
+      <div className="border-1 border-gray-300 rounded-lg overflow-hidden">
+        <Map
+          options={{
+            mapTypeControl: false,
+          }}
+          defaultZoom={11.5}
+          mapId='Apartamentai'
+          defaultCenter={giedreApartments[0].loc}
+          style={{ width: "100%", height: "400px" }}
+        >
+          <PoiMarkers/>
+        </Map>
+      </div>
+    </APIProvider>
+  );
+}
+
 const Form = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -50,8 +85,8 @@ const Form = () => {
   }
 
   return (
-    <Card className="bg-white z-92 w-full max-w-md shadow-xl border-0 overflow-hidden m-auto mt-10">
-      <CardHeader className="border rounded-t-xl bg-gradient-to-r from-amber-500 to-amber-700 text-white relative p-6">
+    <Card className="bg-white z-92 w-full max-w-xl shadow-xl border-0 overflow-hidden m-auto">
+      <CardHeader className="border rounded-t-xl relative p-6">
         <div className="flex justify-between items-center">
           <CardTitle className="text-2xl font-medium">
             Susisiekite su mumis
@@ -140,7 +175,7 @@ const Form = () => {
 };
 const page = () => {
   return (
-    <div className="flex items-center w-full flex-col md:flex-row">
+    <div className="flex items-center md:items-start pt-14 w-full flex-col md:flex-row">
       <div className="absolute top-0 overflow-x-hidden w-full z-[-2] h-screen">
         <img
           className="w-full h-full absolute object-cover object-center"
@@ -149,8 +184,15 @@ const page = () => {
         />
         <div className="w-full h-full bg-black/40 absolute"></div>
       </div>
-      <Form />
-      <Map/>
+      <div className="w-full">
+        <h1 className="text-white text-4xl">Susisiekti</h1>
+        <Form />
+
+      </div>
+      <div className="w-full px-10">
+      <FullMap />
+
+      </div>
     </div>
   );
 };

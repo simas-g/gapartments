@@ -6,8 +6,6 @@ function MapBlock({ location }) {
     lat: location.latitude,
     lng: location.longitude,
   };
-  console.log("our key", key);
-  console.log(process.env.URL);
   return (
     <APIProvider
       apiKey={"AIzaSyCoN-eN4LE9tZDgKNCmLS4zPeqyVLt1y0M"}
