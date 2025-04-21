@@ -1,6 +1,7 @@
 import { Inter, Montserrat } from "next/font/google"
 import "./globals.css";
 import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 
 const inter = Inter({
   subsets: ["latin", "latin-ext"],
@@ -27,6 +28,7 @@ export const metadata = {
       >
         <Nav></Nav>
         {children}
+        <Footer/>
       </body>
     </html>
   );

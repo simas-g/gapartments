@@ -1,5 +1,5 @@
 "use client";
-import {giedreApartments } from "@/lib/properties";
+import { giedreApartments } from "@/lib/properties";
 import {
   Card,
   CardTitle,
@@ -10,45 +10,38 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useState, useEffect } from "react";
 import { Textarea } from "@/components/ui/textarea";
+import { useState } from "react";
 import {
   APIProvider,
   Map,
   AdvancedMarker,
   Pin,
 } from "@vis.gl/react-google-maps";
-const PoiMarkers = () => {
 
+const PoiMarkers = () => {
   return (
     <>
-      {giedreApartments?.map((poi)=> (
-        <AdvancedMarker
-          key={poi.title}
-          position={poi.loc}>
-        <Pin background={'#FBBC04'} glyphColor={'#000'} borderColor={'#000'} />
+      {giedreApartments?.map((poi) => (
+        <AdvancedMarker key={poi.title} position={poi.loc}>
+          <Pin background="#FBBC04" glyphColor="#000" borderColor="#000" />
         </AdvancedMarker>
       ))}
     </>
   );
-}
+};
+
 function FullMap() {
   return (
-    <APIProvider
-      apiKey={"AIzaSyCoN-eN4LE9tZDgKNCmLS4zPeqyVLt1y0M"}
-      onLoad={() => console.log("Maps API has loaded.")}
-    >
-      <div className="border-1 border-gray-300 rounded-lg overflow-hidden">
+    <APIProvider apiKey={"AIzaSyCoN-eN4LE9tZDgKNCmLS4zPeqyVLt1y0M"}>
+      <div className="md:h-[350px] h-[400px] rounded-lg overflow-hidden shadow-md border border-gray-300">
         <Map
-          options={{
-            mapTypeControl: false,
-          }}
+          options={{ mapTypeControl: false }}
           defaultZoom={11.5}
-          mapId='Apartamentai'
+          mapId="Apartamentai"
           defaultCenter={giedreApartments[0].loc}
-          style={{ width: "100%", height: "400px" }}
         >
-          <PoiMarkers/>
+          <PoiMarkers />
         </Map>
       </div>
     </APIProvider>
@@ -62,7 +55,7 @@ const Form = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const newErrors = {};
 
@@ -74,29 +67,22 @@ const Form = () => {
 
     if (Object.keys(newErrors).length === 0) {
       setIsSubmitting(true);
-
-      // Simulate async submission
       setTimeout(() => {
         console.log({ email, name, message });
         setIsSubmitting(false);
-        setOpenContact(false); // Close form or show success message
-      }, 2000);
+        alert("Žinutė išsižsta!");
+      }, 1500);
     }
-  }
+  };
 
   return (
-    <Card className="bg-white z-92 w-full max-w-xl shadow-xl border-0 overflow-hidden m-auto">
-      <CardHeader className="border rounded-t-xl relative p-6">
-        <div className="flex justify-between items-center">
-          <CardTitle className="text-2xl font-medium">
-            Susisiekite su mumis
-          </CardTitle>
-        </div>
+    <Card className="mt-30 bg-white w-full max-w-lg mx-auto shadow-2xl border-0 rounded-xl overflow-hidden">
+      <CardHeader className="bg-gradient-to-tr from-amber-500 to-amber-700 text-white p-6">
+        <CardTitle className="text-2xl">Susisiekite su mumis</CardTitle>
       </CardHeader>
-
       <CardContent className="p-6">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-y-4">
-          <div className="space-y-2">
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
             <Label
               htmlFor="email"
               className={errors.email ? "text-red-500" : ""}
@@ -111,13 +97,10 @@ const Form = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className={
-                errors.email ? "border-red-500 focus-visible:ring-red-500" : ""
-              }
+              className={errors.email ? "border-red-500 ring-red-500" : ""}
             />
           </div>
-
-          <div className="space-y-2">
+          <div>
             <Label htmlFor="name" className={errors.name ? "text-red-500" : ""}>
               Vardas{" "}
               {errors.name && <span className="text-sm">({errors.name})</span>}
@@ -127,13 +110,10 @@ const Form = () => {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className={
-                errors.name ? "border-red-500 focus-visible:ring-red-500" : ""
-              }
+              className={errors.name ? "border-red-500 ring-red-500" : ""}
             />
           </div>
-
-          <div className="space-y-2">
+          <div>
             <Label
               htmlFor="message"
               className={errors.message ? "text-red-500" : ""}
@@ -148,17 +128,16 @@ const Form = () => {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Jūsų žinutė..."
-              className={`shadow min-h-[120px] resize-none ${errors.message ? "focus-visible:ring-red-500" : ""}`}
+              className={`resize-none min-h-[100px] ${errors.message ? "border-red-500 ring-red-500" : ""}`}
             />
           </div>
         </form>
       </CardContent>
-
-      <CardFooter className="flex justify-end gap-3 border-t p-4 bg-gray-50">
+      <CardFooter className="flex justify-end gap-3 bg-gray-100 px-6 py-4 border-t">
         <Button
-          type="button"
           variant="outline"
-          onClick={() => setOpenContact(false)}
+          type="button"
+          onClick={() => alert("Formos siuntimas atšauktas")}
         >
           Atšaukti
         </Button>
@@ -173,27 +152,16 @@ const Form = () => {
     </Card>
   );
 };
-const page = () => {
+
+const Page = () => {
   return (
-    <div className="flex items-center md:items-start pt-14 w-full flex-col md:flex-row">
-      <div className="absolute top-0 overflow-x-hidden w-full z-[-2] h-screen">
-        <img
-          className="w-full h-full absolute object-cover object-center"
-          src="/oldtown.jpg"
-          alt=""
-        />
-        <div className="w-full h-full bg-black/40 absolute"></div>
+    <div className="flex flex-col w-full h-screen">
+      <div className="w-full absolute z-[-1]">
+        <FullMap />
       </div>
-      <div className="w-full">
-        <h1 className="text-white text-4xl">Susisiekti</h1>
-        <Form />
-
-      </div>
-      <div className="w-full px-10">
-      <FullMap />
-
-      </div>
+      <Form />
     </div>
   );
 };
-export default page;
+
+export default Page;
