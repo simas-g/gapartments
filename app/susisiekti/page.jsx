@@ -184,7 +184,7 @@ const Info = () => {
       </CardHeader>
       <CardContent className="p-6 pt-0">
         <div className="space-y-6">
-          <div className="flex items-start gap-4">
+          <div className="flex items-start gap-4 flex-wrap">
             <div className="bg-amber-100 p-3 rounded-full">
               <Mail className="text-amber-600" size={24} />
             </div>
@@ -199,7 +199,7 @@ const Info = () => {
             </div>
           </div>
 
-          <div className="flex items-start gap-4">
+          <div className="flex items-start gap-4 flex-wrap">
             <div className="bg-amber-100 p-3 rounded-full">
               <Phone className="text-amber-600" size={24} />
             </div>
@@ -233,6 +233,7 @@ const Page = () => {
       <div className="absolute inset-0 bg-black/10 z-5"></div>
 
       {/* Content container */}
+      <div className="w-full px-4">
       <div className="relative z-7 md:w-3xl lg:w-4xl border shadow-2xl container mx-auto px-10 py-12 w-fit bg-white rounded-lg p-4">
         {/* Page heading */}
         <div className="text-center mb-12 bg-white/20 rounded-md p-2 w-fit m-auto backdrop-blur-md">
@@ -251,6 +252,8 @@ const Page = () => {
           <Info />
         </div>
       </div>
+      </div>
+      
     </div>
   );
 };

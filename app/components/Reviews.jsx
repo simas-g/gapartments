@@ -61,11 +61,15 @@ const Reviews = ({ reviews, user_ratings_total, url }) => {
         1
       )
     : "0.0";
-
+  const total = user_ratings_total.toString();
+  const filteredReviews = reviews?.filter(
+    (r) =>
+      r.author_name !== "Giedre G." && r.author_name !== "Kęstutis Gedeikis"
+  );
   return (
     <section className="py-4">
       {/* Header with Google Maps attribution */}
-      <div className="flex sm:items-center sm:justify-between justify-around mb-6 border-b pb-4 gap-x-3 flex-col sm:flex-row ">
+      <div className="flex sm:items-center sm:justify-between justify-around mb-6 gap-y-2 border-b pb-4 gap-x-3 flex-col sm:flex-row ">
         <div className="flex items-center gap-2 flex-wrap w-fit">
           <h3 className="font-semibold text-lg">Svečių atsiliepimai</h3>
           <div className="flex gap-x-3 items-center">
@@ -73,21 +77,28 @@ const Reviews = ({ reviews, user_ratings_total, url }) => {
               {averageRating}
             </div>
             <span className="text-sm text-gray-600">
-              {user_ratings_total} atsiliepimų
+              {total}{" "}
+              {total[total.length - 1] === "1"
+                ? "atsiliepimas"
+                : total % 10 === 0 || (total > 10 && total < 20 )
+                  ? "atsiliepimų"
+                  : "atsiliepimai"}
             </span>
           </div>
         </div>
 
         <div className="flex items-center gap-2 sm:px-2">
-          <p className="text-sm text-gray-600 whitespace-nowrap">Informacija iš</p>
+          <p className="text-sm text-gray-600 whitespace-nowrap">
+            Informacija iš
+          </p>
           <img className="w-8 h-8" src="/google-maps.svg" alt="Google Maps" />
         </div>
       </div>
 
       {/* Reviews list */}
-      {reviews?.length > 0 ? (
+      {filteredReviews?.length > 0 ? (
         <ul className="space-y-4">
-          {reviews.map((r, index) => (
+          {filteredReviews.map((r, index) => (
             <Review key={`${r.author_name}-${index}`} {...r} />
           ))}
         </ul>

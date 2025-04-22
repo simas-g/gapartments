@@ -39,14 +39,14 @@ const Dropdown = ({ setNavOpen }) => {
       </button>
 
       {isOpen && (
-        <div className="md:absolute top-full left-0 w-full md:w-fit md:px-4 md:rounded-md bg-black text-white shadow-lg z-10 pb-2 md:block flex flex-col items-end">
-          <ul className="w-full flex flex-col">
+        <div className="md:absolute top-full items-end left-0 w-full md:w-fit md:px-4 md:rounded-md bg-black text-white shadow-lg z-10 pb-2 md:block flex flex-col">
+          <ul className="w-fit flex flex-col">
             {locations.slice(1).map((location, index) => (
               <li
                 key={index}
                 id="list"
                 href={location}
-                className="px-4 z-11 hover:underline underline-offset-8 pr-11 py-3 cursor-pointer text-right uppercase md:text-center tracking-wider font-light w-full"
+                className="px-4 z-11 hover:underline underline-offset-8 pr-11 py-3 cursor-pointer uppercase md:text-center tracking-wider font-light w-full"
                 onClick={() => {
                   router.push(location.url);
                   setIsOpen(false);
