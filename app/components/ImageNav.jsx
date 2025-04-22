@@ -123,7 +123,7 @@ const ImageNav = ({ images }) => {
 
         <img
           src={mainImage}
-          className="object-cover w-full md:h-auto h-auto"
+          className="object-cover w-full md:h-auto h-full"
           alt=""
         />
       </div>
@@ -136,12 +136,12 @@ const ImageNav = ({ images }) => {
         {midImages.map((image, i) => (
           <div
             key={i}
-            className="overflow-hidden cursor-pointer flex h-auto w-full items-center"
+            className="overflow-hidden cursor-pointer flex h-full w-full items-center"
             onClick={() => handleImagesView()}
           >
             <img
               src={image}
-              className={`object-cover w-full md:h-auto h-auto object-center`}
+              className={`object-cover w-full md:h-auto h-full object-center`}
               alt=""
             />
           </div>

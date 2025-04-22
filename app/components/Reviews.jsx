@@ -54,13 +54,7 @@ const Review = ({
   );
 };
 
-const Reviews = ({ reviews, user_ratings_total, url }) => {
-  // Calculate average rating
-  const averageRating = reviews?.length
-    ? (reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length).toFixed(
-        1
-      )
-    : "0.0";
+const Reviews = ({ reviews, user_ratings_total, url, rating }) => {
   const total = user_ratings_total.toString();
   const filteredReviews = reviews?.filter(
     (r) =>
@@ -74,13 +68,13 @@ const Reviews = ({ reviews, user_ratings_total, url }) => {
           <h3 className="font-semibold text-lg">Svečių atsiliepimai</h3>
           <div className="flex gap-x-3 items-center">
             <div className="bg-amber-400 text-white font-bold rounded px-2 py-0.5 text-sm sm:ml-2">
-              {averageRating}
+              {rating}
             </div>
             <span className="text-sm text-gray-600">
               {total}{" "}
               {total[total.length - 1] === "1"
                 ? "atsiliepimas"
-                : total % 10 === 0 || (total > 10 && total < 20 )
+                : total % 10 === 0 || (total > 10 && total < 20)
                   ? "atsiliepimų"
                   : "atsiliepimai"}
             </span>
@@ -101,6 +95,9 @@ const Reviews = ({ reviews, user_ratings_total, url }) => {
           {filteredReviews.map((r, index) => (
             <Review key={`${r.author_name}-${index}`} {...r} />
           ))}
+          <p className="w-full flex justify-center text-sm">
+            <a href={url}>Daugiau atsiliepimų</a>
+          </p>
         </ul>
       ) : (
         <div className="text-center py-8 text-gray-500">Atsiliepimų nėra.</div>

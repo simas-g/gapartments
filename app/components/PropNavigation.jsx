@@ -1,14 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
-import Cal from "./Cal";
 import Contact from "./Contact";
 
 const PropNavigation = ({ prop, selected }) => {
-  const [openCalendar, setOpenCalendar] = useState(false);
   const [openContact, setOpenContact] = useState(false);
 
   useEffect(() => {
-    if(openContact===true || openCalendar === true) {
+    if(openContact===true) {
       document.body.style.overflow = "hidden";
     
       return () => {
@@ -16,11 +14,10 @@ const PropNavigation = ({ prop, selected }) => {
       };
     } else return
 
-  }, [openContact, openCalendar]);
+  }, [openContact]);
 
   return (
     <div className="w-full order-2 lg:sticky lg:top-20 lg:right-8 h-fit bg-white border-gray-300 border px-8 p-4 mt-2 md:mt-0 rounded-lg shadow flex flex-col gap-y-5">
-      {openCalendar && <Cal prop={prop} setOpenContact={setOpenCalendar} />}
       {openContact && <Contact prop={prop} setOpenContact={setOpenContact} />}
       <h5 className="font-extrabold text-xl">Apie apartamentus</h5>
       <div className="text-gray-700 text-justify">{prop.description}</div>
@@ -34,13 +31,7 @@ const PropNavigation = ({ prop, selected }) => {
             <span className="text-gray-700 font-medium text-sm">/ nakčiai</span>
           </p>
         </div>
-        <button onClick={() => setOpenCalendar(true)} className="w-full cursor-pointer text-white bg-amber-600 py-3 rounded-lg">
-          Kalendorius
-        </button>
-        <button
-          onClick={() => setOpenContact(true)}
-          className="w-full cursor-pointer border-gray-300 py-3 border rounded-lg"
-        >
+        <button onClick={() => setOpenContact(true)} className="w-full my-4 cursor-pointer text-white bg-amber-600 py-3 rounded-lg">
           Susisiekti
         </button>
       </div>

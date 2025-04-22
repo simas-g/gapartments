@@ -8,13 +8,7 @@ import {
   Link,
 } from "@react-email/components";
 
-export default function Message({
-  name ="Simas",
-  message = 'Gavome jūsų užklausą dėl apartamentų ir netrukus su jum susisieksime',
-  email,
-  link,
-  property
-}) {
+export default function Message({ name, message, email, property }) {
   // Color scheme
   const colors = {
     primary: "#4F46E5",
@@ -81,8 +75,8 @@ export default function Message({
               borderRadius: "8px",
               padding: "20px",
               margin: "24px 0",
-              fontSize: '14px',
-              color: colors.lightText
+              fontSize: "14px",
+              color: colors.lightText,
             }}
           >
             <Heading
@@ -122,18 +116,22 @@ export default function Message({
             </Text>
             {email}
 
-            <Text
-              style={{
-                fontSize: "14px",
-                color: colors.lightText,
-                margin: "8px 8px 0 0",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <strong className="w-full">Apartamentai:</strong>
-            </Text>
-            {property}
+            {property!=="none" && (
+              <>
+                <Text
+                  style={{
+                    fontSize: "14px",
+                    color: colors.lightText,
+                    margin: "8px 8px 0 0",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <strong className="w-full">Apartamentai:</strong>
+                </Text>
+                {property}
+              </>
+            )}
 
             <Text
               style={{
@@ -165,14 +163,14 @@ export default function Message({
           <Text
             style={{
               fontSize: "14px",
-              color: 'white',
+              color: "white",
               margin: "0 0 8px 0",
             }}
           >
             © 2025{" "}
             <Link
               style={{
-                color: 'white',
+                color: "white",
                 textDecoration: "underline",
                 textUnderlineOffset: "2px",
               }}

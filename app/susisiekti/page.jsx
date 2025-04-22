@@ -14,9 +14,8 @@ const Form = () => {
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
 
@@ -31,6 +30,36 @@ const Form = () => {
 
     if (Object.keys(newErrors).length === 0) {
       setIsSubmitting(true);
+    } else return;
+    const jsonData = {
+      name,
+      email,
+      message,
+      link: "none",
+      property: "none",
+    };
+    ///client
+    try {
+      await fetch("api/property/emails", {
+        method: "POST",
+        body: JSON.stringify(jsonData),
+      });
+    } catch (error) {
+      console.log(error, "error");
+    }
+
+    ///owner
+    try {
+      const res = await fetch("api/property/emails/owner", {
+        method: "POST",
+        body: JSON.stringify(jsonData),
+      });
+      console.log(res)
+    } catch (error) {
+      console.log("Error submitting form:", error);
+    } finally {
+      setIsSubmitting(false);
+      window.location.reload();
     }
   };
 
@@ -43,38 +72,7 @@ const Form = () => {
         </CardTitle>
       </CardHeader>
       <CardContent className="pb-6">
-        {submitted ? (
-          <div className="text-center py-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 mb-4">
-              <svg
-                className="w-8 h-8 text-green-500"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M5 13l4 4L19 7"
-                ></path>
-              </svg>
-            </div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">
-              Žinutė išsiųsta!
-            </h3>
-            <p className="text-gray-600 mb-6">
-              Dėkojame už jūsų žinutę. Susisieksime su jumis kuo greičiau.
-            </p>
-            <Button
-              onClick={() => setSubmitted(false)}
-              className="bg-amber-600 hover:bg-amber-700 text-white"
-            >
-              Siųsti kitą žinutę
-            </Button>
-          </div>
-        ) : (
+        
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <Label
@@ -167,7 +165,7 @@ const Form = () => {
               </Button>
             </div>
           </form>
-        )}
+        
       </CardContent>
     </Card>
   );
@@ -194,7 +192,7 @@ const Info = () => {
                 href="mailto:giedre@example.com"
                 className="text-amber-600 hover:text-amber-700 transition-colors"
               >
-                giedregg99@gmail.com
+                g.gedeikiene@gmail.com
               </a>
             </div>
           </div>
@@ -234,26 +232,25 @@ const Page = () => {
 
       {/* Content container */}
       <div className="w-full px-4">
-      <div className="relative z-7 md:w-3xl lg:w-4xl border shadow-2xl container mx-auto px-10 py-12 w-fit bg-white rounded-lg p-4">
-        {/* Page heading */}
-        <div className="text-center mb-12 bg-white/20 rounded-md p-2 w-fit m-auto backdrop-blur-md">
-          <h1 className="text-4xl font-bold drop-shadow-md">
-            Susisiekite su mumis
-          </h1>
-          <p className="mt-2 max-w-2xl mx-auto drop-shadow">
-            Turite klausimų apie mūsų apartamentus? Susisiekite su mumis ir mes
-            mielai padėsime.
-          </p>
-        </div>
+        <div className="relative z-7 md:w-3xl lg:w-4xl border shadow-2xl container mx-auto px-10 py-12 w-fit bg-white rounded-lg p-4">
+          {/* Page heading */}
+          <div className="text-center mb-12 bg-white/20 rounded-md p-2 w-fit m-auto backdrop-blur-md">
+            <h1 className="text-4xl font-bold drop-shadow-md">
+              Susisiekite su mumis
+            </h1>
+            <p className="mt-2 max-w-2xl mx-auto drop-shadow">
+              Turite klausimų apie mūsų apartamentus? Susisiekite su mumis ir
+              mes mielai padėsime.
+            </p>
+          </div>
 
-        {/* Cards container */}
-        <div className="grid md:grid-cols-2 md:place-items-start place-items-center gap-12 max-w-4xl mx-auto">
-          <Form />
-          <Info />
+          {/* Cards container */}
+          <div className="grid md:grid-cols-2 md:place-items-start place-items-center gap-12 max-w-4xl mx-auto">
+            <Form />
+            <Info />
+          </div>
         </div>
       </div>
-      </div>
-      
     </div>
   );
 };

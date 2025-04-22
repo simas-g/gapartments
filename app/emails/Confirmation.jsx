@@ -8,11 +8,7 @@ import {
   Link,
 } from "@react-email/components";
 
-export default function Confirmation({
-  name ="Simas",
-  message = 'Gavome jūsų užklausą dėl apartamentų ir netrukus su jum susisieksime',
-  link,
-}) {
+export default function Confirmation({ name, message, link }) {
   // Color scheme
   const colors = {
     primary: "#4F46E5",
@@ -92,8 +88,8 @@ export default function Confirmation({
               borderRadius: "8px",
               padding: "20px",
               margin: "24px 0",
-              fontSize: '14px',
-              color: colors.lightText
+              fontSize: "14px",
+              color: colors.lightText,
             }}
           >
             <Heading
@@ -132,25 +128,26 @@ export default function Confirmation({
             </Text>
             {message}
           </Section>
-
-          <Link
-            href={`${process.env.URL}/${link}`}
-            style={{
-              backgroundColor: "#d97706",
-              borderRadius: "6px",
-              color: "white",
-              fontSize: "16px",
-              fontWeight: "bold",
-              textDecoration: "none",
-              textAlign: "center",
-              display: "block",
-              padding: "12px 16px",
-              margin: "26px 0",
-              cursor: "pointer",
-            }}
-          >
-            Peržiūrėti apartamentus
-          </Link>
+          {link !== "none" && (
+            <Link
+              href={`${process.env.URL}/${link}`}
+              style={{
+                backgroundColor: "#d97706",
+                borderRadius: "6px",
+                color: "white",
+                fontSize: "16px",
+                fontWeight: "bold",
+                textDecoration: "none",
+                textAlign: "center",
+                display: "block",
+                padding: "12px 16px",
+                margin: "26px 0",
+                cursor: "pointer",
+              }}
+            >
+              Peržiūrėti apartamentus
+            </Link>
+          )}
         </Section>
 
         {/* Footer */}

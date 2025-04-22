@@ -47,6 +47,7 @@ const GalleryDesc = ({ prop }) => {
         );
         const initialData = await res.json();
         const data = initialData.data.result;
+        console.log(data)
         setData(data);
 
         
@@ -62,7 +63,7 @@ const GalleryDesc = ({ prop }) => {
     <div className="grid px-8 gap-y-4 gap-x-8 items-start lg:grid-cols-2">
       <div className="flex flex-col">
         <ImageNav images={prop.images} />
-        <div className="w-full mt-8 h-12 bg-gray-200 flex items-center justify-around rounded-lg p-1">
+        <div className="w-full mt-8 h-12 bg-gray-200 grid grid-cols-3 lg:grid-cols-2 rounded-lg p-1">
           <h4
             onClick={() => handleSelected(1)}
             className={`lg:hidden cursor-pointer w-full justify-center h-full flex items-center ${selected == 1 ? " bg-gray-100 rounded-md" : ""}`}
