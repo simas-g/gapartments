@@ -20,7 +20,7 @@ const Dropdown = ({ setNavOpen }) => {
 
   const router = useRouter();
   return (
-    <div className="tracking-widest relative w-full md:pt-0 pt-32 h-fit font-[--font-poppins] md:flex items-center ">
+    <div className="tracking-widest relative w-full md:pt-0 pt-32 h-fit md:flex items-center ">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex justify-end pr-12 items-center gap-x-4 w-full px-4 py-3 text-white tracking-wider font-light"
@@ -61,11 +61,12 @@ const Dropdown = ({ setNavOpen }) => {
           </ul>
         </div>
       )}
-      <div className="text-right px-4 pr-19">
+      <div className="px-4 pr-7">
         <a
           href="/susisiekti"
-          className="text-white uppercase hover:underline underline-offset-8"
-        >
+          className="flex uppercase justify-end pr-12 items-center gap-x-4 w-full px-4 py-3 text-white tracking-wider font-light"
+          >
+
           Susisiekti
         </a>
       </div>

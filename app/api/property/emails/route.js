@@ -14,5 +14,6 @@ export async function POST(req) {
         subject: 'Gavome jūsų užklausą',
         react: Confirmation({message, name, link}),
       });
-      return NextResponse.json({message: 'success'}, {status: 200})
+      return NextResponse.json({message: 'success'}, {status: 200}) 
+      
 }

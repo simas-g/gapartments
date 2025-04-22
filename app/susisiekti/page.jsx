@@ -1,86 +1,12 @@
 "use client";
-import { giedreApartments } from "@/lib/properties";
 import { Mail, Phone, MapPin } from "lucide-react";
-
-import {
-  Card,
-  CardTitle,
-  CardContent,
-  CardHeader,
-  CardFooter,
-} from "@/components/ui/card";
+import FullMap from "../components/FullMap";
+import { Card, CardTitle, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
-import {
-  APIProvider,
-  Map,
-  AdvancedMarker,
-  Pin,
-  InfoWindow,
-} from "@vis.gl/react-google-maps";
-
-const PoiMarkers = () => {
-  const [openInfo, setOpenInfo] = useState(null);
-
-  return (
-    <>
-      {giedreApartments?.map((poi) => (
-        <AdvancedMarker 
-          key={poi.title} 
-          position={poi.loc}
-          onClick={() => setOpenInfo(poi.title)}
-        >
-          <Pin 
-            background="#FF9800" 
-            glyphColor="#FFF" 
-            borderColor="#E65100" 
-            scale={1.2} 
-          />
-          {openInfo === poi.title && (
-            <InfoWindow onCloseClick={() => setOpenInfo(null)}>
-              <div className="p-2">
-                <h3 className="font-semibold">{poi.title}</h3>
-                {poi.address && <p className="text-sm">{poi.address}</p>}
-              </div>
-            </InfoWindow>
-          )}
-        </AdvancedMarker>
-      ))}
-    </>
-  );
-};
-
-function FullMap() {
-  return (
-    <APIProvider apiKey={"AIzaSyCoN-eN4LE9tZDgKNCmLS4zPeqyVLt1y0M"}>
-      <div className="h-full w-full rounded-xl overflow-hidden shadow-xl">
-        <Map
-          options={{ 
-            mapTypeControl: false,
-            streetViewControl: false,
-            fullscreenControl: false,
-            zoomControl: true,
-            styles: [
-              {
-                featureType: "poi",
-                elementType: "labels",
-                stylers: [{ visibility: "off" }]
-              }
-            ]
-          }}
-          defaultZoom={13}
-          mapId="Apartamentai"
-          defaultCenter={giedreApartments[0].loc}
-        >
-          <PoiMarkers />
-        </Map>
-      </div>
-    </APIProvider>
-  );
-}
 
 const Form = () => {
   const [email, setEmail] = useState("");
@@ -94,24 +20,17 @@ const Form = () => {
     e.preventDefault();
     const newErrors = {};
 
-    if (!email) newErrors.email = "Būtinas el. pašto adresas";
-    else if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = "Neteisingas el. pašto formatas";
-    
-    if (!name) newErrors.name = "Būtinas vardas";
-    if (!message) newErrors.message = "Būtina žinutė";
+    if (!email) newErrors.email = "el. paštas privalomas";
+    else if (!/\S+@\S+\.\S+/.test(email))
+      newErrors.email = "neteisingas el. pašto formatas";
+
+    if (!name) newErrors.name = "vardas privalomas";
+    if (!message) newErrors.message = "žinutė privaloma";
 
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
       setIsSubmitting(true);
-      setTimeout(() => {
-        console.log({ email, name, message });
-        setIsSubmitting(false);
-        setSubmitted(true);
-        setEmail("");
-        setName("");
-        setMessage("");
-      }, 1500);
     }
   };
 
@@ -123,17 +42,32 @@ const Form = () => {
           Parašykite žinutę
         </CardTitle>
       </CardHeader>
-      <CardContent className='pb-6'>
+      <CardContent className="pb-6">
         {submitted ? (
           <div className="text-center py-8">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 mb-4">
-              <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+              <svg
+                className="w-8 h-8 text-green-500"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M5 13l4 4L19 7"
+                ></path>
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">Žinutė išsiųsta!</h3>
-            <p className="text-gray-600 mb-6">Dėkojame už jūsų žinutę. Susisieksime su jumis kuo greičiau.</p>
-            <Button 
+            <h3 className="text-xl font-semibold text-gray-800 mb-2">
+              Žinutė išsiųsta!
+            </h3>
+            <p className="text-gray-600 mb-6">
+              Dėkojame už jūsų žinutę. Susisieksime su jumis kuo greičiau.
+            </p>
+            <Button
               onClick={() => setSubmitted(false)}
               className="bg-amber-600 hover:bg-amber-700 text-white"
             >
@@ -154,19 +88,20 @@ const Form = () => {
               </Label>
               <Input
                 id="email"
-                type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className={`mt-1 ${errors.email ? "border-red-500 ring-red-500" : "border-gray-300"}`}
               />
             </div>
             <div>
-              <Label 
-                htmlFor="name" 
+              <Label
+                htmlFor="name"
                 className={`text-sm font-medium ${errors.name ? "text-red-500" : "text-gray-700"}`}
               >
                 Vardas{" "}
-                {errors.name && <span className="text-sm font-normal">({errors.name})</span>}
+                {errors.name && (
+                  <span className="text-sm font-normal">({errors.name})</span>
+                )}
               </Label>
               <Input
                 id="name"
@@ -183,7 +118,9 @@ const Form = () => {
               >
                 Žinutė{" "}
                 {errors.message && (
-                  <span className="text-sm font-normal">({errors.message})</span>
+                  <span className="text-sm font-normal">
+                    ({errors.message})
+                  </span>
                 )}
               </Label>
               <Textarea
@@ -202,9 +139,25 @@ const Form = () => {
               >
                 {isSubmitting ? (
                   <span className="flex items-center justify-center gap-2">
-                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    <svg
+                      className="animate-spin h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
                     </svg>
                     Siunčiama...
                   </span>
@@ -237,19 +190,27 @@ const Info = () => {
             </div>
             <div>
               <h3 className="font-semibold text-gray-800 mb-1">El. paštas</h3>
-              <a href="mailto:giedre@example.com" className="text-amber-600 hover:text-amber-700 transition-colors">
+              <a
+                href="mailto:giedre@example.com"
+                className="text-amber-600 hover:text-amber-700 transition-colors"
+              >
                 giedregg99@gmail.com
               </a>
             </div>
           </div>
-          
+
           <div className="flex items-start gap-4">
             <div className="bg-amber-100 p-3 rounded-full">
               <Phone className="text-amber-600" size={24} />
             </div>
             <div>
-              <h3 className="font-semibold text-gray-800 mb-1">Telefono numeris</h3>
-              <a href="tel:+37060000000" className="text-amber-600 hover:text-amber-700 transition-colors">
+              <h3 className="font-semibold text-gray-800 mb-1">
+                Telefono numeris
+              </h3>
+              <a
+                href="tel:+37060000000"
+                className="text-amber-600 hover:text-amber-700 transition-colors"
+              >
                 +370 610 95591
               </a>
             </div>
@@ -265,21 +226,22 @@ const Page = () => {
     <div className="relative w-full min-h-screen py-20">
       {/* Full screen background map */}
       <div className="absolute inset-0 z-0">
-        <FullMap />
+        <FullMap empty={true} />
       </div>
 
       {/* Semi-transparent overlay */}
-      <div className="absolute inset-0 bg-black/10 z-10"></div>
+      <div className="absolute inset-0 bg-black/10 z-5"></div>
 
       {/* Content container */}
-      <div className="relative z-20 md:w-3xl lg:w-4xl border shadow-2xl container mx-auto px-10 py-12 w-fit bg-white rounded-lg p-4">
+      <div className="relative z-7 md:w-3xl lg:w-4xl border shadow-2xl container mx-auto px-10 py-12 w-fit bg-white rounded-lg p-4">
         {/* Page heading */}
         <div className="text-center mb-12 bg-white/20 rounded-md p-2 w-fit m-auto backdrop-blur-md">
           <h1 className="text-4xl font-bold drop-shadow-md">
             Susisiekite su mumis
           </h1>
           <p className="mt-2 max-w-2xl mx-auto drop-shadow">
-            Turite klausimų apie mūsų apartamentus? Susisiekite su mumis ir mes mielai padėsime.
+            Turite klausimų apie mūsų apartamentus? Susisiekite su mumis ir mes
+            mielai padėsime.
           </p>
         </div>
 
