@@ -1,24 +1,16 @@
-import { getS3ImageUrls } from '../actions/getS3Images';
-import { geocoding } from '../actions/geocoding';
-import { User } from 'lucide-react';
 
+import fetchPropertyData from '@/lib/fetchPropertyData';
+import { User } from 'lucide-react';
+import { properties } from '@/lib/properties';
+export const dynamicParams = false
+export async function generateStaticParams() {
+
+  return properties.map((p) => ({
+    property: p.id.replace(/\/$/, ''),
+  }));
+}
 import GalleryDesc from '../components/GalleryDesc';
-const fetchPropertyData = async (id) => {
-  try {
-    const res = await fetch(`${process.env.URL}/api/property?id=${id}`);
-    const { property } = await res.json();
-    const images = await getS3ImageUrls(property?.id);
-    const location = await geocoding(property?.title);
-    return {
-      ...property,
-      images: images.length > 1 ? images.slice(1) : images,
-      location: location,
-    };
-  } catch (error) {
-    console.error('Error fetching property data:', error);
-    return null;
-  }
-};
+
 
 const Page = async ({ params }) => {
   const property = (await params).property

@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Contact from "./Contact";
 
-const PropNavigation = ({ prop, selected }) => {
+const PropNavigation = ({ prop }) => {
   const [openContact, setOpenContact] = useState(false);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const PropNavigation = ({ prop, selected }) => {
         <div className="flex justify-between w-full text-xl font-bold">
           <p>Kaina nuo</p>
           <p>
-            35€{" "}
+            {prop.price}{" "}
             <span className="text-gray-700 font-medium text-sm">/ nakčiai</span>
           </p>
         </div>
