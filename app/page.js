@@ -2,12 +2,37 @@
 import Card from './components/Card';
 import {properties} from '@/lib/properties'
 
+export const metadata = {
+  title: 'Giedre Apartments',
+  description: 'Apartamentai kaune išsidėstę jums patogiose vietose.',
+  openGraph: {
+    title: 'Giedre Apartments',
+    description: 'Apartamentai kaune išsidėstę jums patogiose vietose.',
+    url: 'https://gapartments.lt',
+    type: 'website',
+    images: [
+      {
+        url: '/kaunas.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'gapartments',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Giedre Apartments',
+    description: 'Apartamentai kaune išsidėstę jums patogiose vietose.',
+    images: ['/kaunas.jpg'],
+  },
+};
+
 export default function Home() {
 
   return (
     <div className="flex flex-col font-[family-name:var(--font-geist-sans)]">
       {/* Hero Section */}
-      <header className="relative h-screen w-full">
+      <header className="relative h-[calc(100vh_-_112px)] w-full">
         {/* Background Image */}
         <div 
           className="inset-0 bg-cover bg-center z-[-1] fixed"
