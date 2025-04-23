@@ -5,7 +5,7 @@ import {properties} from '@/lib/properties'
 const sharedMeta = {
   title: 'Giedre Apartments',
   description: 'Apartamentai kaune išsidėstę jums patogiose vietose su reikalinga buitine technika, patogumais ir viskuo ko reikia, kad jaustumėtės kaip namuose.',
-  image: '/logo.jpg',
+  image: '/logo.png',
 };
 
 export const metadata = {
