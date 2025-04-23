@@ -1,22 +1,50 @@
+import fetchPropertyData from "@/lib/fetchPropertyData";
+import { User } from "lucide-react";
+import { properties } from "@/lib/properties";
+import GalleryDesc from "../components/GalleryDesc";
 
-import fetchPropertyData from '@/lib/fetchPropertyData';
-import { User } from 'lucide-react';
-import { properties } from '@/lib/properties';
-export const dynamicParams = false
+export const dynamicParams = false;
 export async function generateStaticParams() {
-
   return properties.map((p) => ({
-    property: p.id.replace(/\/$/, ''),
+    property: p.id.replace(/\/$/, ""),
   }));
 }
-import GalleryDesc from '../components/GalleryDesc';
-
+export async function generateMetadata({ params }) {
+  const property = (await params).property;
+  const prop = await fetchPropertyData(property);
+  const {title, description, images, id} = prop;
+  const image = images[2];
+  return {
+    title: title,
+    description: description,
+    openGraph: {
+      title: title,
+      description: description,
+      url: `https://gapartments.lt/${id}`,
+      type: "website",
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: id,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: title,
+      description:description,
+      images: [image],
+    },
+  };
+}
 
 const Page = async ({ params }) => {
-  const property = (await params).property
+  const property = (await params).property;
   const prop = await fetchPropertyData(property);
   return (
-    <div className="w-full pb-20 bg-gray-100 md:px-20" id='top-page'>
+    <div className="w-full pb-20 bg-gray-100 md:px-20" id="top-page">
       {/* heading */}
       <div className="p-8 px-8 m-auto flex flex-col gap-y-2">
         <h1 className="text-3xl font-bold">{prop?.title}</h1>
