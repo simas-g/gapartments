@@ -2,30 +2,37 @@
 import Card from './components/Card';
 import {properties} from '@/lib/properties'
 
-export const metadata = {
+const sharedMeta = {
   title: 'Giedre Apartments',
-  description: 'Apartamentai kaune išsidėstę jums patogiose vietose.',
+  description: 'Apartamentai kaune išsidėstę jums patogiose vietose su reikalinga buitine technika, patogumais ir viskuo ko reikia, kad jaustumėtės kaip namuose.',
+  image: '/logo.jpg',
+};
+
+export const metadata = {
+  title: sharedMeta.title,
+  description: sharedMeta.description,
   openGraph: {
-    title: 'Giedre Apartments',
-    description: 'Apartamentai kaune išsidėstę jums patogiose vietose.',
+    title: sharedMeta.title,
+    description: sharedMeta.description,
     url: 'https://gapartments.lt',
     type: 'website',
     images: [
       {
-        url: '/kaunas.jpg',
+        url: sharedMeta.image,
         width: 1200,
         height: 630,
-        alt: 'gapartments',
+        alt: 'Giedre Apartments preview image',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Giedre Apartments',
-    description: 'Apartamentai kaune išsidėstę jums patogiose vietose.',
-    images: ['/kaunas.jpg'],
+    title: sharedMeta.title,
+    description: sharedMeta.description,
+    images: [sharedMeta.image],
   },
 };
+
 
 export default function Home() {
 
