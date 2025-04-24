@@ -1,21 +1,31 @@
 "use client";
 import { useState, useEffect } from "react";
 import Contact from "./Contact";
-
+import { Share2 } from "lucide-react";
 const PropNavigation = ({ prop }) => {
   const [openContact, setOpenContact] = useState(false);
 
   useEffect(() => {
-    if(openContact===true) {
+    if (openContact === true) {
       document.body.style.overflow = "hidden";
-    
+
       return () => {
         document.body.style.overflow = "";
       };
-    } else return
-
+    } else return;
   }, [openContact]);
-
+  function share() {
+    if(navigator.share) {
+      navigator.share({
+        title: prop.title,
+        text: prop.description,
+        url: window.location.href, 
+      })
+    }
+    else {
+      navigator.clipboard.writeText(window.location.href)
+    }
+  }
   return (
     <div className="w-full order-2 lg:sticky lg:top-20 lg:right-8 h-fit bg-white border-gray-300 border px-8 p-4 mt-2 md:mt-0 rounded-lg shadow flex flex-col gap-y-5">
       {openContact && <Contact prop={prop} setOpenContact={setOpenContact} />}
@@ -27,13 +37,23 @@ const PropNavigation = ({ prop }) => {
         <div className="flex justify-between w-full text-xl font-bold">
           <p>Kaina nuo</p>
           <p>
-            {prop.price}{" "}
+            {prop.price}
+            {"€ "}
             <span className="text-gray-700 font-medium text-sm">/ nakčiai</span>
           </p>
         </div>
-        <button onClick={() => setOpenContact(true)} className="w-full my-4 cursor-pointer text-white bg-amber-600 py-3 rounded-lg">
-          Susisiekti
-        </button>
+        <div className="flex flex-col gap-y-2 w-full">
+          <button
+            onClick={() => setOpenContact(true)}
+            className="w-full cursor-pointer text-white bg-amber-600 py-3 rounded-lg"
+          >
+            Susisiekti
+          </button>
+          <button onClick={share} className="flex items-center gap-x-3 border px-2 py-3 rounded-lg justify-center">
+            <Share2 size={20} />
+            <p>Dalintis</p>
+          </button>
+        </div>
       </div>
     </div>
   );
