@@ -123,7 +123,7 @@ const ImageNav = ({ images }) => {
 
         <img
           src={mainImage}
-          className="object-cover w-full md:h-auto h-full"
+          className="object-cover w-full h-full"
           alt=""
         />
       </div>
@@ -153,7 +153,7 @@ const ImageNav = ({ images }) => {
       {imagePreviews.map((image, i) => (
         <div
           key={i}
-          className="overflow-hidden h-auto w-full cursor-pointer rounded-sm relative"
+          className="overflow-hidden h-full w-full cursor-pointer rounded-sm relative"
           onClick={() => handleImagesView()}
           
         >
