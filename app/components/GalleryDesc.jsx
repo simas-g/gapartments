@@ -35,7 +35,7 @@ const GalleryDesc = ({ prop }) => {
     }
   }, []);
   useEffect(() => {
-    const fetchData= async () => {
+    const fetchData = async () => {
       setLoading(true);
       const targetProperty = properties.find((p) => p.title === prop?.title);
       try {
@@ -47,10 +47,8 @@ const GalleryDesc = ({ prop }) => {
         );
         const initialData = await res.json();
         const data = initialData.data.result;
-        console.log(data)
+        console.log(data);
         setData(data);
-
-        
       } catch (error) {
         console.log(error, "error");
       } finally {
@@ -59,6 +57,7 @@ const GalleryDesc = ({ prop }) => {
     };
     fetchData();
   }, []);
+  
   return (
     <div className="grid px-8 gap-y-4 gap-x-8 items-start lg:grid-cols-2">
       <div className="flex flex-col">
@@ -83,7 +82,7 @@ const GalleryDesc = ({ prop }) => {
             Atsiliepimai
           </h4>
         </div>
-        {selected == 2 && <MapBlock location={prop.location}></MapBlock>}
+        {selected == 2 && !loading && <MapBlock location={prop.location} url={data?.url}></MapBlock>}
         {selected == 3 && (
           <>
             {loading && <p>Kraunama...</p>}

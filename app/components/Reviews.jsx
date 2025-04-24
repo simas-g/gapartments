@@ -61,7 +61,7 @@ const Reviews = ({ reviews, user_ratings_total, url, rating }) => {
       r.author_name !== "Giedre G." && r.author_name !== "Kęstutis Gedeikis"
   );
   return (
-    <section className="py-4">
+    <section className="pt-4">
       {/* Header with Google Maps attribution */}
       <div className="flex sm:items-center sm:justify-between justify-around mb-6 gap-y-2 border-b pb-4 gap-x-3 flex-col sm:flex-row ">
         <div className="flex items-center gap-2 flex-wrap w-fit">
