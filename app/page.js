@@ -1,4 +1,5 @@
 
+import Link from 'next/link';
 import Card from './components/Card';
 import {properties} from '@/lib/properties'
 
@@ -66,12 +67,12 @@ export default function Home() {
 
             <div className="mt-8 flex space-x-4">
 
-              <a 
+              <Link
                 href="/susisiekti" 
                 className="border border-white text-white px-6 py-3 rounded-full hover:bg-white/20 transition-colors"
               >
                 Susisiekti
-              </a>
+              </Link>
             </div>
           </div>
         </div>
