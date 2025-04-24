@@ -18,7 +18,6 @@ const PropNavigation = ({ prop }) => {
     if(navigator.share) {
       navigator.share({
         title: prop.title,
-        text: prop.description,
         url: window.location.href, 
       })
     }
