@@ -1,6 +1,7 @@
 import { Inter, Montserrat } from "next/font/google"
 import "./globals.css";
 import Nav from "./components/Nav";
+import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
 
 const inter = Inter({
@@ -27,6 +28,7 @@ export const metadata = {
       suppressHydrationWarning={true}
       >
         <Nav></Nav>
+        <TopBar/>
         {children}
         <Footer/>
       </body>
