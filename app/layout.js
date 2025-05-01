@@ -1,36 +1,40 @@
-import { Inter, Montserrat } from "next/font/google"
+import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import Nav from "./components/Nav";
 import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
-
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale } from "next-intl/server";
 const inter = Inter({
   subsets: ["latin", "latin-ext"],
   display: "swap",
   variable: "--font-inter",
-})
+});
 const montserrat = Montserrat({
   subsets: ["latin", "latin-ext"],
   display: "swap",
   variable: "--font-montserrat",
-})
+});
 
 export const metadata = {
   title: "Giedre Apartments",
   description: "Kauno apartamentai įsikūrę jums patogiose vietose",
 };
 
-  export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const locale = await getLocale()
   return (
-    <html lang="lt">
+    <html lang={locale}>
       <body
         className={`${montserrat.variable} ${inter.variable} antialiased overflow-x-hidden`}
-      suppressHydrationWarning={true}
+        suppressHydrationWarning={true}
       >
-        <Nav></Nav>
-        <TopBar/>
-        {children}
-        <Footer/>
+        <NextIntlClientProvider>
+          <Nav></Nav>
+          <TopBar />
+          {children}
+          <Footer />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

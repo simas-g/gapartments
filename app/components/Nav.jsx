@@ -4,7 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChevronDown, Menu, X, Globe } from "lucide-react";
-
+import setLanguageCookie from "@/lib/languageCookie";
+import checkLanguage from "@/lib/checkLanguage";
 const locations = [
   { title: "APARTAMENTAI", url: "/apartamentai" },
   { title: "KALNIEČIŲ G. 219", url: "/kalnieciu219" },
@@ -21,8 +22,21 @@ const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const router = useRouter();
-  const [language, setLanguage] = useState("lt");
-
+  const [language, setLanguage] = useState();
+  useEffect(() => {
+    if(language) {
+      setLanguageCookie(language)
+    }
+    async function getLanguage(){
+      const lang = await checkLanguage()
+      if(lang) {
+        setLanguage(lang)
+      } else {
+        setLanguage('lt')
+      }
+    }
+    getLanguage()
+  }, [language])
   // Toggle dropdown function to ensure only one is open at a time
   const toggleDropdown = (dropdown) => {
     if (activeDropdown === dropdown) {
@@ -41,9 +55,8 @@ const Nav = () => {
 
   // Handle language selection
   const toggleLanguage = (lang) => {
+    setActiveDropdown(null)
     setLanguage(lang);
-    setActiveDropdown(null);
-    setIsOpen(false);
   };
   useEffect(() => {
     if(isOpen) {
