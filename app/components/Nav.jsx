@@ -1,140 +1,231 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-const Dropdown = ({ setNavOpen }) => {
-  const [isOpen, setIsOpen] = useState(false);
+import { ChevronDown, Menu, X, Globe } from "lucide-react";
 
-  const locations = [
-    { title: "APARTAMENTAI", url: "/apartamentai" },
-    { title: "KALNIEČIŲ G. 219", url: "/kalnieciu219" },
-    { title: "KALNIEČIŲ G. 196 (1)", url: "/kalnieciu196(1)" },
-    { title: "KALNIEČIŲ G. 196 (2)", url: "/kalnieciu196(2)" },
-    { title: "TAIKOS PR. 33B", url: "/taikospr33b" },
-    { title: "VARNIŲ G. 24", url: "/varniu24" },
-    { title: "NEMUNO G. 22", url: "/nemuno22" },
-    { title: "PUODŽIŲ G. 27", url: "/puodziu27" },
-    { title: "LINKUVOS G. 55", url: "/linkuvos55" },
-  ];
-
-  const router = useRouter();
-  return (
-    <div className="tracking-widest relative w-full md:pt-0 pt-32 h-fit md:flex items-center ">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex justify-end pr-12 items-center gap-x-4 w-full px-4 py-3 text-white tracking-wider font-light"
-      >
-        <span className="uppercase hover:underline underline-offset-8">
-          Apartamentai
-        </span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 10 7"
-          fill="white"
-          className={`w-3 h-3 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
-        >
-          <polygon points="5,0 10,7 0,7" />
-        </svg>
-      </button>
-
-      {isOpen && (
-        <div className="md:absolute top-full items-end left-0 w-full md:w-fit md:px-4 md:rounded-md bg-black text-white shadow-lg z-10 pb-2 md:block flex flex-col">
-          <ul className="w-fit flex flex-col">
-            {locations.slice(1).map((location, index) => (
-              <li
-                key={index}
-                id="list"
-                href={location}
-                className="px-4 z-11 hover:underline underline-offset-8 pr-11 py-3 cursor-pointer uppercase md:text-center tracking-wider font-light w-full"
-                onClick={() => {
-                  router.push(location.url);
-                  setIsOpen(false);
-                  if (setNavOpen) {
-                    setNavOpen(false);
-                  }
-                }}
-              >
-                {location.title}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-      <div className="px-4 pr-7">
-        <a
-          href="/susisiekti"
-          className="flex uppercase justify-end pr-12 items-center gap-x-4 w-full px-4 py-3 text-white tracking-wider font-light"
-          >
-
-          Susisiekti
-        </a>
-      </div>
-    </div>
-  );
-};
+const locations = [
+  { title: "APARTAMENTAI", url: "/apartamentai" },
+  { title: "KALNIEČIŲ G. 219", url: "/kalnieciu219" },
+  { title: "KALNIEČIŲ G. 196 (1)", url: "/kalnieciu196(1)" },
+  { title: "KALNIEČIŲ G. 196 (2)", url: "/kalnieciu196(2)" },
+  { title: "TAIKOS PR. 33B", url: "/taikospr33b" },
+  { title: "VARNIŲ G. 24", url: "/varniu24" },
+  { title: "NEMUNO G. 22", url: "/nemuno22" },
+  { title: "PUODŽIŲ G. 27", url: "/puodziu27" },
+  { title: "LINKUVOS G. 55", url: "/linkuvos55" },
+];
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  const router = useRouter();
+  const [language, setLanguage] = useState("lt");
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
+  // Toggle dropdown function to ensure only one is open at a time
+  const toggleDropdown = (dropdown) => {
+    if (activeDropdown === dropdown) {
+      setActiveDropdown(null);
+    } else {
+      setActiveDropdown(dropdown);
+    }
   };
 
+  // Handle location selection
+  const handleLocationClick = (url) => {
+    router.push(url);
+    setActiveDropdown(null);
+    setIsOpen(false);
+  };
+
+  // Handle language selection
+  const toggleLanguage = (lang) => {
+    setLanguage(lang);
+    setActiveDropdown(null);
+    setIsOpen(false);
+  };
+  useEffect(() => {
+    if(isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = ""
+    }
+    return () => {
+      document.body.style.overflow =""
+    }
+  }, [isOpen])
   return (
-    <nav className="bg-gradient-to-r z-40 md:px-20 from-amber-600 via-amber-700 to-amber-800 top-0 left-0 w-full">
-      <div className="mx-auto px-4 sm:px-6 p-8">
-        <div className="flex items-center justify-between h-12">
+    <nav className="w-full z-40 bg-gradient-to-r from-amber-600 via-amber-700 to-amber-800 py-4 md:px-18">
+      <div className="container mx-auto px-4 lg:px-8">
+        <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href={"/"} className="flex-shrink-0 z-50 cursor-pointer">
-            <Image
-              src={"/logo.png"}
-              height={80}
-              width={80}
-              alt="gapartments"
-              className="object-contain"
-            />
+          <Link href="/" className="flex-shrink-0 relative z-42">
+            <div className="flex items-center">
+              <Image
+                src="/logo.png"
+                height={80}
+                width={80}
+                alt="GApartments"
+                className="object-contain"
+              />
+            </div>
           </Link>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center z-50">
-            <button
-              onClick={toggleMenu}
-              className="relative p-2 cursor-pointer text-white hover:text-gray-100 focus:outline-none"
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center space-x-4">
+            {/* Location Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => toggleDropdown('locations')}
+                className="flex items-center gap-2 text-white font-medium px-4 py-2 hover:bg-amber-700 rounded-md transition-all duration-300"
+              >
+                <span className="uppercase">Apartamentai</span>
+                <ChevronDown 
+                  size={16} 
+                  className={`transition-transform duration-300 ${activeDropdown === 'locations' ? "rotate-180" : ""}`} 
+                />
+              </button>
+
+              {activeDropdown === 'locations' && (
+                <div className="absolute mt-2 left-0 bg-white text-amber-800 rounded-md shadow-lg overflow-hidden z-50 animate-fadeIn w-64">
+                  {locations.slice(1).map((location, index) => (
+                    <button
+                      key={index}
+                      className="block w-full text-left px-4 py-3 hover:bg-amber-100 transition-colors border-b border-amber-100 last:border-0"
+                      onClick={() => handleLocationClick(location.url)}
+                    >
+                      {location.title}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Language Selector */}
+            <div className="relative">
+              <button 
+                onClick={() => toggleDropdown('language')}
+                className="flex items-center gap-2 text-white font-medium px-4 py-2 hover:bg-amber-700 rounded-md transition-all duration-300"
+              >
+                <Globe size={16} />
+                <span className="uppercase">{language}</span>
+                <ChevronDown 
+                  size={16} 
+                  className={`transition-transform duration-300 ${activeDropdown === 'language' ? "rotate-180" : ""}`} 
+                />
+              </button>
+              
+              {activeDropdown === 'language' && (
+                <div className="absolute right-0 mt-2 w-32 bg-white text-amber-800 rounded-md shadow-lg overflow-hidden z-50 animate-fadeIn">
+                  {["lt", "en"].map((lang) => (
+                    <button
+                      key={lang}
+                      className={`block w-full text-left px-4 py-3 transition-colors ${language === lang ? "bg-gray-300" : ""}`}
+                      onClick={() => toggleLanguage(lang)}
+                    >
+                      <span className="uppercase font-medium">{lang}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Contact Link */}
+            <Link 
+              href="/susisiekti"
+              className="text-white font-medium px-4 py-2 hover:bg-amber-600 rounded-md transition-all duration-300 uppercase"
             >
-              <div className="w-8 h-6 flex flex-col justify-between">
-                <div
-                  className={`h-0.5 w-full bg-current transition-all duration-300 ease-in-out ${
-                    isOpen ? "rotate-45 translate-y-[11px]" : ""
-                  }`}
-                ></div>
-                <div
-                  className={`h-0.5 w-full bg-current transition-all duration-300 ease-in-out ${
-                    isOpen ? "opacity-0" : ""
-                  }`}
-                ></div>
-                <div
-                  className={`h-0.5 w-full bg-current transition-all duration-300 ease-in-out ${
-                    isOpen ? "-rotate-45 -translate-y-[11px]" : ""
-                  }`}
-                ></div>
-              </div>
-            </button>
+              Susisiekti
+            </Link>
           </div>
 
-          {/* Mobile Menu Overlay */}
-          {isOpen && (
-            <div className="md:hidden absolute inset-0 bg-black top-0 right-10 w-full h-fit z-40 ">
-              <div className="container mx-auto space-y-6">
-                <Dropdown setNavOpen={setIsOpen} />
-                <div className="space-y-4"></div>
-              </div>
-            </div>
-          )}
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden relative z-50 text-white p-2 bg-white/10"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </div>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex md:items-center md:space-x-6">
-            <Dropdown />
+      {/* Mobile Menu */}
+      <div 
+        className={`absolute inset-0 overflow-auto bg-amber-800 bg-opacity-95 z-43 transition-transform transform duration-300 ease-in-out ${
+          isOpen ? "translate-x-0" : "translate-x-full"
+        } md:hidden flex flex-col`}
+      >
+        <div className="container h-full mx-auto px-6 pt-24 pb-8 flex flex-col">
+          <div className="space-y-6 w-full">
+            {/* Location Dropdown (Mobile) */}
+            <div className="border-b border-amber-600 pb-4 relative w-full">
+              <button
+                onClick={() => toggleDropdown('locations')}
+                className="flex items-center gap-2 text-white font-medium px-4 py-3 hover:bg-amber-700 rounded-md transition-all duration-300 w-full justify-between"
+              >
+                <span className="uppercase text-lg">Apartamentai</span>
+                <ChevronDown 
+                  size={16} 
+                  className={`transition-transform duration-300 ${activeDropdown === 'locations' ? "rotate-180" : ""}`} 
+                />
+              </button>
+
+              {activeDropdown === 'locations' && (
+                <ul className="relative w-full mt-2 text-white rounded-md overflow-hidden z-50 animate-fadeIn">
+                  {locations.slice(1).map((location, index) => (
+                    <li
+                      key={index}
+                      className="block text-sm w-full text-left px-6 py-3 transition-colors cursor-pointer"
+                      onClick={() => handleLocationClick(location.url)}
+                    >
+                      {location.title}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            
+            {/* Language Selector (Mobile) */}
+            <div className="border-b border-amber-600 pb-4 relative w-full">
+              <button 
+                onClick={() => toggleDropdown('language')}
+                className="flex items-center gap-2 text-white font-medium px-4 py-3 hover:bg-amber-700 rounded-md transition-all duration-300 w-full justify-between"
+              >
+                <div className="flex items-center gap-2">
+                  <Globe size={18} />
+                  <span className="uppercase text-lg">{language}</span>
+                </div>
+                <ChevronDown 
+                  size={16} 
+                  className={`transition-transform duration-300 ${activeDropdown === 'language' ? "rotate-180" : ""}`} 
+                />
+              </button>
+              
+              {activeDropdown === 'language' && (
+                <div className="relative mt-2 w-fit flex rounded-md border text-white shadow-lg overflow-hidden z-50 animate-fadeIn">
+                  {["lt", "en"].map((lang) => (
+                    <button
+                      key={lang}
+                      className={`block w-full text-left px-6 py-4 ${language===lang ? "bg-white/20" : ''}`}
+                      onClick={() => toggleLanguage(lang)}
+                    >
+                      <span className="uppercase font-medium text-lg">{lang}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+            
+            {/* Contact Link (Mobile) */}
+            <Link 
+              href="/susisiekti"
+              className="text-white font-medium px-4 mb-20 py-3 w-full text-center bg-amber-600 rounded-md transition-all duration-300 uppercase flex items-center justify-center"
+              onClick={() => setIsOpen(false)}
+            >
+              Susisiekti
+            </Link>
           </div>
         </div>
       </div>
