@@ -46,15 +46,28 @@ const Nav = () => {
     changeLang(lang);
   };
   useEffect(() => {
-    if(isOpen) {
+    // Function to prevent touch events
+    const preventTouchMove = (e) => {
+      e.preventDefault();
+    };
+  
+    if (isOpen) {
       document.body.style.overflow = "hidden";
+      
+      // Add touch event listeners to prevent mobile navigation
+      document.addEventListener('touchmove', preventTouchMove, { passive: false });
     } else {
-      document.body.style.overflow = ""
+      document.body.style.overflow = "";
+      
+      // Remove event listeners
+      document.removeEventListener('touchmove', preventTouchMove);
     }
+  
     return () => {
-      document.body.style.overflow =""
-    }
-  }, [isOpen])
+      document.body.style.overflow = "";
+      document.removeEventListener('touchmove', preventTouchMove);
+    };
+  }, [isOpen]);
   return (
     <nav className="w-full z-40 bg-gradient-to-r from-amber-600 via-amber-700 to-amber-800 py-4 md:px-18">
       <div className="container mx-auto px-4 lg:px-8">
@@ -153,8 +166,8 @@ const Nav = () => {
 
       {/* Mobile Menu */}
       <div 
-        className={`absolute inset-0 overflow-auto bg-amber-800 bg-opacity-95 z-43 transition-transform transform duration-300 ease-in-out ${
-          isOpen ? "translate-x-0" : "translate-x-full"
+        className={`absolute inset-0 overflow-y-auto bg-amber-800 bg-opacity-95 z-43 transition-transform transform duration-300 ease-in-out ${
+          isOpen ? "" : "hidden"
         } md:hidden flex flex-col`}
       >
         <div className="container h-full mx-auto px-6 pt-24 pb-8 flex flex-col">
