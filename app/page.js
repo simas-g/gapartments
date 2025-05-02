@@ -2,7 +2,7 @@ import Link from "next/link";
 import Card from "./components/Card";
 import { properties } from "@/lib/properties";
 import { useTranslations } from "next-intl";
-
+import { LanguageContextProvider } from "./language/languageProvider";
 const sharedMeta = {
   title: "Giedre Apartments",
   description:

@@ -1,11 +1,10 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChevronDown, Menu, X, Globe } from "lucide-react";
-import setLanguageCookie from "@/lib/languageCookie";
-import checkLanguage from "@/lib/checkLanguage";
+import languageContext from "../language/languageProvider";
 const locations = [
   { title: "APARTAMENTAI", url: "/apartamentai" },
   { title: "KALNIEČIŲ G. 219", url: "/kalnieciu219" },
@@ -22,21 +21,7 @@ const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const router = useRouter();
-  const [language, setLanguage] = useState();
-  useEffect(() => {
-    if(language) {
-      setLanguageCookie(language)
-    }
-    async function getLanguage(){
-      const lang = await checkLanguage()
-      if(lang) {
-        setLanguage(lang)
-      } else {
-        setLanguage('lt')
-      }
-    }
-    getLanguage()
-  }, [language])
+  const {locale, changeLang} = useContext(languageContext)
   // Toggle dropdown function to ensure only one is open at a time
   const toggleDropdown = (dropdown) => {
     if (activeDropdown === dropdown) {
@@ -56,7 +41,7 @@ const Nav = () => {
   // Handle language selection
   const toggleLanguage = (lang) => {
     setActiveDropdown(null)
-    setLanguage(lang);
+    changeLang(lang);
   };
   useEffect(() => {
     if(isOpen) {
@@ -122,7 +107,7 @@ const Nav = () => {
                 className="flex items-center gap-2 text-white font-medium px-4 py-2 hover:bg-amber-700 rounded-md transition-all duration-300"
               >
                 <Globe size={16} />
-                <span className="uppercase">{language}</span>
+                <span className="uppercase">{locale}</span>
                 <ChevronDown 
                   size={16} 
                   className={`transition-transform duration-300 ${activeDropdown === 'language' ? "rotate-180" : ""}`} 
@@ -131,13 +116,13 @@ const Nav = () => {
               
               {activeDropdown === 'language' && (
                 <div className="absolute right-0 mt-2 w-32 bg-white text-amber-800 rounded-md shadow-lg overflow-hidden z-50 animate-fadeIn">
-                  {["lt", "en"].map((lang) => (
+                  {["lt", "en"].map((l) => (
                     <button
-                      key={lang}
-                      className={`block w-full text-left px-4 py-3 transition-colors ${language === lang ? "bg-gray-300" : ""}`}
-                      onClick={() => toggleLanguage(lang)}
+                      key={l}
+                      className={`block w-full text-left px-4 py-3 transition-colors ${locale === l ? "bg-gray-300" : ""}`}
+                      onClick={() => toggleLanguage(l)}
                     >
-                      <span className="uppercase font-medium">{lang}</span>
+                      <span className="uppercase font-medium">{l}</span>
                     </button>
                   ))}
                 </div>
@@ -208,7 +193,7 @@ const Nav = () => {
               >
                 <div className="flex items-center gap-2">
                   <Globe size={18} />
-                  <span className="uppercase text-lg">{language}</span>
+                  <span className="uppercase text-lg">{locale}</span>
                 </div>
                 <ChevronDown 
                   size={16} 
@@ -221,7 +206,7 @@ const Nav = () => {
                   {["lt", "en"].map((lang) => (
                     <button
                       key={lang}
-                      className={`block w-full text-left px-6 py-4 ${language===lang ? "bg-white/20" : ''}`}
+                      className={`block w-full text-left px-6 py-4 ${locale===lang ? "bg-white/20" : ''}`}
                       onClick={() => toggleLanguage(lang)}
                     >
                       <span className="uppercase font-medium text-lg">{lang}</span>

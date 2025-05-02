@@ -5,6 +5,7 @@ import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
+import { LanguageContextProvider } from "./language/languageProvider";
 const inter = Inter({
   subsets: ["latin", "latin-ext"],
   display: "swap",
@@ -30,10 +31,12 @@ export default async function RootLayout({ children }) {
         suppressHydrationWarning={true}
       >
         <NextIntlClientProvider>
+          <LanguageContextProvider>
           <Nav></Nav>
           <TopBar />
           {children}
           <Footer />
+          </LanguageContextProvider>
         </NextIntlClientProvider>
       </body>
     </html>
