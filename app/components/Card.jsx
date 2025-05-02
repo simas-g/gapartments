@@ -2,8 +2,9 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 const Card = ({property}) => {
-  const t = useTranslations('Card')
-  const propT = useTranslations(`properties.id[${property.id}]`)
+  const cleanedId = property.id.replace(/[()/]/g, '');
+  const t = useTranslations(`Card`)
+  const propT = useTranslations(`properties.${cleanedId}`)
   return (
     <div 
     className="border bg-white border-gray-300 shadow rounded-lg overflow-hidden h-fit max-w-[400px]"
@@ -21,17 +22,17 @@ const Card = ({property}) => {
               {a.length === 1 ? (
                 <div className='flex items-center gap-x-1'>
                   <img width={15} height={15} src='/user.svg'></img>
-                  {a}
+                  {propT(`add.${i}`)}
                 </div>
               ) : (
-                a
+                propT(`add.${i}`)
               )}
             </div>
           ))}
         </div>
 
         <div className='text-gray-600 line-clamp-6'>
-          {property.description}
+          {propT('description')}
         </div>
         <div className='flex flex-wrap items-center justify-between gap-y-3'>
           <div className='flex items-center gap-x-2'>

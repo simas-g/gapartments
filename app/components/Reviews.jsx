@@ -1,6 +1,7 @@
-"use client";
+import checkLanguage from "@/lib/checkLanguage";
 import { Star } from "lucide-react";
-
+import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 const Review = ({
   author_name,
   profile_photo_url,
@@ -10,6 +11,7 @@ const Review = ({
   relative_time_description,
   text,
 }) => {
+  const t = useTranslations("PropertyPage");
   return (
     <li className="p-6 border rounded-lg shadow-sm bg-white hover:shadow-md transition-shadow mb-4">
       {/* Header */}
@@ -46,7 +48,7 @@ const Review = ({
         {/* Translation indicator */}
         {translated && (
           <div className="mt-2 text-xs text-gray-500 italic">
-            išversta iš {original_language?.toUpperCase()}
+            {t("translatedFrom")} {original_language?.toUpperCase()}
           </div>
         )}
       </div>
@@ -55,35 +57,49 @@ const Review = ({
 };
 
 const Reviews = ({ reviews, user_ratings_total, url, rating }) => {
+  const [language, setLanguage] = useState('')
+  useEffect(() => {
+    async function checkLang() {
+      const loc = await checkLanguage()
+      setLanguage(loc)
+    }
+    checkLang()
+  }, [])
   const total = user_ratings_total.toString();
   const filteredReviews = reviews?.filter(
     (r) =>
       r.author_name !== "Giedre G." && r.author_name !== "Kęstutis Gedeikis"
+  );
+  const t = useTranslations("PropertyPage");
+  const lithuanianPlurals = (
+    <>
+      {total[total.length - 1] === "1"
+        ? "atsiliepimas"
+        : total % 10 === 0 || (total > 10 && total < 20)
+          ? "atsiliepimų"
+          : "atsiliepimai"}
+    </>
   );
   return (
     <section className="pt-4">
       {/* Header with Google Maps attribution */}
       <div className="flex sm:items-center sm:justify-between justify-around mb-6 gap-y-2 border-b pb-4 gap-x-3 flex-col sm:flex-row ">
         <div className="flex items-center gap-2 flex-wrap w-fit">
-          <h3 className="font-semibold text-lg">Svečių atsiliepimai</h3>
+          <h3 className="font-semibold text-lg">{t("guestsReviews")}</h3>
           <div className="flex gap-x-3 items-center">
             <div className="bg-amber-400 text-white font-bold rounded px-2 py-0.5 text-sm sm:ml-2">
               {rating}
             </div>
             <span className="text-sm text-gray-600">
-              {total}{" "}
-              {total[total.length - 1] === "1"
-                ? "atsiliepimas"
-                : total % 10 === 0 || (total > 10 && total < 20)
-                  ? "atsiliepimų"
-                  : "atsiliepimai"}
+              {language === "lt" && lithuanianPlurals}
+              {language === "en" && t('reviewsPlural', {count: user_ratings_total})}
             </span>
           </div>
         </div>
 
         <div className="flex items-center gap-2 sm:px-2">
           <p className="text-sm text-gray-600 whitespace-nowrap">
-            Informacija iš
+            {t("infoFrom")}
           </p>
           <img className="w-8 h-8" src="/google-maps.svg" alt="Google Maps" />
         </div>
@@ -96,7 +112,7 @@ const Reviews = ({ reviews, user_ratings_total, url, rating }) => {
             <Review key={`${r.author_name}-${index}`} {...r} />
           ))}
           <p className="w-full flex justify-center text-sm">
-            <a href={url}>Daugiau atsiliepimų</a>
+            <a href={url}>{t("moreReviews")}</a>
           </p>
         </ul>
       ) : (

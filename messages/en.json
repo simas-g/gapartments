@@ -9,35 +9,67 @@
   "properties": {
     "kalnieciu219": {
       "description": "Relax with the whole family in this peaceful place. Cozy, newly furnished 2-room apartment. Private entrance! Ground floor! Windows face the courtyard. No city noise! Walking distance to Kaunas Clinics! Nearby grocery store “Express Market”, a bit further is the shopping center “Maxima XXL”. 7 min drive to city center. The apartment has all necessary appliances: washing machine, refrigerator, stove, hood, kettle, iron, Smart TV + WiFi. Towels, bed linens, all kitchenware, coffee and tea, spices. Free parking space right by your apartment door. Accommodates up to 4 guests.",
-      "add": ["2 rooms", "4", "WiFi"]
+      "add": {
+        "0": "2 rooms",
+        "1": "4",
+        "2": "WiFi"
+      }
     },
     "kalnieciu1961": {
       "description": "Walking distance to Kaunas Clinics! Two 2-room apartments side by side on the top panoramic 9th floor! Windows face the courtyard – a private house neighborhood, no city noise. Nearby grocery store “Express Market”, “Maxima”, a bit further is “Maxima XXL”. 7 min drive to city center. The apartment includes all necessary appliances: washing machine, refrigerator, stove, hood, kettle, iron, Smart TV + WiFi, glazed balcony. Towels, bed linens, all kitchenware, coffee and tea, spices.",
-      "add": ["2 rooms", "4", "WiFi"]
+      "add": {
+        "0": "2 rooms",
+        "1": "4",
+        "2": "WiFi"
+      }
     },
     "kalnieciu1962": {
       "description": "Walking distance to Kaunas Clinics! Two 2-room apartments side by side on the top panoramic 9th floor! Windows face the courtyard – a private house neighborhood, no city noise. Nearby grocery store “Express Market”, “Maxima”, a bit further is “Maxima XXL”. 7 min drive to city center. The apartment includes all necessary appliances: washing machine, refrigerator, stove, hood, kettle, iron, Smart TV + WiFi, glazed balcony. Towels, bed linens, all kitchenware, coffee and tea, spices.",
-      "add": ["2 rooms", "4", "WiFi"]
+      "add": {
+        "0": "2 rooms",
+        "1": "4",
+        "2": "WiFi"
+      }
     },
     "taikospr33b": {
       "description": "Bright and spacious 2-room apartment. Windows face the courtyard, no city noise. Located on the 8th floor, elevator available. Nearby grocery store “Šilas”, 7 min drive to Urmas market and city center, 5 min to Zoo and Darius and Girėnas stadium. Fully equipped with necessary appliances: washing machine, refrigerator, stove, hood, kettle, iron, Smart TV + WiFi, two balconies. Towels, bed linens, all kitchenware, coffee and tea, spices. Free parking in the open lot next to the building. Accommodates up to 4 guests.",
-      "add": ["2 rooms", "4", "WiFi"]
+      "add": {
+        "0": "2 rooms",
+        "1": "4",
+        "2": "WiFi"
+      }
     },
     "varniu24": {
       "description": "Large and spacious 2-room apartment. Windows face the courtyard, no city noise. On the first floor, a pastry shop-café “Alkava” is located in the building. Nearby grocery stores “Iki”, “Rimi”, and Vilijampolė market. A few minutes away is the Neris riverbank with walking paths and children's playgrounds. 7 min drive to Old Town. Fully equipped with necessary appliances: washing machine, refrigerator, stove, hood, kettle, iron, Smart TV + WiFi. Towels, bed linens, all kitchenware, coffee and tea, spices. Free parking in the open lot next to the building. Accommodates up to 6 guests.",
-      "add": ["2 rooms", "4", "WiFi"]
+      "add": {
+        "0": "2 rooms",
+        "1": "4",
+        "2": "WiFi"
+      }
     },
     "nemuno22": {
       "description": "2-room apartment for rent in the heart of the Old Town. Windows face the courtyard, no city noise. Nearby grocery store “Iki”, Žalgiris Arena 15 min walk. Fully equipped with necessary appliances: washing machine, refrigerator, stove, hood, kettle, iron, Smart TV + WiFi. Towels, bed linens, all kitchenware, coffee and tea, spices. Free parking in the open lot next to the building. Accommodates up to 6 guests.",
-      "add": ["2 rooms", "4", "WiFi"]
+      "add": {
+        "0": "2 rooms",
+        "1": "4",
+        "2": "WiFi"
+      }
     },
     "puodziu27": {
       "description": "Two-floor studio with a courtyard for your morning coffee! Windows face the courtyard, no city noise. Žalgiris Arena 15 min walk. Fully equipped with necessary appliances: washing machine, refrigerator, stove, hood, kettle, iron, Smart TV + WiFi. Towels, bed linens, all kitchenware, coffee and tea, spices. Paid street parking next to the building. Accommodates up to 4 guests.",
-      "add": ["2 rooms", "4", "WiFi"]
+      "add": {
+        "0": "2 rooms",
+        "1": "4",
+        "2": "WiFi"
+      }
     },
     "linkuvos55": {
       "description": "Small apartment with a private entrance on the ground floor! 20 min walk to the Old Town, 3 min walk to “Šilas” store, 3 min drive to the Veterinary Academy, nearby pain clinic “Agatas”. Fully equipped with necessary appliances: washing machine, refrigerator, stove, hood, kettle, iron, Smart TV + WiFi. Towels, bed linens, all kitchenware, coffee and tea, spices. Free parking in the open lot next to the building. Accommodates up to 4 guests.",
-      "add": ["2 rooms", "4", "WiFi"]
+      "add": {
+        "0": "2 rooms",
+        "1": "4",
+        "2": "WiFi"
+      }
     }
   },
   "Card": {
@@ -59,7 +91,7 @@
   },
   "NavBar": {
     "apartments": "apartments",
-    "contact": "contact"
+    "contact": "Contact"
   },
   "PropertyPage": {
     "information": "Information",
@@ -68,13 +100,17 @@
     "about": "About the Apartment",
     "priceFrom": "Price from",
     "night": "per night",
-    "contact": "contact",
-    "share": "share",
+    "contact": "Contact",
+    "share": "Share",
     "place": "Location",
     "googleMaps": "View on Google Maps",
-    "guestsReviews": "Guest Reviews",
+    "guestsReviews": "Guest reviews",
     "reviewsLowerCase": "reviews",
     "infoFrom": "Information from",
-    "moreReviews": "More reviews"
+    "moreReviews": "More reviews",
+    "loading": "Loading",
+    "noReviews": "No reviews",
+    "translatedFrom": "translated from",
+    "reviewsPlural": "{count, plural, =0 {no reviews} =1 {# review} other {# reviews}}"
   }
 }

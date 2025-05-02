@@ -2,6 +2,7 @@ import fetchPropertyData from "@/lib/fetchPropertyData";
 import { User } from "lucide-react";
 import { properties } from "@/lib/properties";
 import GalleryDesc from "../components/GalleryDesc";
+import {getTranslations} from 'next-intl/server';
 
 export const dynamicParams = false;
 export async function generateStaticParams() {
@@ -43,6 +44,8 @@ export async function generateMetadata({ params }) {
 const Page = async ({ params }) => {
   const property = (await params).property;
   const prop = await fetchPropertyData(property);
+  const cleanedId = prop.id.replace(/[()/]/g, '');
+  const propT = await getTranslations(`properties.${cleanedId}`)
   return (
     <div className="w-full pb-20 bg-gray-100 md:px-20" id="top-page">
       {/* heading */}
@@ -57,10 +60,10 @@ const Page = async ({ params }) => {
               {a.length === 1 ? (
                 <div className="flex items-center gap-x-1">
                   <User height={18} width={18} />
-                  {a}
+                  {propT(`add.${i}`)}
                 </div>
               ) : (
-                a
+                propT(`add.${i}`)
               )}
             </li>
           ))}

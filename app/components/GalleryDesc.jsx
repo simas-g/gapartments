@@ -5,6 +5,7 @@ import PropNavigation from "./PropNavigation";
 import MapBlock from "./Map";
 import Reviews from "./Reviews";
 import { properties } from "@/lib/properties";
+import { useTranslations } from "next-intl";
 const GalleryDesc = ({ prop }) => {
   const [selected, setSelected] = useState(1);
   const [width, setWidth] = useState(0);
@@ -13,6 +14,8 @@ const GalleryDesc = ({ prop }) => {
   const handleSelected = (i) => {
     setSelected(i);
   };
+
+  const t = useTranslations('PropertyPage')
 
   useEffect(() => {
     const handleResize = () => {
@@ -67,30 +70,29 @@ const GalleryDesc = ({ prop }) => {
             onClick={() => handleSelected(1)}
             className={`lg:hidden cursor-pointer w-full justify-center h-full flex items-center ${selected == 1 ? " bg-gray-100 rounded-md" : ""}`}
           >
-            Informacija
+            {t('information')}
           </h4>
           <h4
             onClick={() => handleSelected(2)}
             className={`cursor-pointer w-full justify-center h-full flex items-center ${selected == 2 ? " bg-gray-100 rounded-md" : ""}`}
           >
-            Žemėlapis
+            {t('map')}
           </h4>
           <h4
             onClick={() => handleSelected(3)}
             className={`cursor-pointer w-full justify-center h-full flex items-center ${selected == 3 ? " bg-gray-100 rounded-md" : ""}`}
           >
-            Atsiliepimai
+            {t('reviews')}
           </h4>
         </div>
         {selected == 2 && !loading && <MapBlock location={prop.location} url={data?.url}></MapBlock>}
         {selected == 3 && (
           <>
-            {loading && <p>Kraunama...</p>}
-            {!loading && data ? (
+            {loading && <p>{t('loading')}...</p>}
+            {!loading && data && (
               <Reviews {...data} />
-            ) : (
-              <p>Atsiliepimų nerasta.</p>
             )}
+            {!loading && !data && <p>{t('noReviews')}</p>}
           </>
         )}
       </div>
