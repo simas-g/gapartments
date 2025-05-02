@@ -7,8 +7,8 @@ import {
   Img,
   Link,
 } from "@react-email/components";
-
-export default function Message({ name, message, email, property }) {
+import { Globe } from "lucide-react";
+export default function Message({ name, message, email, property, locale }) {
   // Color scheme
   const colors = {
     primary: "#4F46E5",
@@ -79,6 +79,13 @@ export default function Message({ name, message, email, property }) {
               color: colors.lightText,
             }}
           >
+            <Text style={{
+              display: 'flex',
+              gap: "2px"
+            }}>
+              <Globe/>
+              {locale || 'LT'}
+            </Text>
             <Heading
               as="h3"
               style={{

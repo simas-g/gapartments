@@ -8,7 +8,7 @@ import {
   Link,
 } from "@react-email/components";
 
-export default function Confirmation({ name, message, link }) {
+export default function Confirmation({ name, message, link, emailStrings }) {
   // Color scheme
   const colors = {
     primary: "#4F46E5",
@@ -17,7 +17,15 @@ export default function Confirmation({ name, message, link }) {
     lightText: "#6B7280",
     border: "#E5E7EB",
   };
-
+  const t = emailStrings || {
+    subject: 'Gavome jūsų užklausą',
+    greeting: 'Sveiki',
+    receivedMessage: 'Gavome jūsų užklausą dėl apartamentų ir netrukus su jumis susisieksime.',
+    yourInfo: 'Jūsų informacija',
+    name: 'Vardas:',
+    message: 'Žinutė:',
+    viewApartments: 'Peržiūrėti apartamentus'
+  }
   return (
     <Html>
       <Container
@@ -67,7 +75,7 @@ export default function Confirmation({ name, message, link }) {
               marginBottom: "12px",
             }}
           >
-            Sveiki {name},
+            {t.greeting} {name},
           </Heading>
 
           <Text
@@ -78,8 +86,7 @@ export default function Confirmation({ name, message, link }) {
               margin: "16px 0",
             }}
           >
-            Gavome jūsų užklausą dėl apartamentų ir netrukus su jumis
-            susisieksime.
+            {t.receivedMessage}
           </Text>
 
           <Section
@@ -100,7 +107,7 @@ export default function Confirmation({ name, message, link }) {
                 margin: "0 0 12px 0",
               }}
             >
-              Jūsų informacija
+              {t.yourInfo}
             </Heading>
 
             <Text
@@ -112,7 +119,7 @@ export default function Confirmation({ name, message, link }) {
                 flexDirection: "column",
               }}
             >
-              <strong className="w-full">Vardas:</strong>
+              <strong className="w-full">{t.name}</strong>
             </Text>
             {name}
             <Text
@@ -124,7 +131,7 @@ export default function Confirmation({ name, message, link }) {
                 flexDirection: "column",
               }}
             >
-              <strong>Žinutė:</strong>
+              <strong>{t.message}</strong>
             </Text>
             {message}
           </Section>
@@ -145,7 +152,7 @@ export default function Confirmation({ name, message, link }) {
                 cursor: "pointer",
               }}
             >
-              Peržiūrėti apartamentus
+              {t.viewApartments}
             </Link>
           )}
         </Section>
