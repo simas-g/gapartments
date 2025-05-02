@@ -17,7 +17,7 @@ const locations = [
   { title: "PUODŽIŲ G. 27", url: "/puodziu27" },
   { title: "LINKUVOS G. 55", url: "/linkuvos55" },
 ];
-
+const languages = ['lt', 'en', 'ru']
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -118,7 +118,7 @@ const Nav = () => {
               
               {activeDropdown === 'language' && (
                 <div className="absolute right-0 mt-2 w-32 bg-white text-amber-800 rounded-md shadow-lg overflow-hidden z-50 animate-fadeIn">
-                  {["lt", "en"].map((l) => (
+                  {languages.map((l) => (
                     <button
                       key={l}
                       className={`block w-full text-left px-4 py-3 transition-colors ${locale === l ? "bg-gray-300" : ""}`}
@@ -205,7 +205,7 @@ const Nav = () => {
               
               {activeDropdown === 'language' && (
                 <div className="relative mt-2 w-fit flex rounded-md border text-white shadow-lg overflow-hidden z-50 animate-fadeIn">
-                  {["lt", "en"].map((lang) => (
+                  {languages.map((lang) => (
                     <button
                       key={lang}
                       className={`block w-full text-left px-6 py-4 ${locale===lang ? "bg-white/20" : ''}`}
