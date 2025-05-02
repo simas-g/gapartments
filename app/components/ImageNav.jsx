@@ -2,7 +2,9 @@
 import { useState, useRef, useEffect } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 const ImageNav = ({ images }) => {
+  const t = useTranslations('PropertyPage')
   const [viewing, setViewing] = useState(false);
   const [selected, setSelected] = useState(0);
   const scrollBar = useRef();
@@ -176,7 +178,7 @@ const ImageNav = ({ images }) => {
                 }}
                 className="absolute inset-0 flex items-center justify-center bg-black/50 text-white font-bold rounded-sm sm:text-xs text-[10px] px-2"
               >
-                Peržiūrėti visas nuotraukas ({images.length})
+                {t('viewAllImages')} ({images.length})
               </div>
             )}
             <img
