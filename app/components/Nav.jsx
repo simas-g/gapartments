@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChevronDown, Menu, X, Globe } from "lucide-react";
 import languageContext from "../language/languageProvider";
+import { useTranslations } from "next-intl";
 const locations = [
   { title: "APARTAMENTAI", url: "/apartamentai" },
   { title: "KALNIEČIŲ G. 219", url: "/kalnieciu219" },
@@ -22,6 +23,7 @@ const Nav = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const router = useRouter();
   const {locale, changeLang} = useContext(languageContext)
+  const t = useTranslations('NavBar')
   // Toggle dropdown function to ensure only one is open at a time
   const toggleDropdown = (dropdown) => {
     if (activeDropdown === dropdown) {
@@ -78,7 +80,7 @@ const Nav = () => {
                 onClick={() => toggleDropdown('locations')}
                 className="flex items-center gap-2 text-white font-medium px-4 py-2 hover:bg-amber-700 rounded-md transition-all duration-300"
               >
-                <span className="uppercase">Apartamentai</span>
+                <span className="uppercase">{t('apartments')}</span>
                 <ChevronDown 
                   size={16} 
                   className={`transition-transform duration-300 ${activeDropdown === 'locations' ? "rotate-180" : ""}`} 
@@ -134,7 +136,7 @@ const Nav = () => {
               href="/susisiekti"
               className="text-white font-medium px-4 py-2 hover:bg-amber-600 rounded-md transition-all duration-300 uppercase"
             >
-              Susisiekti
+              {t('contact')}
             </Link>
           </div>
 
@@ -163,7 +165,7 @@ const Nav = () => {
                 onClick={() => toggleDropdown('locations')}
                 className="flex items-center gap-2 text-white font-medium px-4 py-3 hover:bg-amber-700 rounded-md transition-all duration-300 w-full justify-between"
               >
-                <span className="uppercase text-lg">Apartamentai</span>
+                <span className="uppercase text-lg">{t('apartments')}</span>
                 <ChevronDown 
                   size={16} 
                   className={`transition-transform duration-300 ${activeDropdown === 'locations' ? "rotate-180" : ""}`} 
@@ -222,7 +224,7 @@ const Nav = () => {
               className="text-white font-medium px-4 mb-20 py-3 w-full text-center bg-amber-600 rounded-md transition-all duration-300 uppercase flex items-center justify-center"
               onClick={() => setIsOpen(false)}
             >
-              Susisiekti
+              {t('contact')}
             </Link>
           </div>
         </div>

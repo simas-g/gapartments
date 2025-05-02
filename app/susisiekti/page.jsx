@@ -1,6 +1,7 @@
 import FullMap from "../components/FullMap";
 import Form from "../components/Form";
 import Info from "../components/Info";
+import { getTranslations } from "next-intl/server";
 const sharedMeta = {
   title: 'Giedre Apartments - susisiekite su mumis',
   description: 'Apartamentai kaune išsidėstę jums patogiose vietose su reikalinga buitine technika, patogumais ir viskuo ko reikia, kad jaustumėtės kaip namuose.',
@@ -32,7 +33,8 @@ export const metadata = {
   },
 };
 
-const Page = () => {
+const Page = async () => {
+  const t = await getTranslations('ContactPage')
   return (
     <div className="relative w-full min-h-screen py-20">
       {/* Full screen background map */}
@@ -49,11 +51,10 @@ const Page = () => {
           {/* Page heading */}
           <div className="text-center mb-12 bg-white/20 rounded-md p-2 w-fit m-auto backdrop-blur-md">
             <h1 className="text-4xl font-bold drop-shadow-md">
-              Susisiekite su mumis
+              {t('heading')}
             </h1>
             <p className="mt-2 max-w-2xl mx-auto drop-shadow">
-              Turite klausimų apie mūsų apartamentus? Susisiekite su mumis ir
-              mes mielai padėsime.
+              {t('description')}
             </p>
           </div>
 

@@ -13,22 +13,23 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { MapPinned } from "lucide-react";
+import { useTranslations } from "next-intl";
 const Contact = ({ prop = "none", setOpenContact }) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const t = useTranslations('ContactPage')
   const validate = () => {
     const newErrors = {};
 
-    if (!email) newErrors.email = "privalomas";
+    if (!email) newErrors.email = t('emailError');
     else if (!/\S+@\S+\.\S+/.test(email))
-      newErrors.email = "Neteisingas el. pašto formatas";
+      newErrors.email = t('emailFormat');
 
-    if (!name) newErrors.name = "privalomas";
-    if (!message) newErrors.message = "privaloma";
+    if (!name) newErrors.name = t('nameError');
+    if (!message) newErrors.message = t('messageError');
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -85,7 +86,7 @@ const Contact = ({ prop = "none", setOpenContact }) => {
         <CardHeader className="border rounded-t-xl bg-gradient-to-r from-amber-500 to-amber-700 text-white relative p-6 ">
           <div className="flex justify-between items-center">
             <CardTitle className="text-2xl font-medium">
-              Parašykite mums laišką
+              {t("formHeading")}
             </CardTitle>
             <Button
               variant="ghost"
@@ -100,7 +101,7 @@ const Contact = ({ prop = "none", setOpenContact }) => {
           <form onSubmit={handleSubmit} className="flex flex-col gap-y-4">
             {prop !== "none" && (
               <div className="space-y-2">
-                <Label htmlFor="property">Apartamentai</Label>
+                <Label htmlFor="property">{t('apartments')}</Label>
                 <div className="bg-gray-100 rounded-lg p-2 border border-gray-300 flex items-center gap-x-1.5">
                   <MapPinned strokeWidth={1} stroke="oklch(0.666 0.179 58.318)"/>
                   <p className="text-gray-400">{prop.title}</p>
@@ -113,7 +114,7 @@ const Contact = ({ prop = "none", setOpenContact }) => {
                 htmlFor="email"
                 className={errors.email ? "text-red-500" : ""}
               >
-                El. paštas{" "}
+                {t('email')}{" "}
                 {errors.email && (
                   <span className="text-sm">({errors.email})</span>
                 )}
@@ -132,7 +133,7 @@ const Contact = ({ prop = "none", setOpenContact }) => {
                 htmlFor="name"
                 className={errors.name ? "text-red-500" : ""}
               >
-                Vardas{" "}
+                {t('name')}{" "}
                 {errors.name && (
                   <span className="text-sm">({errors.name})</span>
                 )}
@@ -151,7 +152,7 @@ const Contact = ({ prop = "none", setOpenContact }) => {
                 htmlFor="message"
                 className={errors.message ? "text-red-500" : ""}
               >
-                Žinutė{" "}
+                {t("message")}{" "}
                 {errors.message && (
                   <span className="text-sm">({errors.message})</span>
                 )}
@@ -160,7 +161,7 @@ const Contact = ({ prop = "none", setOpenContact }) => {
                 id="message"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                placeholder="Jūsų žinutė..."
+                placeholder={`${t('yourMessage')}...`}
                 className={`shadow min-h-[120px] resize-none ${errors.message ? "focus-visible:ring-red-500" : ""}`}
               />
             </div>
@@ -173,14 +174,14 @@ const Contact = ({ prop = "none", setOpenContact }) => {
             variant="outline"
             onClick={() => setOpenContact(false)}
           >
-            Atšaukti
+            {t('return')}
           </Button>
           <Button
             onClick={handleSubmit}
             className="bg-amber-600 hover:bg-amber-700 text-white"
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Siunčiama..." : "Išsiųsti pranešimą"}
+            {isSubmitting ? `${t('sending')}` : `${t('sendMessage')}`}
           </Button>
         </CardFooter>
       </Card>

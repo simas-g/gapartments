@@ -85,9 +85,17 @@
     "name": "Name",
     "message": "Message",
     "yourMessage": "Your message",
-    "sendMessage": "Send Message",
+    "sendMessage": "Send a message",
     "heading3": "Contact Details",
-    "phoneNumber": "Phone number"
+    "phoneNumber": "Phone number",
+    "emailError": "email required",
+    "emailFormat": "invalid email",
+    "nameError": "name required",
+    "messageError": "message required",
+    "formHeading": "Send us a message",
+    "return": "Return",
+    "apartments": "Apartments",
+    "sending": "sending"
   },
   "NavBar": {
     "apartments": "apartments",

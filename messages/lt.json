@@ -87,7 +87,15 @@
     "yourMessage": "Jūsų žinutė",
     "sendMessage": "Išsiųsti žinutę",
     "heading3": "Kontaktai",
-    "phoneNumber": "Telefono numeris"
+    "phoneNumber": "Telefono numeris",
+    "emailError": "el.paštas privalomas",
+    "emailFormat": "neteisingas el. pašto formatas",
+    "nameError": "vardas privalomas",
+    "messageError": "žinutė privaloma",
+    "formHeading": "Parašykite mums laišką",
+    "return": "Atšaukti",
+    "apartments": "Apartamentai",
+    "sending": "Siunčiama"
   },
   "NavBar": {
     "apartments": "apartamentai",
@@ -108,8 +116,8 @@
     "reviewsLowerCase": "atsiliepimai",
     "infoFrom": "Informacija iš",
     "moreReviews": "Daugiau atsiliepimų",
-    "loading":"Kraunama",
-    "noReviews" : "Atsiliepimų nėra",
+    "loading": "Kraunama",
+    "noReviews": "Atsiliepimų nėra",
     "translatedFrom": "translated from"
   }
 }
