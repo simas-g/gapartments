@@ -14,7 +14,7 @@ export async function POST(req) {
     await resend.emails.send({
         from: 'info@gapartments.lt',
         to: email,
-        subject: 'Gavome jūsų užklausą',
+        subject: emailStrings.subject,
         react: Confirmation({message, name, link, emailStrings}),
       });
       return NextResponse.json({message: 'success'}, {status: 200}) 

@@ -81,7 +81,8 @@ export default function Message({ name, message, email, property, locale }) {
           >
             <Text style={{
               display: 'flex',
-              gap: "2px"
+              gap: "2px",
+              textTransform: 'uppercase'
             }}>
               <Globe/>
               {locale || 'LT'}
