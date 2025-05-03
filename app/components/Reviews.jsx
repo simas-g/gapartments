@@ -1,8 +1,7 @@
-import checkLanguage from "@/lib/checkLanguage";
 import { Star } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
-const Review = ({
+import { memo } from "react";
+const Review = memo(({
   author_name,
   profile_photo_url,
   translated,
@@ -54,32 +53,14 @@ const Review = ({
       </div>
     </li>
   );
-};
-
-const Reviews = ({ reviews, user_ratings_total, url, rating }) => {
-  const [language, setLanguage] = useState('')
-  useEffect(() => {
-    async function checkLang() {
-      const loc = await checkLanguage()
-      setLanguage(loc)
-    }
-    checkLang()
-  }, [])
-  const total = user_ratings_total.toString();
+});
+const Reviews = memo(({ reviews, user_ratings_total, url, rating }) => {
   const filteredReviews = reviews?.filter(
     (r) =>
       r.author_name !== "Giedre G." && r.author_name !== "Kęstutis Gedeikis"
   );
   const t = useTranslations("PropertyPage");
-  const lithuanianPlurals = (
-    <>
-      {total[total.length - 1] === "1"
-        ? "atsiliepimas"
-        : total % 10 === 0 || (total > 10 && total < 20)
-          ? "atsiliepimų"
-          : "atsiliepimai"}
-    </>
-  );
+
   return (
     <section className="pt-4">
       {/* Header with Google Maps attribution */}
@@ -91,8 +72,7 @@ const Reviews = ({ reviews, user_ratings_total, url, rating }) => {
               {rating}
             </div>
             <span className="text-sm text-gray-600">
-              {language === "lt" && lithuanianPlurals}
-              {language === "en" && t('reviewsPlural', {count: user_ratings_total})}
+              {t("reviewsPlural", { count: user_ratings_total })}
             </span>
           </div>
         </div>
@@ -120,6 +100,6 @@ const Reviews = ({ reviews, user_ratings_total, url, rating }) => {
       )}
     </section>
   );
-};
+});
 
 export default Reviews;

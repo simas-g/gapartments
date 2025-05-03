@@ -1,12 +1,14 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import ImageNav from "./ImageNav";
 import PropNavigation from "./PropNavigation";
 import MapBlock from "./Map";
 import Reviews from "./Reviews";
 import { properties } from "@/lib/properties";
 import { useTranslations } from "next-intl";
+import languageContext from "../language/languageProvider";
 const GalleryDesc = ({ prop }) => {
+  const {locale} = useContext(languageContext)
   const [selected, setSelected] = useState(1);
   const [width, setWidth] = useState(0);
   const [data, setData] = useState();
@@ -39,18 +41,18 @@ const GalleryDesc = ({ prop }) => {
   }, []);
   useEffect(() => {
     const fetchData = async () => {
+      setData(null);
       setLoading(true);
       const targetProperty = properties.find((p) => p.title === prop?.title);
       try {
         const res = await fetch(
-          `/api/property/reviews?place=${targetProperty?.placeId}`,
+          `/api/property/reviews?place=${targetProperty?.placeId}&language=${locale}`,
           {
             method: "GET",
           }
         );
         const initialData = await res.json();
         const data = initialData.data.result;
-        console.log(data);
         setData(data);
       } catch (error) {
         console.log(error, "error");
@@ -59,7 +61,7 @@ const GalleryDesc = ({ prop }) => {
       }
     };
     fetchData();
-  }, []);
+  }, [locale]);
   
   return (
     <div className="grid px-8 gap-y-4 gap-x-8 items-start lg:grid-cols-2">

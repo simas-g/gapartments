@@ -119,6 +119,8 @@
     "loading": "Kraunama",
     "noReviews": "Atsiliepimų nėra",
     "translatedFrom": "translated from",
-    "viewAllImages": "Peržiūrėti visas nuotraukas"
+    "viewAllImages": "Peržiūrėti visas nuotraukas",
+    "reviewsPlural": "{count, plural, =0 {nėra atsiliepimų} one {# atsiliepimas} few {# atsiliepimai} other {# atsiliepimų}}"
+
   }
 }
