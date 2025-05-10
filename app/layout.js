@@ -25,7 +25,10 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   const locale = await getLocale()
   return (
-    <html lang={locale}>
+    <html lang={locale} translate="no">
+      <head>
+         <meta name="google" content="notranslate" />
+      </head>
       <body
         className={`${montserrat.variable} ${inter.variable} antialiased overflow-x-hidden`}
         suppressHydrationWarning={true}
