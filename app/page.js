@@ -82,7 +82,7 @@ export default function Home() {
 
       {/* Properties Preview Section */}
       <section className="py-16 bg-gray-100 z-2 relative">
-        <h3 className="text-center text-4xl text-gray-700 font-bold pb-3">
+        <h3 className="text-center px-5 text-4xl text-gray-700 font-bold pb-3">
           {t('heading')}
         </h3>
         <div className=" w-18 rounded-lg h-1 bg-amber-600 m-auto mb-9"></div>
