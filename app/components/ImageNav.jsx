@@ -67,7 +67,7 @@ const ImageNav = ({ images }) => {
       {/* image viewer */}
       {viewing && (
         <div className="fixed inset-0 z-100 bg-white px-6 md:py-6">
-          <div className="w-full flex justify-end absolute right-2">
+          <div className="w-full flex justify-end absolute right-2 top-3">
             <div
               className="cursor-pointer flex items-center gap-x-1 hover:underline"
               onClick={() => setViewing(false)}
@@ -78,7 +78,7 @@ const ImageNav = ({ images }) => {
           </div>
 
           <div className="flex flex-col justify-center items-center gap-y-4 md:mt-8">
-            <div className="select-none border border-gray-300 w-[400px] h-[400px] max-[90%] sm:w-100 sm:h-[450px] overflow-hidden flex items-center">
+            <div className="select-none w-[400px] h-[400px] max-[90%] sm:w-100 sm:h-[450px] overflow-hidden flex items-center">
               <img
                 src={images[selected]}
                 className="object-cover object-center w-full h-auto"
