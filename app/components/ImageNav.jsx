@@ -63,11 +63,11 @@ const ImageNav = ({ images }) => {
   }, [selected]);
 
   return (
-    <div className="max-h-90 grid grid-cols-3 grid-rows-4 gap-2 max-w-4xl w-full h-auto rounded-lg overflow-hidden">
+    <div className="h-auto grid grid-cols-3 grid-rows-4 gap-2 max-w-4xl w-full rounded-lg overflow-hidden">
       {/* image viewer */}
       {viewing && (
-        <div className="fixed inset-0 z-100 bg-white px-6 py-6">
-          <div className="w-full flex justify-end">
+        <div className="fixed inset-0 z-100 bg-white px-6 md:py-6">
+          <div className="w-full flex justify-end absolute right-2">
             <div
               className="cursor-pointer flex items-center gap-x-1 hover:underline"
               onClick={() => setViewing(false)}
@@ -77,8 +77,8 @@ const ImageNav = ({ images }) => {
             </div>
           </div>
 
-          <div className="flex flex-col justify-center items-center gap-y-4 mt-8">
-            <div className="select-none border border-gray-300 w-80 h-80 max-[90%] sm:w-100 sm:h-[450px] overflow-hidden flex items-center">
+          <div className="flex flex-col justify-center items-center gap-y-4 md:mt-8">
+            <div className="select-none border border-gray-300 w-[400px] h-[400px] max-[90%] sm:w-100 sm:h-[450px] overflow-hidden flex items-center">
               <img
                 src={images[selected]}
                 className="object-cover object-center w-full h-auto"
@@ -135,12 +135,12 @@ const ImageNav = ({ images }) => {
         }}
         onClick={() => handleImagesView()}
       >
-        <Image priority src={mainImage} fill alt="gapartments" className="object-cover" />
+        <Image priority src={mainImage} fill alt="gapartments" className="object-cover h-auto" />
       </div>
 
       {/* mid images */}
       <div
-        className="flex flex-col gap-2 col-span-1 row-span-3 select-none"
+        className="flex flex-col gap-2 h-auto col-span-1 row-span-3 select-none"
         style={{
           borderRadius: "0px 8px 0px 0px",
         }}
@@ -155,7 +155,7 @@ const ImageNav = ({ images }) => {
               src={image}
               fill
               priority
-              className={`object-cover`}
+              className={`object-cover h-auto`}
               alt=""
             />
           </div>
@@ -167,7 +167,7 @@ const ImageNav = ({ images }) => {
         {imagePreviews.map((image, i) => (
           <div
             key={i}
-            className="overflow-hidden h-full w-full cursor-pointer rounded-sm relative"
+            className="overflow-hidden h-auto w-full cursor-pointer rounded-sm relative"
             onClick={() => handleImagesView()}
           >
             {/* Overlay for the last image preview */}
