@@ -57,7 +57,7 @@ const Review = memo(({
 const Reviews = memo(({ reviews, user_ratings_total, url, rating }) => {
   const filteredReviews = reviews?.filter(
     (r) =>
-      r.author_name !== "Giedre G." && r.author_name !== "Kęstutis Gedeikis"
+      r.author_name !== "Giedre G." && r.author_name !== "Kęstutis Gedeikis" && r.rating !== 1
   );
   const t = useTranslations("PropertyPage");
 
