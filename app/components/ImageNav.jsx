@@ -67,13 +67,13 @@ const ImageNav = ({ images }) => {
       {/* image viewer */}
       {viewing && (
         <div className="fixed inset-0 z-100 bg-white px-6 md:py-6">
-          <div className="w-full flex justify-end absolute right-2 top-3">
+          <div className="w-full flex justify-end absolute right-3 top-3">
             <div
-              className="cursor-pointer flex items-center gap-x-1 hover:underline"
+              className="cursor-pointer flex items-center border border-black gap-x-1 px-2 p-1 bg-gray-300 rounded-full"
               onClick={() => setViewing(false)}
-            >
+            > 
               <p>Uždaryti</p>
-              <X width={40} height={40} color="black" />
+              <X size={28} color="black" strokeWidth={2}/>
             </div>
           </div>
 
