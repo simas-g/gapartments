@@ -49,6 +49,7 @@ const GalleryDesc = ({ prop }) => {
           `/api/property/reviews?place=${targetProperty?.placeId}&language=${locale}`,
           {
             method: "GET",
+            cache: "force-cache"
           }
         );
         const initialData = await res.json();
