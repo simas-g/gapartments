@@ -4,10 +4,11 @@ import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
-function MapBlock({ location, url }) {
+function MapBlock({ loc, url }) {
+  console.log(loc, "loc from MapBlock");
   const center = {
-    lat: location.latitude,
-    lng: location.longitude,
+    lat: loc.lat,
+    lng: loc.lng,
   };
   const t = useTranslations('PropertyPage');
   return (

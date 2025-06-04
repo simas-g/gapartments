@@ -88,7 +88,7 @@ const GalleryDesc = ({ prop }) => {
             {t('reviews')}
           </h4>
         </div>
-        {selected == 2 && !loading && <MapBlock location={prop.location} url={data?.url}></MapBlock>}
+        {selected == 2 && !loading && <MapBlock loc={prop.loc} url={data?.url}></MapBlock>}
         {selected == 3 && (
           <>
             {loading && <p>{t('loading')}...</p>}

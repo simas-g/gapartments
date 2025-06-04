@@ -19,7 +19,10 @@ export async function geocoding(address) {
       console.error("Address validation failed");
       return null;
     }    
-    
-    return validationData.result.geocode.location
+    const loc = {
+      lat: validationData.result.geocode.location.latitude,
+      lng: validationData.result.geocode.location.longitude,
+    }
+    return loc
   }
   
