@@ -6,7 +6,7 @@ import {
   Pin,
   InfoWindow,
 } from "@vis.gl/react-google-maps";
-import { giedreApartments } from "@/lib/properties";
+import { properties } from "@/lib/properties";
 import { useState } from "react";
 
 const PoiMarkers = () => {
@@ -14,7 +14,7 @@ const PoiMarkers = () => {
 
   return (
     <>
-      {giedreApartments?.map((poi) => (
+      {properties?.map((poi) => (
         <AdvancedMarker 
           key={poi.title} 
           position={poi.loc}
@@ -59,9 +59,8 @@ export default function FullMap({empty = true}) {
           }}
           defaultZoom={13}
           mapId="Apartamentai"
-          defaultCenter={giedreApartments[0].loc}
+          defaultCenter={properties[0].loc}
         >
-          {!empty && <PoiMarkers />}
         </Map>
       </div>
     </APIProvider>
