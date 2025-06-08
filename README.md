@@ -46,5 +46,3 @@ A responsive web application showcasing apartment rentals in Kaunas, built for a
 
 - **next-intl:**  
   Internationalization support to deliver content in multiple languages.
-
----
