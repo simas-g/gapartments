@@ -4,7 +4,7 @@ import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 const ImageNav = ({ images }) => {
-  const t = useTranslations('PropertyPage')
+  const t = useTranslations("PropertyPage");
   const [viewing, setViewing] = useState(false);
   const [selected, setSelected] = useState(0);
   const scrollBar = useRef();
@@ -71,9 +71,9 @@ const ImageNav = ({ images }) => {
             <div
               className="cursor-pointer flex items-center border border-black gap-x-1 px-2 p-1 bg-gray-300 rounded-full"
               onClick={() => setViewing(false)}
-            > 
+            >
               <p>Uždaryti</p>
-              <X size={28} color="black" strokeWidth={2}/>
+              <X size={28} color="black" strokeWidth={2} />
             </div>
           </div>
 
@@ -102,11 +102,12 @@ const ImageNav = ({ images }) => {
                 <ChevronRight width={50} height={50} color="black" />
               </div>
             </div>
-
             <div
               ref={scrollBar}
-              className="flex gap-x-4 overflow-x-auto max-w-[390px] md:max-w-[680px] px-4 scroll-smooth"
-              style={{ scrollbarWidth: "none" }}
+              style={{
+                scrollbarWidth: "none"
+              }}
+              className="relative flex gap-x-4 overflow-x-auto max-w-[390px] md:max-w-[680px] px-4 no-scrollbar [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]"
             >
               {images.map((image, i) => (
                 <div
@@ -135,7 +136,13 @@ const ImageNav = ({ images }) => {
         }}
         onClick={() => handleImagesView()}
       >
-        <Image priority src={mainImage} fill alt="gapartments" className="object-cover h-auto" />
+        <Image
+          priority
+          src={mainImage}
+          fill
+          alt="gapartments"
+          className="object-cover h-auto"
+        />
       </div>
 
       {/* mid images */}
@@ -178,7 +185,7 @@ const ImageNav = ({ images }) => {
                 }}
                 className="absolute inset-0 flex items-center justify-center bg-black/50 text-white font-bold rounded-sm sm:text-xs text-[10px] px-2"
               >
-                {t('viewAllImages')} ({images.length})
+                {t("viewAllImages")} ({images.length})
               </div>
             )}
             <img
