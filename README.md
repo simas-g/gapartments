@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# gapartments.lt — apartment rental listing platform
 
-## Getting Started
+A responsive web application showcasing apartment rentals in Kaunas, built for a family-run business. The platform helps users explore available apartments with detailed property information, interactive maps, and authentic user reviews.  
+**Note:** The platform currently does **not** support direct bookings.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Property Listings:**  
+  Users can browse apartments with rich details including photos, descriptions, pricing, and amenities.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **Interactive Maps:**  
+  Integrated Google Maps API displays geocoded apartment locations alongside guest reviews directly on the map for easy navigation and location context.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **User Reviews:**  
+  Guests can read and submit reviews for properties, helping future renters make informed decisions.
 
-## Learn More
+- **Multi-language Support:**  
+  Fully internationalized content, reviews, and communication to cater to a diverse user base.
 
-To learn more about Next.js, take a look at the following resources:
+- **Contact Owners:**  
+  Enables users to message property owners via a seamless React-email powered contact form, with automated confirmation emails handled by Resend.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **SEO & Performance:**  
+  Server-side rendering with Next.js ensures fast load times and SEO optimization for better visibility on search engines.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Elegant UI:**  
+  Uses Shadcn UI components to create a clean, modern, and card-based property display optimized for responsiveness and usability.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Technologies Used
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Next.js:**  
+  React framework for server-side rendering and optimized SEO.
+
+- **Google Maps API:**  
+  For geocoding and interactive map features showing property locations and reviews.
+
+- **Shadcn UI:**  
+  Provides a polished and accessible UI component library.
+
+- **React-email & Resend:**  
+  For managing user-to-owner messaging with automated email confirmations.
+
+- **next-intl:**  
+  Internationalization support to deliver content in multiple languages.
