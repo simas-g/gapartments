@@ -39,13 +39,13 @@ export default function Home() {
   return (
     <div className="flex flex-col font-[family-name:var(--font-geist-sans)]">
       {/* Hero Section */}
-      <header className="relative h-[calc(100vh_-_112px)] w-full">
+      <header className="relative h-[90vh] w-full">
         {/* Background Image */}
         <div
           className="inset-0 bg-cover bg-center z-[-1] fixed"
           style={{
             backgroundImage: "url(/kaunas.jpg)",
-            height: "100vh",
+            height: "100%",
           }}
         >
           {/* Overlay */}
