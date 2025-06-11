@@ -9,13 +9,12 @@ export async function POST(req) {
     const locale = await getLocale();
     const emailStrings = getEmailTranslations(locale)
     const data = await req.json();
-    const {message, name, link, email} = data;
-    console.log(data)
+    const {message, name, link, email, number} = data;
     await resend.emails.send({
         from: 'info@gapartments.lt',
         to: email,
         subject: emailStrings.subject,
-        react: Confirmation({message, name, link, emailStrings}),
+        react: Confirmation({message, number, name, link, emailStrings}),
       });
       return NextResponse.json({message: 'success'}, {status: 200}) 
       

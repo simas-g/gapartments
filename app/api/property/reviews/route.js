@@ -1,6 +1,5 @@
 import { getPlaceId } from "@/lib/getPlaceId";
-import { getLocale } from "next-intl/server";
-import { cookies } from "next/headers";
+
 import { NextResponse } from "next/server";
 export async function GET(req) {
 

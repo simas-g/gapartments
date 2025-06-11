@@ -39,10 +39,10 @@ export default function Home() {
   return (
     <div className="flex flex-col font-[family-name:var(--font-geist-sans)]">
       {/* Hero Section */}
-      <header className="relative md:h-[90vh] h-[750px] w-full">
+      <header className="relative md:h-[100vh] h-[750px] w-full">
         {/* Background Image */}
         <div
-          className="inset-0 bg-cover bg-center z-[-1] fixed h-[850px]"
+          className="inset-0 bg-cover bg-center z-[-1] fixed h-[850px] sm:h-[900px]"
           style={{
             backgroundImage: "url(/kaunas.jpg)",
           }}

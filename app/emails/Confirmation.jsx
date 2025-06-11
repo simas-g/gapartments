@@ -8,7 +8,7 @@ import {
   Link,
 } from "@react-email/components";
 
-export default function Confirmation({ name, message, link, emailStrings }) {
+export default function Confirmation({ name, number, message, link, emailStrings }) {
   // Color scheme
   const colors = {
     primary: "#4F46E5",
@@ -24,6 +24,7 @@ export default function Confirmation({ name, message, link, emailStrings }) {
     yourInfo: 'Jūsų informacija',
     name: 'Vardas:',
     message: 'Žinutė:',
+    number: "Numeris:",
     viewApartments: 'Peržiūrėti apartamentus'
   }
   return (
@@ -134,7 +135,21 @@ export default function Confirmation({ name, message, link, emailStrings }) {
               <strong>{t.message}</strong>
             </Text>
             {message}
+                        <Text
+              style={{
+                fontSize: "14px",
+                color: colors.lightText,
+                margin: "8px 8px 0 0",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <strong>{t.number}</strong>
+            </Text>
+            {number}
+
           </Section>
+          
           {link !== "none" && (
             <Link
               href={`${process.env.URL}/${link}`}

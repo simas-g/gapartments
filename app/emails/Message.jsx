@@ -8,7 +8,7 @@ import {
   Link,
 } from "@react-email/components";
 import { Globe } from "lucide-react";
-export default function Message({ name, message, email, property, locale }) {
+export default function Message({ name, message, number, email, property, locale }) {
   // Color scheme
   const colors = {
     primary: "#4F46E5",
@@ -123,6 +123,18 @@ export default function Message({ name, message, email, property, locale }) {
               <strong className="w-full">El. paštas:</strong>
             </Text>
             {email}
+            <Text
+              style={{
+                fontSize: "14px",
+                color: colors.lightText,
+                margin: "8px 8px 0 0",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <strong className="w-full">Numeris:</strong>
+            </Text>
+            {number}
 
             {property!=="none" && (
               <>

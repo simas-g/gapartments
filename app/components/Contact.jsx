@@ -18,18 +18,20 @@ const Contact = ({ prop = "none", setOpenContact }) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
+  const [number, setNumber] = useState("");
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const t = useTranslations('ContactPage')
+  const t = useTranslations("ContactPage");
   const validate = () => {
     const newErrors = {};
 
-    if (!email) newErrors.email = t('emailError');
-    else if (!/\S+@\S+\.\S+/.test(email))
-      newErrors.email = t('emailFormat');
-
-    if (!name) newErrors.name = t('nameError');
-    if (!message) newErrors.message = t('messageError');
+    if (!email) newErrors.email = t("emailError");
+    else if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = t("emailFormat");
+    if (!number) {
+      newErrors.number = t("numberError");
+    }
+    if (!name) newErrors.name = t("nameError");
+    if (!message) newErrors.message = t("messageError");
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -43,6 +45,7 @@ const Contact = ({ prop = "none", setOpenContact }) => {
       link: prop.id,
       property: prop.title,
       email,
+      number,
     };
     if (!validate()) return;
 
@@ -101,9 +104,12 @@ const Contact = ({ prop = "none", setOpenContact }) => {
           <form onSubmit={handleSubmit} className="flex flex-col gap-y-4">
             {prop !== "none" && (
               <div className="space-y-2">
-                <Label htmlFor="property">{t('apartments')}</Label>
+                <Label htmlFor="property">{t("apartments")}</Label>
                 <div className="bg-gray-100 rounded-lg p-2 border border-gray-300 flex items-center gap-x-1.5">
-                  <MapPinned strokeWidth={1} stroke="oklch(0.666 0.179 58.318)"/>
+                  <MapPinned
+                    strokeWidth={1}
+                    stroke="oklch(0.666 0.179 58.318)"
+                  />
                   <p className="text-gray-400">{prop.title}</p>
                 </div>
               </div>
@@ -114,7 +120,7 @@ const Contact = ({ prop = "none", setOpenContact }) => {
                 htmlFor="email"
                 className={errors.email ? "text-red-500" : ""}
               >
-                {t('email')}{" "}
+                {t("email")}{" "}
                 {errors.email && (
                   <span className="text-sm">({errors.email})</span>
                 )}
@@ -127,13 +133,31 @@ const Contact = ({ prop = "none", setOpenContact }) => {
                 className={`${errors.email ? "border-red-500 focus-visible:ring-red-500" : ""}`}
               />
             </div>
+            <div className="space-y-2">
+              <Label
+                htmlFor="number"
+                className={errors.email ? "text-red-500" : ""}
+              >
+                {t("number")}{" "}
+                {errors.number && (
+                  <span className="text-sm">({errors.number})</span>
+                )}
+              </Label>
+              <Input
+                id="number"
+                type="number"
+                value={number}
+                onChange={(e) => setNumber(e.target.value)}
+                className={`${errors.number ? "border-red-500 focus-visible:ring-red-500" : ""}`}
+              />
+            </div>
 
             <div className="space-y-2">
               <Label
                 htmlFor="name"
                 className={errors.name ? "text-red-500" : ""}
               >
-                {t('name')}{" "}
+                {t("name")}{" "}
                 {errors.name && (
                   <span className="text-sm">({errors.name})</span>
                 )}
@@ -161,7 +185,7 @@ const Contact = ({ prop = "none", setOpenContact }) => {
                 id="message"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                placeholder={`${t('yourMessage')}...`}
+                placeholder={`${t("yourMessage")}...`}
                 className={`shadow min-h-[120px] resize-none ${errors.message ? "focus-visible:ring-red-500" : ""}`}
               />
             </div>
@@ -174,18 +198,19 @@ const Contact = ({ prop = "none", setOpenContact }) => {
             variant="outline"
             onClick={() => setOpenContact(false)}
           >
-            {t('return')}
+            {t("return")}
           </Button>
           <Button
             onClick={handleSubmit}
             className="bg-amber-600 hover:bg-amber-700 text-white"
             disabled={isSubmitting}
           >
-            {isSubmitting ? `${t('sending')}` : `${t('sendMessage')}`}
+            {isSubmitting ? `${t("sending")}` : `${t("sendMessage")}`}
           </Button>
         </CardFooter>
       </Card>
-    </div>, document.getElementById('top-page')
+    </div>,
+    document.getElementById("top-page")
   );
 };
 

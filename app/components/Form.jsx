@@ -1,5 +1,4 @@
 "use client";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,6 +11,7 @@ const Form = () => {
   const t = useTranslations('ContactPage')
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [number, setNumber] = useState("");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -36,6 +36,7 @@ const Form = () => {
       name,
       email,
       message,
+      number,
       link: "none",
       property: "none",
     };
@@ -89,6 +90,23 @@ const Form = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className={`mt-1 ${errors.email ? "border-red-500 ring-red-500" : "border-gray-300"}`}
+            />
+          </div>
+          <div>
+            <Label
+              htmlFor="number"
+              className={`text-sm font-medium ${errors.number ? "text-red-500" : "text-gray-700"}`}
+            >
+              {t('number')}{" "}
+              {errors.number && (
+                <span className="text-sm font-normal">({errors.number})</span>
+              )}
+            </Label>
+            <Input
+              id="number"
+              value={number}
+              onChange={(e) => setNumber(e.target.value)}
+              className={`mt-1 ${errors.number ? "border-red-500 ring-red-500" : "border-gray-300"}`}
             />
           </div>
           <div>

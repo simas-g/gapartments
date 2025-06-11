@@ -83,12 +83,14 @@
     "heading2": "Parašykite žinutę",
     "email": "El. paštas",
     "name": "Vardas",
+    "number": "Numeris",
     "message": "Žinutė",
     "yourMessage": "Jūsų žinutė",
     "sendMessage": "Išsiųsti žinutę",
     "heading3": "Kontaktai",
     "phoneNumber": "Telefono numeris",
     "emailError": "el.paštas privalomas",
+    "numberError": "numeris yra privalomas",
     "emailFormat": "neteisingas el. pašto formatas",
     "nameError": "vardas privalomas",
     "messageError": "žinutė privaloma",
@@ -121,6 +123,5 @@
     "translatedFrom": "Išversta iš",
     "viewAllImages": "Peržiūrėti visas nuotraukas",
     "reviewsPlural": "{count, plural, =0 {nėra atsiliepimų} one {# atsiliepimas} few {# atsiliepimai} other {# atsiliepimų}}"
-
   }
 }
