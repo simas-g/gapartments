@@ -12,7 +12,7 @@ export async function POST(req) {
     console.log(data)
     await resend.emails.send({
         from: 'info@gapartments.lt',
-        to: 'gedeikissimas@gmail.com',
+        to: 'g.gedeikiene@gmail.com',
         subject: 'Naujas pranešimas',
         react: Message({email, message, name, property, locale}),
       });
