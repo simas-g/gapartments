@@ -39,7 +39,7 @@ export default function Home() {
   return (
     <div className="flex flex-col font-[family-name:var(--font-geist-sans)]">
       {/* Hero Section */}
-      <header className="relative md:h-[90vh] h-[calc(100vh - 50px)] w-full">
+      <header className="relative md:h-[90vh] h-[calc(100vh_-_100px)] w-full">
         {/* Background Image */}
         <div
           className="inset-0 bg-cover bg-center z-[-1] fixed h-full"
