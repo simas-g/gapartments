@@ -39,10 +39,10 @@ export default function Home() {
   return (
     <div className="flex flex-col font-[family-name:var(--font-geist-sans)]">
       {/* Hero Section */}
-      <header className="relative md:h-[90vh] h-[calc(100vh_-_100px)] w-full">
+      <header className="relative md:h-[90vh] h-[750px] w-full">
         {/* Background Image */}
         <div
-          className="inset-0 bg-cover bg-center z-[-1] fixed h-full"
+          className="inset-0 bg-cover bg-center z-[-1] fixed h-[850px]"
           style={{
             backgroundImage: "url(/kaunas.jpg)",
           }}
@@ -52,7 +52,7 @@ export default function Home() {
         </div>
 
         {/* Hero Content */}
-        <div className="container mx-auto px-4 md:px-26 h-full flex pt-40 justify-start relative z-1">
+        <div className="mx-auto px-4 md:px-26 h-fit flex pt-40 justify-start relative z-1">
           <div className="text-white max-w-2xl">
             <h1 className="text-4xl md:text-5xl font-[--font-poppins-sans] mb-4">
               {t("title")}
