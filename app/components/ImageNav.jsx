@@ -174,7 +174,7 @@ const ImageNav = ({ images }) => {
         {imagePreviews.map((image, i) => (
           <div
             key={i}
-            className="overflow-hidden h-auto w-full cursor-pointer rounded-sm relative"
+            className="overflow-hidden h-full w-full cursor-pointer rounded-sm relative"
             onClick={() => handleImagesView()}
           >
             {/* Overlay for the last image preview */}
